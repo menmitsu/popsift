@@ -40,6 +40,9 @@ CUDA_ADD_LIBRARY(popsift
         popsift/common/clamp.h)
 
 
+find_package( OpenCV REQUIRED )
+include_directories( ${OpenCV_INCLUDE_DIRS} )
+
 # build directory containing the automatically generated files
 set(popsift_generated_dir "${CMAKE_CURRENT_BINARY_DIR}/generated")
 
@@ -59,7 +62,7 @@ set_target_properties(popsift PROPERTIES DEBUG_POSTFIX "d")
 
 # cannot use PRIVATE here as there is a bug in FindCUDA and CUDA_ADD_LIBRARY
 # https://gitlab.kitware.com/cmake/cmake/issues/16097
-target_link_libraries(popsift ${CUDA_CUDADEVRT_LIBRARY} ${CUDA_CUBLAS_LIBRARIES} Threads::Threads)
+target_link_libraries(popsift ${CUDA_CUDADEVRT_LIBRARY} ${CUDA_CUBLAS_LIBRARIES} ${OpenCV_LIBS} Threads::Threads)
 
 
 # EXPORTING THE LIBRARY
@@ -148,4 +151,3 @@ export(TARGETS popsift FILE "${popsift_generated_dir}/${popsift_targets_export_n
 if(PopSift_BUILD_EXAMPLES)
   add_subdirectory(application)
 endif()
-

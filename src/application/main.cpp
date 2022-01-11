@@ -57,7 +57,7 @@ static void parseargs(int argc, char** argv, popsift::Config& config, string& in
             ("log,l", bool_switch()->notifier([&](bool i) {if(i) config.setLogMode(popsift::Config::All); }), "Write debugging files")
 
             ("input-file,i", value<std::string>(&inputFile)->required(), "Input file");
-    
+
     }
     options_description parameters("Parameters");
     {
@@ -122,16 +122,16 @@ static void parseargs(int argc, char** argv, popsift::Config& config, string& in
         ("pgmread-loading", bool_switch(&pgmread_loading)->default_value(false), "Use the old image loader instead of LibDevIL")
         ("float-mode", bool_switch(&float_mode)->default_value(false), "Upload image to GPU as float instead of byte")
         ;
-        
+
         //("test-direct-scaling")
     }
 
     options_description all("Allowed options");
     all.add(options).add(parameters).add(modes).add(informational);
     variables_map vm;
-    
+
     try
-    {    
+    {
        store(parse_command_line(argc, argv, all), vm);
 
        if (vm.count("help")) {
@@ -249,6 +249,24 @@ void read_job( SiftJob* job, bool really_write )
     cerr << "Number of feature points: " << feature_list->getFeatureCount()
          << " number of feature descriptors: " << feature_list->getDescriptorCount()
          << endl;
+//// Rahul experiments
+
+         cout << feature_list->getFeatures()->xpos;
+
+         popsift::FeaturesHost* features = new popsift::FeaturesHost( feature_list->getFeatureCount(), feature_list->getDescriptorCount() );
+features->pin( );
+cudaMemcpy( features->getFeatures(),
+                         feature_list->getFeatures(),
+                         feature_list->getFeatureCount() * sizeof(popsift::Feature),
+                         cudaMemcpyDeviceToHost );
+cudaMemcpy( features->getDescriptors(),
+                         feature_list->getDescriptors(),
+                         feature_list->getDescriptorCount() * sizeof(popsift::Descriptor),
+                         cudaMemcpyDeviceToHost );
+features->unpin( );
+
+cout<<features->getFeatures()<<"\n";
+//// Rahul experiments
 
     if( really_write ) {
         nvtxRangePushA( "Writing features to disk" );
@@ -327,4 +345,3 @@ int main(int argc, char **argv)
 
     return EXIT_SUCCESS;
 }
-

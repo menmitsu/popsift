@@ -25,6 +25,15 @@
 #include <stdexcept>
 #include <string>
 
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+
+#include "opencv2/features2d.hpp"
+
+#include "opencv2/calib3d.hpp"
+#include "opencv2/core.hpp"
+
 #ifdef USE_DEVIL
 #include <devil_cpp_wrapper.hpp>
 #endif
@@ -57,7 +66,7 @@ static void parseargs(int argc, char** argv, popsift::Config& config, string& lF
 
             ("left,l",  value<std::string>(&lFile)->required(), "\"Left\"  input file")
             ("right,r", value<std::string>(&rFile)->required(), "\"Right\" input file");
-    
+
     }
     options_description parameters("Parameters");
     {
@@ -118,16 +127,16 @@ static void parseargs(int argc, char** argv, popsift::Config& config, string& lF
         ("dont-write", bool_switch(&dont_write)->default_value(false), "Suppress descriptor output")
         ("pgmread-loading", bool_switch(&pgmread_loading)->default_value(false), "Use the old image loader instead of LibDevIL")
         ;
-        
+
         //("test-direct-scaling")
     }
 
     options_description all("Allowed options");
     all.add(options).add(parameters).add(modes).add(informational);
     variables_map vm;
-    
+
     try
-    {    
+    {
        store(parse_command_line(argc, argv, all), vm);
 
        if (vm.count("help")) {
@@ -217,9 +226,48 @@ SiftJob* process_image( const string& inputFile, PopSift& PopSift )
     return job;
 }
 
+cv::Mat convertFeaturesDevToMat(popsift::FeaturesDev* lFeatures, popsift::FeaturesHost* left_features)
+{
+
+  left_features->pin( );
+  cudaMemcpy( left_features->getFeatures(),
+                      lFeatures->getFeatures(),
+                      lFeatures->getFeatureCount() * sizeof(popsift::Feature),
+                      cudaMemcpyDeviceToHost );
+  cudaMemcpy( left_features->getDescriptors(),
+                      lFeatures->getDescriptors(),
+                      lFeatures->getDescriptorCount() * sizeof(popsift::Descriptor),
+                      cudaMemcpyDeviceToHost );
+  left_features->unpin( );
+
+  std::vector<popsift::Feature> featuresVec(left_features->getFeatures(), left_features->getFeatures() +  lFeatures->getFeatureCount());
+  std::vector<popsift::Descriptor> descriptors(left_features->getDescriptors(), left_features->getDescriptors() +  lFeatures->getDescriptorCount());
+
+  std::vector<const float*> descriptors_fl;
+
+  cout<<featuresVec[0].xpos<<"  "<<featuresVec[0].ypos;
+  cout<<"\n"<<left_features->getDescriptors();
+
+  float* lptr  = (float*)( left_features->getDescriptors());
+  // cv::Mat mat1;
+   cv::Mat mat1(lFeatures->getDescriptorCount(),128,CV_32FC1, lptr);
+
+
+}
+
 int main(int argc, char **argv)
 {
     cudaDeviceReset();
+
+    cout << "OpenCV version : " << CV_VERSION << endl;
+
+  cout << "Major version : " << CV_MAJOR_VERSION << endl;
+  cout << "Minor version : " << CV_MINOR_VERSION << endl;
+
+  cout << "Subminor version : " << CV_SUBMINOR_VERSION << endl;
+
+
+
 
     popsift::Config config;
     string         lFile{};
@@ -260,6 +308,7 @@ int main(int argc, char **argv)
     SiftJob* rJob = process_image( rFile, PopSift );
 
     popsift::FeaturesDev* lFeatures = lJob->getDev();
+
     cout << "Number of features:    " << lFeatures->getFeatureCount() << endl;
     cout << "Number of descriptors: " << lFeatures->getDescriptorCount() << endl;
 
@@ -267,13 +316,271 @@ int main(int argc, char **argv)
     cout << "Number of features:    " << rFeatures->getFeatureCount() << endl;
     cout << "Number of descriptors: " << rFeatures->getDescriptorCount() << endl;
 
-    lFeatures->match( rFeatures );
+    // lFeatures->match( rFeatures );
 
-    delete lFeatures;
-    delete rFeatures;
+    popsift::FeaturesHost* left_features = new popsift::FeaturesHost( lFeatures->getFeatureCount(), lFeatures->getDescriptorCount() );
+    popsift::FeaturesHost* right_features = new popsift::FeaturesHost( rFeatures->getFeatureCount(), rFeatures->getDescriptorCount() );
 
-    PopSift.uninit( );
+
+    // cv::Mat leftDescMat=convertFeaturesDevToMat(lFeatures,left_features);
+    // cout<<leftDescMat;
+
+
+    std::vector<const float*> descriptors_fl;
+
+    cv::Mat limg=cv::imread(lFile);
+    cv::Mat outLimg=limg.clone();
+
+    cv::Mat rimg=cv::imread(rFile);
+    cv::Mat outRimg=rimg.clone();
+
+
+/////
+
+    left_features->pin( );
+    cudaMemcpy( left_features->getFeatures(),
+                        lFeatures->getFeatures(),
+                        lFeatures->getFeatureCount() * sizeof(popsift::Feature),
+                        cudaMemcpyDeviceToHost );
+    cudaMemcpy( left_features->getDescriptors(),
+                        lFeatures->getDescriptors(),
+                        lFeatures->getDescriptorCount() * sizeof(popsift::Descriptor),
+                        cudaMemcpyDeviceToHost );
+    left_features->unpin( );
+
+    right_features->pin( );
+    cudaMemcpy( right_features->getFeatures(),
+                        rFeatures->getFeatures(),
+                        rFeatures->getFeatureCount() * sizeof(popsift::Feature),
+                        cudaMemcpyDeviceToHost );
+    cudaMemcpy( right_features->getDescriptors(),
+                        rFeatures->getDescriptors(),
+                        rFeatures->getDescriptorCount() * sizeof(popsift::Descriptor),
+                        cudaMemcpyDeviceToHost );
+    right_features->unpin( );
+
+
+
+    std::vector<popsift::Feature> leftFeaturesVec(left_features->getFeatures(), left_features->getFeatures() +  lFeatures->getFeatureCount());
+    std::vector<popsift::Descriptor> leftFeaturesDesc(left_features->getDescriptors(), left_features->getDescriptors() +  lFeatures->getDescriptorCount());
+
+    std::vector<cv::KeyPoint> leftKpts,rightKpts;
+
+    std::vector<popsift::Feature> rightFeaturesVec(right_features->getFeatures(), right_features->getFeatures() +  rFeatures->getFeatureCount());
+    std::vector<popsift::Descriptor> rightFeaturesDesc(right_features->getDescriptors(), right_features->getDescriptors() +  rFeatures->getDescriptorCount());
+
+
+    for(int i=0;i<leftFeaturesVec.size();i++)
+    {
+      leftKpts.push_back(cv::KeyPoint((int)leftFeaturesVec[i].xpos,(int)leftFeaturesVec[i].ypos,-1));
+    }
+
+    for(int i=0;i<rightFeaturesVec.size();i++)
+    {
+      rightKpts.push_back(cv::KeyPoint((int)rightFeaturesVec[i].xpos,(int)rightFeaturesVec[i].ypos,-1));
+    }
+
+    cv::drawKeypoints(limg,leftKpts,outLimg);
+
+    cv::imshow("Left Keypoints",outLimg);
+
+    cv::drawKeypoints(rimg,rightKpts,outRimg);
+    cv::imshow("Right Keypoints",outRimg);
+
+    // std::ofstream of( "output-features-l.txt" );
+    // lFeatures->print( of, write_as_uchar );
+
+    cout<<leftFeaturesVec[0].xpos<<"  "<<leftFeaturesVec[0].ypos<<"\n";
+
+    float* descPtr  = (float*)( leftFeaturesVec[0].desc);
+    cv::Mat descMatPtr(1,128,CV_8UC1, descPtr);
+
+
+     cout<<descMatPtr<<"\n\n";
+
+
+    // cout<<"\n"<<left_features->getDescriptors();
+
+    float* lptr  = (float*)( left_features->getDescriptors());
+
+    cv::Mat lDescMat(lFeatures->getDescriptorCount(),128,CV_32FC1, lptr);
+    cout<<lDescMat.row(1)<<"\n\n\n";
+
+    cv::FileStorage file("lDescMat.mat", cv::FileStorage::WRITE);
+    file<<"LMat"<<lDescMat;
+
+
+        delete lFeatures;
+        delete rFeatures;
+
+        PopSift.uninit( );
+
+
+
+    cout<<"\n\n\n\n";
+
+
+    float* rptr  = (float*)(right_features->getDescriptors());
+    cv::Mat rDescMat(rFeatures->getDescriptorCount(),128,CV_32FC1, rptr);
+    cout<<rDescMat.row(0)<<"\n\n\n";
+
+
+
+
+    cv::Ptr<cv::DescriptorMatcher> matcher =cv:: DescriptorMatcher::create("BruteForce");
+
+    std::vector< std::vector<cv::DMatch> > cpuKnnMatches;
+    std::vector<cv::DMatch> good_matches;
+
+     matcher->knnMatch( lDescMat, rDescMat, cpuKnnMatches,2);
+
+     // const float ratio_thresh = 0.7f;
+
+    double max_dist = 0;
+      double min_dist = 100;
+//
+//   for(int i=0;i<cpuKnnMatches.size();i++)
+//   {
+//      double dist = cpuKnnMatches[i].distance;
+//
+//
+//      // std::cout<<"\n"<<dist<<"\t"<<cpuKnnMatches[i].queryIdx<<"  "<<cpuKnnMatches[i].trainIdx;
+//      if (dist < min_dist)
+//           min_dist = dist;
+//      if (dist > max_dist)
+//           max_dist = dist;
+//
+// }
+
+
+cv::Mat matchesImg;
+//
+// for(int i=0;i<cpuKnnMatches.size();i++)
+// {
+//    if( cpuKnnMatches[i].distance <= max(2*min_dist, 0.02) )
+//     {
+//       cout<<"\n\n"<<leftFeaturesVec[cpuKnnMatches[i].queryIdx].xpos<<"    "<<leftFeaturesVec[cpuKnnMatches[i].queryIdx].ypos<<"   "<<rightFeaturesVec[cpuKnnMatches[i].trainIdx].xpos<<"   "<<rightFeaturesVec[cpuKnnMatches[i].trainIdx].ypos;
+//       cout<<"\n\n"<<limg.cols*leftFeaturesVec[cpuKnnMatches[i].queryIdx].xpos<<"    "<<limg.rows*leftFeaturesVec[cpuKnnMatches[i].queryIdx].ypos<<"   "<<rimg.cols*rightFeaturesVec[cpuKnnMatches[i].trainIdx].xpos<<"   "<<rimg.rows*rightFeaturesVec[cpuKnnMatches[i].trainIdx].ypos;
+//       good_matches.push_back( cpuKnnMatches[i]);
+//     }
+// }
+
+
+    const float ratio_thresh = 0.7f;
+
+    for (size_t i = 0; i < cpuKnnMatches.size(); i++)
+    {
+        if (cpuKnnMatches[i][0].distance < ratio_thresh * cpuKnnMatches[i][1].distance)
+        {
+            good_matches.push_back(cpuKnnMatches[i][0]);
+
+            // cout<<"\n Good match found at "<<leftKpts[good_matches[i].queryIdx].pt<<" \t\t"<<rightKpts[good_matches[i].trainIdx].pt;
+
+        }
+    }
+
+
+// cv::waitKey(0);
+
+    // drawMatches( outLimg, leftKpts, outRimg, rightKpts, good_matches, matchesImg, cv::Scalar::all(-1), cv::Scalar::all(-1), std::vector<char>(), cv::DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS );
+
+    // cv::imshow("Matches",matchesImg);
+
+cout<<"\n\n"<<"Total Matches"<<cpuKnnMatches.size()<<" out of which good matches are:  "<<good_matches.size()<<"\n";
+
+cout<<"Distances"<<min_dist<<"    \t\t\t"<<max_dist;
+
+
+
+
+//
+// for(int i=0;i<leftFeaturesVec.size();i++)
+// {
+//   cv::circle(limg, cv::Point(leftFeaturesVec[i].xpos,leftFeaturesVec[i].ypos),4, cv::Scalar(0,0,255));
+// }
+//
+//
+//
+// for(int i=0;i<rightFeaturesVec.size();i++)
+// {
+//   cv::circle(rimg, cv::Point(rightFeaturesVec[i].xpos,rightFeaturesVec[i].ypos),4, cv::Scalar(0,0,255));
+// }
+//
+
+
+
+
+
+
+
+// matchesImg=cv::Mat::ones(std::max(limg.rows,rimg.rows),limg.cols+rimg.cols,CV_8UC3);
+
+std::cout<<limg.channels()<<"   "<<rimg.channels()<<"  "<<matchesImg.channels();
+
+std::cout<<"Rows"<<limg.rows<<"   "<<rimg.rows<<"  "<<matchesImg.rows;
+std::cout<<"Cols"<<limg.cols<<"   "<<rimg.cols<<"  "<<matchesImg.cols;
+
+
+std::cout<<"\n Matches image"<<matchesImg.rows<< " "<<matchesImg.cols<<std::endl;
+//
+// limg.copyTo(matchesImg(cv::Rect(0,0,limg.cols,limg.rows)));
+// rimg.copyTo(matchesImg(cv::Rect(limg.cols,0,rimg.cols,rimg.rows)));
+
+//
+for(int i=0;i<good_matches.size();i++)
+{
+
+  line(matchesImg, cv::Point(leftKpts[good_matches[i].queryIdx].pt.x,leftKpts[good_matches[i].queryIdx].pt.y),  cv::Point(rightKpts[good_matches[i].trainIdx].pt.x+limg.cols,rightKpts[good_matches[i].trainIdx].pt.y), cv::Scalar(255, 0, 0),
+     4, cv::LINE_8);
+
+
+}
+
+
+cv::imshow("Left img",limg);
+cv::imshow("Right img",rimg);
+cv::waitKey(0);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+// Ptr<DescriptorMatcher> matcher2 = DescriptorMatcher::create(DescriptorMatcher::FLANNBASED);
+//   std::vector< std::vector<DMatch> > knn_matches;
+
+
+
+///////
+
+
+
+
+
+
+
+
+
+     // cout<<mat1.rows<<mat1.cols<<endl;
+
+
+
+    // std::vector<float> descriptorsvec(lptr,lptr+128);
+    // cout<<descriptorsvec.size();
+    //
+    // for(int i=0;i<descriptorsvec.size();i++)
+    // cout<<"\n"<<descriptorsvec[i]<<"\t";
+
+
 
     return EXIT_SUCCESS;
 }
-

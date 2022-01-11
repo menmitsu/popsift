@@ -1,0 +1,40 @@
+file(REMOVE_RECURSE
+  "../Linux-x86_64/libpopsift.pdb"
+  "../Linux-x86_64/libpopsift.so"
+  "../Linux-x86_64/libpopsift.so.1.0.0"
+  "CMakeFiles/popsift.dir/popsift/common/popsift_generated_assist.cu.o"
+  "CMakeFiles/popsift.dir/popsift/common/popsift_generated_debug_macros.cu.o"
+  "CMakeFiles/popsift.dir/popsift/common/popsift_generated_device_prop.cu.o"
+  "CMakeFiles/popsift.dir/popsift/common/popsift_generated_plane_2d.cu.o"
+  "CMakeFiles/popsift.dir/popsift/common/popsift_generated_write_plane_2d.cu.o"
+  "CMakeFiles/popsift.dir/popsift/popsift.cpp.o"
+  "CMakeFiles/popsift.dir/popsift/popsift.cpp.o.d"
+  "CMakeFiles/popsift.dir/popsift/popsift_generated_features.cu.o"
+  "CMakeFiles/popsift.dir/popsift/popsift_generated_gauss_filter.cu.o"
+  "CMakeFiles/popsift.dir/popsift/popsift_generated_s_desc_grid.cu.o"
+  "CMakeFiles/popsift.dir/popsift/popsift_generated_s_desc_igrid.cu.o"
+  "CMakeFiles/popsift.dir/popsift/popsift_generated_s_desc_iloop.cu.o"
+  "CMakeFiles/popsift.dir/popsift/popsift_generated_s_desc_loop.cu.o"
+  "CMakeFiles/popsift.dir/popsift/popsift_generated_s_desc_notile.cu.o"
+  "CMakeFiles/popsift.dir/popsift/popsift_generated_s_extrema.cu.o"
+  "CMakeFiles/popsift.dir/popsift/popsift_generated_s_filtergrid.cu.o"
+  "CMakeFiles/popsift.dir/popsift/popsift_generated_s_image.cu.o"
+  "CMakeFiles/popsift.dir/popsift/popsift_generated_s_orientation.cu.o"
+  "CMakeFiles/popsift.dir/popsift/popsift_generated_s_pyramid_build.cu.o"
+  "CMakeFiles/popsift.dir/popsift/popsift_generated_s_pyramid_build_aa.cu.o"
+  "CMakeFiles/popsift.dir/popsift/popsift_generated_s_pyramid_build_ai.cu.o"
+  "CMakeFiles/popsift.dir/popsift/popsift_generated_s_pyramid_build_ra.cu.o"
+  "CMakeFiles/popsift.dir/popsift/popsift_generated_s_pyramid_fixed.cu.o"
+  "CMakeFiles/popsift.dir/popsift/popsift_generated_sift_conf.cu.o"
+  "CMakeFiles/popsift.dir/popsift/popsift_generated_sift_constants.cu.o"
+  "CMakeFiles/popsift.dir/popsift/popsift_generated_sift_desc.cu.o"
+  "CMakeFiles/popsift.dir/popsift/popsift_generated_sift_extremum.cu.o"
+  "CMakeFiles/popsift.dir/popsift/popsift_generated_sift_octave.cu.o"
+  "CMakeFiles/popsift.dir/popsift/popsift_generated_sift_pyramid.cu.o"
+  "CMakeFiles/popsift.dir/popsift_intermediate_link.o"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/popsift.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()
