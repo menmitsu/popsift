@@ -176,12 +176,27 @@ static void collectFilenames( list<string>& inputFiles, const boost::filesystem:
     }
 }
 
+SiftJob* detectFeaturesAndDescriptors(Mat &img,PopSift& PopSift)
+{
+
+  unsigned char* image_data;
+  SiftJob* job;
+
+  nvtxRangePushA( "load and convert image" );
+
+  image_data = img.GetData();
+
+  nvtxRangePop( );
+
+  // PopSift.init( w, h );
+  job = PopSift.enqueue( w, h, image_data );
+
+  img.Clear();
+
+}
+
 SiftJob* process_image( const string& inputFile, PopSift& PopSift )
 {
-    unsigned char* image_data;
-    SiftJob* job;
-
-    nvtxRangePushA( "load and convert image" );
 
 #ifdef USE_DEVIL
 
@@ -306,30 +321,45 @@ int main(int argc, char **argv)
 
     clock_t begin_time = clock();
 
-    SiftJob* lJob = process_image( lFile, PopSift );
+    cv::VideoCapture video("Footage/packet_orientations.mp4");
 
+
+
+    SiftJob* lJob = process_image( lFile, PopSift );
     std::cout <<"\n\nSift detection and description time"<< float( clock () - begin_time ) /  CLOCKS_PER_SEC;
+
+    popsift::FeaturesDev* lFeatures = lJob->getDev();
+
+    cout << "Number of features:    " << lFeatures->getFeatureCount() << endl;
+    cout << "Number of descriptors: " << lFeatures->getDesc
+
+
+
+    Mat frame;
+
+
+
+
 
     SiftJob* rJob = process_image( rFile, PopSift );
 
     std::cout <<"\n\nSift detection and description"<< float( clock () - begin_time ) /  CLOCKS_PER_SEC;
 
-    popsift::FeaturesDev* lFeatures = lJob->getDev();
-
-    cout << "Number of features:    " << lFeatures->getFeatureCount() << endl;
-    cout << "Number of descriptors: " << lFeatures->getDescriptorCount() << endl;
+  riptorCount() << endl;
 
     popsift::FeaturesDev* rFeatures = rJob->getDev();
     cout << "Number of features:    " << rFeatures->getFeatureCount() << endl;
     cout << "Number of descriptors: " << rFeatures->getDescriptorCount() << endl;
 
-    vector<float> good_matches2;
+while(cv::waitKey(1)!=27)
+{
+
+
     begin_time = clock();
 
     lFeatures->match( rFeatures);
 
     std::cout <<"\n\nMatching time "<< float( clock () - begin_time ) /  CLOCKS_PER_SEC;
-
 
     popsift::FeaturesHost* left_features = new popsift::FeaturesHost( lFeatures->getFeatureCount(), lFeatures->getDescriptorCount() );
     popsift::FeaturesHost* right_features = new popsift::FeaturesHost( rFeatures->getFeatureCount(), rFeatures->getDescriptorCount() );
@@ -344,7 +374,6 @@ int main(int argc, char **argv)
 
     cv::Mat rimg=cv::imread(rFile);
     cv::Mat outRimg=rimg.clone();
-
 
 /////
 
@@ -387,13 +416,13 @@ int main(int argc, char **argv)
      limg.copyTo(matchesImg(cv::Rect(0,0,limg.cols,limg.rows)));
      rimg.copyTo(matchesImg(cv::Rect(limg.cols,0,rimg.cols,rimg.rows)));
 
-
      std::vector<cv::Point2f> objPts;
      std::vector<cv::Point2f> scenePts;
 
 
      for(int i=0;i<numGoodMatches ;i++)
      {
+
        cv::Point2f objPt(objFeatures[i*4],objFeatures[i*4+1]);
        cv::Point2f scenePt(objFeatures[i*4+2],objFeatures[i*4+3]);
 
@@ -405,21 +434,18 @@ int main(int argc, char **argv)
 
      }
 
-
-
     cv::Mat H = cv::findHomography( objPts, scenePts,cv::RANSAC );
     std::cout <<"\n\nHomography "<< float( clock () - begin_time ) /  CLOCKS_PER_SEC;
 
-
     std::vector<cv::Point2f> scene_corners(4);
     std::vector<cv::Point2f> obj_corners(4);
+
     obj_corners[0] = cv::Point2f(0, 0);
     obj_corners[1] = cv::Point2f( (float)limg.cols, 0 );
     obj_corners[2] = cv::Point2f( (float)limg.cols, (float)limg.rows );
     obj_corners[3] = cv::Point2f( 0, (float)limg.rows );
 
     perspectiveTransform( obj_corners, scene_corners, H);
-
 
     //-- Draw lines between the corners (the mapped object in the scene - image_2 )
     line( matchesImg, scene_corners[0] + cv::Point2f((float)limg.cols, 0),
@@ -432,11 +458,8 @@ int main(int argc, char **argv)
           scene_corners[0] + cv::Point2f((float)limg.cols, 0), cv::Scalar( 0, 255, 0), 4 );
     //-- Show detected matches
 
-     cv::imshow("Matches",matchesImg);
-
-     cv::waitKey(0);
-
-
+    cv::imshow("Matches",matchesImg);
+}
 
     return EXIT_SUCCESS;
 }
