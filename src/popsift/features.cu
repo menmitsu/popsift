@@ -16,6 +16,7 @@
 #include <cstdlib>
 #include <iomanip>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -58,6 +59,8 @@ void FeaturesHost::reset( int num_ext, int num_ori )
 {
     if( _ext != nullptr ) { free( _ext ); _ext = nullptr; }
     if( _ori != nullptr ) { free( _ori ); _ori = nullptr; }
+    if( _obj != nullptr ) { free( _ori ); _ori = nullptr; }
+
 
     _ext = (Feature*)memalign( getPageSize(), num_ext * sizeof(Feature) );
     if( _ext == nullptr ) {
@@ -67,7 +70,9 @@ void FeaturesHost::reset( int num_ext, int num_ori )
         if( errno == ENOMEM ) cerr << "    Not enough memory." << endl;
         exit( -1 );
     }
+
     _ori = (Descriptor*)memalign( getPageSize(), num_ori * sizeof(Descriptor) );
+
     if( _ori == nullptr ) {
         cerr << __FILE__ << ":" << __LINE__ << " Runtime error:" << endl
              << "    Failed to (re)allocate memory for downloading " << num_ori << " descriptors" << endl;
@@ -75,6 +80,23 @@ void FeaturesHost::reset( int num_ext, int num_ori )
         if( errno == ENOMEM ) cerr << "    Not enough memory." << endl;
         exit( -1 );
     }
+
+    _obj = (float*)memalign( getPageSize(), num_ori * sizeof(float) );
+
+    if( _obj == nullptr ) {
+        cerr << __FILE__ << ":" << __LINE__ << " Runtime error:" << endl
+             << "    Failed to (re)allocate memory for downloading " << " Scene popints" << endl;
+        if( errno == EINVAL ) cerr << "    Alignment is not a power of two." << endl;
+        if( errno == ENOMEM ) cerr << "    Not enough memory." << endl;
+        exit( -1 );
+    }
+
+
+    aaa= (int*)memalign( getPageSize(),  sizeof(int) );
+
+
+    _numGoodMatches= (int*)memalign( getPageSize(),  sizeof(int) );
+
 
     setFeatureCount( num_ext );
     setDescriptorCount( num_ori );
@@ -99,12 +121,27 @@ void FeaturesHost::pin( )
              << "    Memory size requested: " << getDescriptorCount() * sizeof(Descriptor) << endl
              << "    " << cudaGetErrorString(err) << endl;
     }
+
+    err = cudaHostRegister( _obj, getDescriptorCount() * sizeof(float), 0 );
+    if( err != cudaSuccess ) {
+        cerr << __FILE__ << ":" << __LINE__ << " Runtime warning:" << endl
+             << "    Failed to register Object keypoints in Cuda." << endl
+             << "    Descriptors count: " << getDescriptorCount() << endl
+             << "    Memory size requested: " << getDescriptorCount() * sizeof(float) << endl
+             << "    " << cudaGetErrorString(err) << endl;
+    }
+
+
+    err = cudaHostRegister( _numGoodMatches,sizeof(int), 0 );
+
 }
 
 void FeaturesHost::unpin( )
 {
     cudaHostUnregister( _ext );
     cudaHostUnregister( _ori );
+    cudaHostUnregister( _obj );
+
 }
 
 void FeaturesHost::print( std::ostream& ostr, bool write_as_uchar ) const
@@ -128,12 +165,18 @@ FeaturesDev::FeaturesDev( )
     : _ext( nullptr )
     , _ori( nullptr )
     , _rev( nullptr )
-{ }
+    , _obj(nullptr)
+    , _scene(nullptr)
+{
+
+}
 
 FeaturesDev::FeaturesDev( int num_ext, int num_ori )
     : _ext( nullptr )
     , _ori( nullptr )
     , _rev( nullptr )
+    , _obj(nullptr)
+    , _scene(nullptr)
 {
     reset( num_ext, num_ori );
 }
@@ -143,6 +186,8 @@ FeaturesDev::~FeaturesDev( )
     cudaFree( _ext );
     cudaFree( _ori );
     cudaFree( _rev );
+    cudaFree( _obj );
+    cudaFree( _scene );
 }
 
 void FeaturesDev::reset( int num_ext, int num_ori )
@@ -150,13 +195,23 @@ void FeaturesDev::reset( int num_ext, int num_ori )
     if( _ext != nullptr ) { cudaFree( _ext ); _ext = nullptr; }
     if( _ori != nullptr ) { cudaFree( _ori ); _ori = nullptr; }
     if( _rev != nullptr ) { cudaFree( _rev ); _rev = nullptr; }
+    if( _obj != nullptr ) { cudaFree( _obj ); _obj = nullptr; }
+    if( _scene != nullptr ) { cudaFree( _scene ); _scene = nullptr; }
 
     _ext = popsift::cuda::malloc_devT<Feature>   ( num_ext, __FILE__, __LINE__ );
     _ori = popsift::cuda::malloc_devT<Descriptor>( num_ori, __FILE__, __LINE__ );
     _rev = popsift::cuda::malloc_devT<int>       ( num_ori, __FILE__, __LINE__ );
+    _obj = popsift::cuda::malloc_devT<float>( num_ori, __FILE__, __LINE__ );
+    _scene = popsift::cuda::malloc_devT<float>       ( num_ori, __FILE__, __LINE__ );
+
+    _numGoodMatches = popsift::cuda::malloc_devT<int>       ( 1, __FILE__, __LINE__ );
 
     setFeatureCount( num_ext );
     setDescriptorCount( num_ori );
+
+    // resetGoodMatches();
+
+
 }
 
 __device__ inline float
@@ -222,6 +277,7 @@ compute_distance( int3* match_matrix, Descriptor* l, int l_len, Descriptor* r, i
         bool accept = ( match_1st_val / match_2nd_val < 0.8f );
         match_matrix[blockIdx.x] = make_int3( match_1st_idx, match_2nd_idx, accept );
     }
+
 }
 
 __global__ void
@@ -233,40 +289,81 @@ show_distance( int3*       match_matrix,
                Feature*    r_ext,
                Descriptor* r_ori,
                int*        r_fem,
-               int         r_len )
+               int         r_len,
+               int*         var,
+               float*      obj,
+               float*      scene,
+               int*        numGoodMatches
+             )
 {
+
+  *numGoodMatches=0;
+
     for( int i=0; i<l_len; i++ )
     {
         const float4* lptr  = (const float4*)( &l_ori[i] );
         const float4* rptr1 = (const float4*)( &r_ori[match_matrix[i].x] );
-        const float4* rptr2 = (const float4*)( &r_ori[match_matrix[i].y] );
-	float d1 = l2_in_t0( lptr, rptr1 );
-	float d2 = l2_in_t0( lptr, rptr2 );
-	if( threadIdx.x == 0 )
-        {
-            if( match_matrix[i].z )
-                printf( "accept feat %4d [%4d] matches feat %4d [%4d] ( 2nd feat %4d [%4d] ) dist %.3f vs %.3f\n",
-                        l_fem[i], i,
-                        r_fem[match_matrix[i].x], match_matrix[i].x,
-                        r_fem[match_matrix[i].y], match_matrix[i].y,
-                        d1, d2 );
-	    else
-                printf( "reject feat %4d [%4d] matches feat %4d [%4d] ( 2nd feat %4d [%4d] ) dist %.3f vs %.3f\n",
-                        l_fem[i], i,
-                        r_fem[match_matrix[i].x], match_matrix[i].x,
-                        r_fem[match_matrix[i].y], match_matrix[i].y,
-                        d1, d2 );
-        }
-        __syncthreads();
-    }
+        const float4* rptr2 = (const float4*)( &r_ori[match_matrix[i].y]);
+
+
+        const float4* lFeatptr  = (const float4*)( &l_ext[i] );
+
+      	float d1 = l2_in_t0( lptr, rptr1 );
+      	float d2 = l2_in_t0( lptr, rptr2 );
+
+        const float ratio_thresh = 0.4f;
+
+      	if( threadIdx.x == 0 )
+              {
+                  if( match_matrix[i].z &&d1<ratio_thresh*d2 )
+                      {
+
+
+                         obj[*numGoodMatches]=l_ext[l_fem[i]].xpos; obj[*numGoodMatches+1]=l_ext[l_fem[i]].ypos;
+                         obj[*numGoodMatches+2]=r_ext[r_fem[match_matrix[i].x]].xpos; obj[*numGoodMatches+3]=r_ext[r_fem[match_matrix[i].x]].ypos;
+
+
+
+                        //  printf( "\naccept feat %4d [%4d] matches feat %4d [%4d] ( 2nd feat %4d [%4d] ) dist %.3f vs %.3f\n",
+                        //        l_fem[i], i,
+                        //        r_fem[match_matrix[i].x], match_matrix[i].x,
+                        //        r_fem[match_matrix[i].y], match_matrix[i].y,
+                        //        d1, d2 );
+                        //
+                        //
+                        // printf("\nKeypoint feat %f %f %f %f ",obj[*numGoodMatches],obj[*numGoodMatches+1],obj[*numGoodMatches+2],obj[*numGoodMatches+3]);
+
+                        *(numGoodMatches)=*(numGoodMatches)+4;
+                        // numGoodMatches[0]=12;
+                        //
+                        // printf("\n Number of matches %d",numGoodMatches[0]);
+
+
+
+                        // _obj.push_back(cv::Point2f(l_ext[l_fem[i]].xpos,l_ext[l_fem[i]].ypos));
+                        }
+      	    else
+                      ;// printf( "reject feat %4d [%4d] matches feat %4d [%4d] ( 2nd feat %4d [%4d] ) dist %.3f vs %.3f\n",
+                      //         l_fem[i], i,
+                      //         r_fem[match_matrix[i].x], match_matrix[i].x,
+                      //         r_fem[match_matrix[i].y], match_matrix[i].y,
+                      //         d1, d2 );
+              }
+              __syncthreads();
+          }
+
+          
+
+
 }
 
-void FeaturesDev::match( FeaturesDev* other )
+void FeaturesDev::match( FeaturesDev* other)
 {
     int l_len = getDescriptorCount( );
     int r_len = other->getDescriptorCount( );
+    // resetGoodMatches();
 
-    int3* match_matrix = popsift::cuda::malloc_devT<int3>( l_len, __FILE__, __LINE__ );
+      int3* match_matrix = popsift::cuda::malloc_devT<int3>( l_len, __FILE__, __LINE__ );
 
     dim3 grid;
     grid.x = l_len;
@@ -283,22 +380,43 @@ void FeaturesDev::match( FeaturesDev* other )
 
     POP_SYNC_CHK;
 
-    show_distance
-        <<<1,32>>>
-        ( match_matrix,
-          getFeatures(),
-          getDescriptors(),
-          getReverseMap(),
-          l_len,
-          other->getFeatures(),
-          other->getDescriptors(),
-          other->getReverseMap(),
-          r_len );
+// Original
+
+    // show_distance
+    //     <<<1,32>>>
+    //     ( match_matrix,
+    //       getFeatures(),
+    //       getDescriptors(),
+    //       getReverseMap(),
+    //       l_len,
+    //       other->getFeatures(),
+    //       other->getDescriptors(),
+    //       other->getReverseMap(),
+    //       r_len );
+
+          show_distance
+              <<<1,32>>>
+              ( match_matrix,
+                getFeatures(),
+                getDescriptors(),
+                getReverseMap(),
+                l_len,
+                other->getFeatures(),
+                other->getDescriptors(),
+                other->getReverseMap(),
+                r_len,
+                _var,
+                _obj,
+                _scene,
+                _numGoodMatches);
 
     POP_SYNC_CHK;
 
+
     cudaFree( match_matrix );
 }
+
+
 
 /*************************************************************
  * Feature

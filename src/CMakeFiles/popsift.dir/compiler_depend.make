@@ -270,14 +270,70 @@ src/CMakeFiles/popsift.dir/popsift/popsift.cpp.o: src/popsift/popsift.cpp \
   src/popsift/gauss_filter.h \
   src/popsift/sift_pyramid.h \
   src/popsift/features.h \
+  /usr/local/include/opencv4/opencv2/core/core.hpp \
+  /usr/local/include/opencv4/opencv2/core.hpp \
+  /usr/local/include/opencv4/opencv2/core/cvdef.h \
+  /usr/local/include/opencv4/opencv2/core/version.hpp \
+  /usr/local/include/opencv4/opencv2/core/hal/interface.h \
+  /usr/include/c++/7/cstddef \
+  /usr/local/include/opencv4/opencv2/core/cv_cpu_dispatch.h \
+  /usr/lib/gcc/x86_64-linux-gnu/7/include/emmintrin.h \
+  /usr/lib/gcc/x86_64-linux-gnu/7/include/xmmintrin.h \
+  /usr/lib/gcc/x86_64-linux-gnu/7/include/mmintrin.h \
+  /usr/lib/gcc/x86_64-linux-gnu/7/include/mm_malloc.h \
+  /usr/include/c++/7/stdlib.h \
+  /usr/local/include/opencv4/opencv2/core/base.hpp \
+  /usr/local/include/opencv4/opencv2/opencv_modules.hpp \
+  /usr/include/c++/7/climits \
+  /usr/include/c++/7/algorithm \
+  /usr/include/c++/7/bits/stl_algo.h \
+  /usr/include/c++/7/bits/algorithmfwd.h \
+  /usr/include/c++/7/bits/uniform_int_dist.h \
+  /usr/local/include/opencv4/opencv2/core/cvstd.hpp \
+  /usr/local/include/opencv4/opencv2/core/cvstd_wrapper.hpp \
+  /usr/local/include/opencv4/opencv2/core/neon_utils.hpp \
+  /usr/local/include/opencv4/opencv2/core/vsx_utils.hpp \
+  /usr/include/assert.h \
+  /usr/local/include/opencv4/opencv2/core/check.hpp \
+  /usr/local/include/opencv4/opencv2/core/traits.hpp \
+  /usr/local/include/opencv4/opencv2/core/matx.hpp \
+  /usr/local/include/opencv4/opencv2/core/saturate.hpp \
+  /usr/local/include/opencv4/opencv2/core/fast_math.hpp \
+  /usr/local/include/opencv4/opencv2/core/types.hpp \
+  /usr/include/c++/7/cfloat \
+  /usr/lib/gcc/x86_64-linux-gnu/7/include/float.h \
+  /usr/local/include/opencv4/opencv2/core/mat.hpp \
+  /usr/local/include/opencv4/opencv2/core/bufferpool.hpp \
+  /usr/local/include/opencv4/opencv2/core/mat.inl.hpp \
+  /usr/local/include/opencv4/opencv2/core/persistence.hpp \
+  /usr/local/include/opencv4/opencv2/core/operations.hpp \
+  /usr/local/include/opencv4/opencv2/core/cvstd.inl.hpp \
+  /usr/include/c++/7/complex \
+  /usr/include/c++/7/sstream \
+  /usr/include/c++/7/bits/sstream.tcc \
+  /usr/local/include/opencv4/opencv2/core/utility.hpp \
+  /usr/include/c++/7/functional \
+  /usr/local/include/opencv4/opencv2/core/optim.hpp \
+  /usr/local/include/opencv4/opencv2/core/ovx.hpp \
+  /usr/local/include/opencv4/opencv2/core/cvdef.h \
+  /usr/local/include/opencv4/opencv2/highgui/highgui.hpp \
+  /usr/local/include/opencv4/opencv2/highgui.hpp \
+  /usr/local/include/opencv4/opencv2/imgcodecs.hpp \
+  /usr/local/include/opencv4/opencv2/videoio.hpp \
+  /usr/local/include/opencv4/opencv2/imgproc/imgproc.hpp \
+  /usr/local/include/opencv4/opencv2/imgproc.hpp \
+  /usr/local/include/opencv4/opencv2/imgproc/segmentation.hpp \
+  /usr/local/include/opencv4/opencv2/features2d.hpp \
+  /usr/local/include/opencv4/opencv2/flann/miniflann.hpp \
+  /usr/local/include/opencv4/opencv2/flann/defines.h \
+  /usr/local/include/opencv4/opencv2/flann/config.h \
+  /usr/local/include/opencv4/opencv2/calib3d.hpp \
+  /usr/local/include/opencv4/opencv2/core/affine.hpp \
   src/popsift/s_image.h \
   src/popsift/common/plane_2d.h \
   /usr/include/c++/7/cassert \
-  /usr/include/assert.h \
   /usr/include/c++/7/cinttypes \
   /usr/include/inttypes.h \
-  /usr/include/c++/7/sstream \
-  /usr/include/c++/7/bits/sstream.tcc \
   src/popsift/sift_octave.h \
   /usr/include/c++/7/fstream \
   /usr/include/c++/7/bits/codecvt.h \
@@ -292,17 +348,81 @@ src/CMakeFiles/popsift.dir/popsift/popsift.cpp.o: src/popsift/popsift.cpp \
 
 /usr/include/c++/7/bits/codecvt.h:
 
-/usr/include/c++/7/fstream:
-
-/usr/include/c++/7/bits/sstream.tcc:
-
-/usr/include/c++/7/sstream:
-
 /usr/include/c++/7/cinttypes:
 
 /usr/include/c++/7/cassert:
 
 src/popsift/common/plane_2d.h:
+
+/usr/local/include/opencv4/opencv2/core/affine.hpp:
+
+/usr/local/include/opencv4/opencv2/calib3d.hpp:
+
+/usr/local/include/opencv4/opencv2/flann/miniflann.hpp:
+
+/usr/local/include/opencv4/opencv2/features2d.hpp:
+
+/usr/local/include/opencv4/opencv2/imgproc/segmentation.hpp:
+
+/usr/local/include/opencv4/opencv2/imgproc.hpp:
+
+/usr/local/include/opencv4/opencv2/videoio.hpp:
+
+/usr/local/include/opencv4/opencv2/highgui.hpp:
+
+/usr/local/include/opencv4/opencv2/highgui/highgui.hpp:
+
+/usr/local/include/opencv4/opencv2/core/ovx.hpp:
+
+/usr/include/c++/7/functional:
+
+/usr/local/include/opencv4/opencv2/core/utility.hpp:
+
+/usr/include/c++/7/bits/sstream.tcc:
+
+/usr/include/c++/7/sstream:
+
+/usr/local/include/opencv4/opencv2/core/persistence.hpp:
+
+/usr/local/include/opencv4/opencv2/core/bufferpool.hpp:
+
+/usr/local/include/opencv4/opencv2/core/mat.hpp:
+
+/usr/lib/gcc/x86_64-linux-gnu/7/include/float.h:
+
+/usr/local/include/opencv4/opencv2/core/types.hpp:
+
+/usr/include/c++/7/fstream:
+
+/usr/local/include/opencv4/opencv2/core/matx.hpp:
+
+/usr/local/include/opencv4/opencv2/imgproc/imgproc.hpp:
+
+/usr/local/include/opencv4/opencv2/core/traits.hpp:
+
+/usr/local/include/opencv4/opencv2/core/check.hpp:
+
+/usr/local/include/opencv4/opencv2/core/cvstd.hpp:
+
+/usr/include/c++/7/bits/uniform_int_dist.h:
+
+/usr/local/include/opencv4/opencv2/opencv_modules.hpp:
+
+/usr/local/include/opencv4/opencv2/core/base.hpp:
+
+/usr/include/c++/7/stdlib.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/7/include/mm_malloc.h:
+
+/usr/include/c++/7/bits/algorithmfwd.h:
+
+/usr/local/include/opencv4/opencv2/core/cv_cpu_dispatch.h:
+
+/usr/local/include/opencv4/opencv2/core/hal/interface.h:
+
+/usr/local/include/opencv4/opencv2/core.hpp:
+
+/usr/local/include/opencv4/opencv2/core/core.hpp:
 
 src/popsift/features.h:
 
@@ -313,6 +433,8 @@ src/popsift/sift_pyramid.h:
 /usr/include/c++/7/stack:
 
 /usr/include/c++/7/bits/std_function.h:
+
+/usr/local/include/opencv4/opencv2/core/cvstd_wrapper.hpp:
 
 /usr/include/c++/7/bits/atomic_lockfree_defines.h:
 
@@ -346,6 +468,8 @@ src/popsift/sift_pyramid.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdlib.h:
 
+/usr/local/include/opencv4/opencv2/core/cvdef.h:
+
 /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h:
 
 /usr/include/errno.h:
@@ -360,6 +484,8 @@ src/popsift/sift_pyramid.h:
 
 /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h:
 
+/usr/local/include/opencv4/opencv2/flann/config.h:
+
 /usr/include/x86_64-linux-gnu/c++/7/bits/error_constants.h:
 
 /usr/include/c++/7/bits/localefwd.h:
@@ -372,11 +498,15 @@ src/popsift/sift_pyramid.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/FILE.h:
 
+/usr/local/include/opencv4/opencv2/core/optim.hpp:
+
 /usr/include/c++/7/queue:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
 
 /usr/local/cuda/include/device_types.h:
+
+/usr/include/c++/7/cfloat:
 
 /usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
 
@@ -397,6 +527,8 @@ src/popsift/sift_pyramid.h:
 /usr/include/c++/7/bits/postypes.h:
 
 /usr/include/c++/7/bits/memoryfwd.h:
+
+/usr/local/include/opencv4/opencv2/imgcodecs.hpp:
 
 /usr/include/c++/7/bits/stl_deque.h:
 
@@ -458,6 +590,8 @@ src/popsift/popsift.h:
 
 /usr/include/c++/7/cstdint:
 
+/usr/local/include/opencv4/opencv2/core/fast_math.hpp:
+
 /usr/include/c++/7/typeinfo:
 
 /usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
@@ -492,6 +626,8 @@ src/popsift/popsift.h:
 
 /usr/include/stdc-predef.h:
 
+/usr/lib/gcc/x86_64-linux-gnu/7/include/mmintrin.h:
+
 /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h:
 
 /usr/include/c++/7/chrono:
@@ -525,6 +661,8 @@ src/popsift/popsift.h:
 /usr/include/c++/7/debug/debug.h:
 
 /usr/include/x86_64-linux-gnu/bits/endian.h:
+
+/usr/local/include/opencv4/opencv2/core/version.hpp:
 
 src/popsift/popsift.cpp:
 
@@ -568,6 +706,8 @@ src/popsift/s_image.h:
 
 /usr/include/x86_64-linux-gnu/c++/7/bits/cpu_defines.h:
 
+/usr/local/include/opencv4/opencv2/core/saturate.hpp:
+
 /usr/include/stdlib.h:
 
 /usr/include/c++/7/bits/ios_base.h:
@@ -601,6 +741,8 @@ src/popsift/sift_octave.h:
 /usr/include/c++/7/bits/exception.h:
 
 /usr/include/c++/7/cwctype:
+
+/usr/local/include/opencv4/opencv2/core/mat.inl.hpp:
 
 /usr/include/x86_64-linux-gnu/c++/7/bits/c++config.h:
 
@@ -660,6 +802,8 @@ src/popsift/sift_octave.h:
 
 /usr/include/c++/7/bits/stl_iterator.h:
 
+/usr/include/c++/7/cstddef:
+
 /usr/include/c++/7/bits/ptr_traits.h:
 
 /usr/include/c++/7/ext/string_conversions.h:
@@ -680,6 +824,8 @@ src/popsift/sift_octave.h:
 
 /usr/include/c++/7/bits/stl_function.h:
 
+/usr/include/c++/7/algorithm:
+
 /usr/include/ctype.h:
 
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
@@ -694,6 +840,8 @@ src/popsift/sift_octave.h:
 
 /usr/include/c++/7/bits/basic_ios.tcc:
 
+/usr/local/include/opencv4/opencv2/core/neon_utils.hpp:
+
 /usr/include/c++/7/clocale:
 
 /usr/include/c++/7/ext/atomicity.h:
@@ -704,15 +852,23 @@ src/popsift/sift_octave.h:
 
 /usr/include/pthread.h:
 
+/usr/include/c++/7/complex:
+
 /usr/include/c++/7/condition_variable:
 
 /usr/include/x86_64-linux-gnu/bits/sched.h:
+
+/usr/include/c++/7/climits:
 
 /usr/include/x86_64-linux-gnu/bits/types/timer_t.h:
 
 /usr/include/c++/7/bits/basic_string.tcc:
 
+/usr/local/include/opencv4/opencv2/core/vsx_utils.hpp:
+
 /usr/include/c++/7/ios:
+
+/usr/lib/gcc/x86_64-linux-gnu/7/include/xmmintrin.h:
 
 /usr/include/time.h:
 
@@ -738,6 +894,8 @@ src/popsift/sift_octave.h:
 
 /usr/include/c++/7/cstdio:
 
+/usr/include/c++/7/bits/stl_algo.h:
+
 /usr/include/x86_64-linux-gnu/bits/_G_config.h:
 
 /usr/include/c++/7/bits/allocator.h:
@@ -753,6 +911,8 @@ src/popsift/sift_octave.h:
 /usr/include/c++/7/bits/uses_allocator.h:
 
 /usr/include/c++/7/bits/shared_ptr.h:
+
+/usr/local/include/opencv4/opencv2/core/cvstd.inl.hpp:
 
 /usr/include/c++/7/bits/allocated_ptr.h:
 
@@ -790,6 +950,8 @@ src/popsift/sift_extremum.h:
 
 /usr/include/x86_64-linux-gnu/c++/7/bits/basic_file.h:
 
+/usr/local/include/opencv4/opencv2/flann/defines.h:
+
 /usr/include/x86_64-linux-gnu/c++/7/bits/c++locale.h:
 
 /usr/local/cuda/include/builtin_types.h:
@@ -818,6 +980,8 @@ src/popsift/sift_extremum.h:
 
 src/popsift/sift_conf.h:
 
+/usr/lib/gcc/x86_64-linux-gnu/7/include/emmintrin.h:
+
 /usr/include/c++/7/bits/range_access.h:
 
 /usr/include/c++/7/future:
@@ -837,6 +1001,8 @@ src/popsift/sift_constants.h:
 /usr/include/c++/7/utility:
 
 /usr/include/c++/7/ostream:
+
+/usr/local/include/opencv4/opencv2/core/operations.hpp:
 
 /usr/include/c++/7/bits/locale_classes.h:
 

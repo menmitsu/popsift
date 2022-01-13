@@ -206,50 +206,125 @@ src/application/CMakeFiles/popsift-match.dir/match.cpp.o: src/application/match.
   /usr/include/c++/7/bits/ostream.tcc \
   /usr/include/c++/7/istream \
   /usr/include/c++/7/bits/istream.tcc \
-  src/popsift/popsift.h \
-  src/popsift/common/sync_queue.h \
-  /usr/include/c++/7/condition_variable \
-  /usr/include/c++/7/chrono \
-  /usr/include/c++/7/ratio \
+  /usr/local/include/opencv4/opencv2/core/core.hpp \
+  /usr/local/include/opencv4/opencv2/core.hpp \
+  /usr/local/include/opencv4/opencv2/core/cvdef.h \
+  /usr/local/include/opencv4/opencv2/core/version.hpp \
   /usr/include/c++/7/limits \
-  /usr/include/c++/7/ctime \
-  /usr/include/c++/7/bits/parse_numbers.h \
-  /usr/include/c++/7/bits/std_mutex.h \
-  /usr/include/c++/7/ext/concurrence.h \
-  /usr/include/c++/7/bits/unique_ptr.h \
+  /usr/local/include/opencv4/opencv2/core/hal/interface.h \
+  /usr/include/c++/7/cstddef \
+  /usr/local/include/opencv4/opencv2/core/cv_cpu_dispatch.h \
+  /usr/lib/gcc/x86_64-linux-gnu/7/include/emmintrin.h \
+  /usr/lib/gcc/x86_64-linux-gnu/7/include/xmmintrin.h \
+  /usr/lib/gcc/x86_64-linux-gnu/7/include/mmintrin.h \
+  /usr/lib/gcc/x86_64-linux-gnu/7/include/mm_malloc.h \
+  /usr/include/c++/7/stdlib.h \
+  /usr/include/c++/7/array \
   /usr/include/c++/7/utility \
   /usr/include/c++/7/bits/stl_relops.h \
-  /usr/include/c++/7/tuple \
-  /usr/include/c++/7/array \
+  /usr/local/include/opencv4/opencv2/core/base.hpp \
+  /usr/local/include/opencv4/opencv2/opencv_modules.hpp \
+  /usr/include/c++/7/climits \
+  /usr/include/c++/7/algorithm \
+  /usr/include/c++/7/bits/stl_algo.h \
+  /usr/include/c++/7/bits/algorithmfwd.h \
+  /usr/include/c++/7/bits/stl_heap.h \
+  /usr/include/c++/7/bits/stl_tempbuf.h \
+  /usr/include/c++/7/bits/uniform_int_dist.h \
+  /usr/local/include/opencv4/opencv2/core/cvstd.hpp \
+  /usr/include/c++/7/cstring \
+  /usr/include/string.h \
+  /usr/include/strings.h \
+  /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
+  /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
+  /usr/include/c++/7/cmath \
+  /usr/include/math.h \
+  /usr/include/x86_64-linux-gnu/bits/math-vector.h \
+  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
+  /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
+  /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
+  /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
+  /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
+  /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
+  /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
+  /usr/include/x86_64-linux-gnu/bits/mathinline.h \
+  /usr/local/include/opencv4/opencv2/core/cvstd_wrapper.hpp \
+  /usr/include/c++/7/memory \
+  /usr/include/c++/7/bits/stl_raw_storage_iter.h \
+  /usr/include/c++/7/ext/concurrence.h \
   /usr/include/c++/7/bits/uses_allocator.h \
+  /usr/include/c++/7/bits/unique_ptr.h \
+  /usr/include/c++/7/tuple \
   /usr/include/c++/7/bits/invoke.h \
   /usr/include/c++/7/bits/shared_ptr.h \
   /usr/include/c++/7/bits/shared_ptr_base.h \
   /usr/include/c++/7/bits/allocated_ptr.h \
   /usr/include/c++/7/bits/refwrap.h \
   /usr/include/c++/7/ext/aligned_buffer.h \
+  /usr/include/c++/7/bits/shared_ptr_atomic.h \
+  /usr/include/c++/7/bits/atomic_base.h \
+  /usr/include/c++/7/bits/atomic_lockfree_defines.h \
+  /usr/include/c++/7/backward/auto_ptr.h \
+  /usr/local/include/opencv4/opencv2/core/neon_utils.hpp \
+  /usr/local/include/opencv4/opencv2/core/vsx_utils.hpp \
+  /usr/include/assert.h \
+  /usr/local/include/opencv4/opencv2/core/check.hpp \
+  /usr/local/include/opencv4/opencv2/core/traits.hpp \
+  /usr/local/include/opencv4/opencv2/core/matx.hpp \
+  /usr/local/include/opencv4/opencv2/core/saturate.hpp \
+  /usr/local/include/opencv4/opencv2/core/fast_math.hpp \
+  /usr/local/include/opencv4/opencv2/core/types.hpp \
+  /usr/include/c++/7/cfloat \
+  /usr/lib/gcc/x86_64-linux-gnu/7/include/float.h \
+  /usr/local/include/opencv4/opencv2/core/mat.hpp \
+  /usr/local/include/opencv4/opencv2/core/bufferpool.hpp \
+  /usr/local/include/opencv4/opencv2/core/mat.inl.hpp \
+  /usr/local/include/opencv4/opencv2/core/persistence.hpp \
+  /usr/local/include/opencv4/opencv2/core/operations.hpp \
+  /usr/local/include/opencv4/opencv2/core/cvstd.inl.hpp \
+  /usr/include/c++/7/complex \
+  /usr/include/c++/7/sstream \
+  /usr/include/c++/7/bits/sstream.tcc \
+  /usr/local/include/opencv4/opencv2/core/utility.hpp \
+  /usr/include/c++/7/functional \
+  /usr/include/c++/7/bits/std_function.h \
   /usr/include/c++/7/mutex \
+  /usr/include/c++/7/chrono \
+  /usr/include/c++/7/ratio \
+  /usr/include/c++/7/ctime \
+  /usr/include/c++/7/bits/parse_numbers.h \
+  /usr/include/c++/7/bits/std_mutex.h \
+  /usr/local/include/opencv4/opencv2/core/optim.hpp \
+  /usr/local/include/opencv4/opencv2/core/ovx.hpp \
+  /usr/local/include/opencv4/opencv2/core/cvdef.h \
+  /usr/local/include/opencv4/opencv2/highgui/highgui.hpp \
+  /usr/local/include/opencv4/opencv2/highgui.hpp \
+  /usr/local/include/opencv4/opencv2/imgcodecs.hpp \
+  /usr/local/include/opencv4/opencv2/videoio.hpp \
+  /usr/local/include/opencv4/opencv2/imgproc/imgproc.hpp \
+  /usr/local/include/opencv4/opencv2/imgproc.hpp \
+  /usr/local/include/opencv4/opencv2/imgproc/segmentation.hpp \
+  /usr/local/include/opencv4/opencv2/features2d.hpp \
+  /usr/local/include/opencv4/opencv2/flann/miniflann.hpp \
+  /usr/local/include/opencv4/opencv2/flann/defines.h \
+  /usr/local/include/opencv4/opencv2/flann/config.h \
+  /usr/local/include/opencv4/opencv2/calib3d.hpp \
+  /usr/local/include/opencv4/opencv2/core/affine.hpp \
+  src/popsift/popsift.h \
+  src/popsift/common/sync_queue.h \
+  /usr/include/c++/7/condition_variable \
   /usr/include/c++/7/queue \
   /usr/include/c++/7/deque \
   /usr/include/c++/7/bits/stl_deque.h \
   /usr/include/c++/7/bits/deque.tcc \
-  /usr/include/c++/7/bits/stl_heap.h \
   /usr/include/c++/7/bits/stl_queue.h \
   src/popsift/sift_conf.h \
   src/generated/popsift/sift_config.h \
   src/popsift/sift_extremum.h \
   /usr/include/c++/7/future \
   /usr/include/c++/7/thread \
-  /usr/include/c++/7/memory \
-  /usr/include/c++/7/bits/stl_tempbuf.h \
-  /usr/include/c++/7/bits/stl_raw_storage_iter.h \
-  /usr/include/c++/7/bits/shared_ptr_atomic.h \
-  /usr/include/c++/7/bits/atomic_base.h \
-  /usr/include/c++/7/bits/atomic_lockfree_defines.h \
-  /usr/include/c++/7/backward/auto_ptr.h \
   /usr/include/c++/7/atomic \
   /usr/include/c++/7/bits/atomic_futex.h \
-  /usr/include/c++/7/bits/std_function.h \
   /usr/include/c++/7/stack \
   /usr/include/c++/7/bits/stl_stack.h \
   src/generated/popsift/version.hpp \
@@ -259,7 +334,6 @@ src/application/CMakeFiles/popsift-match.dir/match.cpp.o: src/application/match.
   /usr/include/boost/config/user.hpp \
   /usr/include/boost/config/detail/select_compiler_config.hpp \
   /usr/include/boost/config/compiler/gcc.hpp \
-  /usr/include/c++/7/cstddef \
   /usr/include/boost/config/detail/select_stdlib_config.hpp \
   /usr/include/boost/config/stdlib/libstdcpp3.hpp \
   /usr/include/unistd.h \
@@ -312,10 +386,8 @@ src/application/CMakeFiles/popsift-match.dir/match.cpp.o: src/application/match.
   /usr/include/boost/predef/os/ios.h \
   /usr/include/boost/cstdint.hpp \
   /usr/include/boost/assert.hpp \
-  /usr/include/assert.h \
   /usr/include/boost/noncopyable.hpp \
   /usr/include/boost/core/noncopyable.hpp \
-  /usr/include/c++/7/functional \
   /usr/include/boost/cerrno.hpp \
   /usr/include/boost/config/abi_prefix.hpp \
   /usr/include/boost/config/abi_suffix.hpp \
@@ -664,10 +736,6 @@ src/application/CMakeFiles/popsift-match.dir/match.cpp.o: src/application/match.
   /usr/include/boost/predef/hardware/simd/ppc.h \
   /usr/include/boost/predef/hardware/simd/ppc/versions.h \
   /usr/include/boost/predef/version.h \
-  /usr/include/c++/7/algorithm \
-  /usr/include/c++/7/bits/stl_algo.h \
-  /usr/include/c++/7/bits/algorithmfwd.h \
-  /usr/include/c++/7/bits/uniform_int_dist.h \
   /usr/include/boost/smart_ptr/detail/operator_bool.hpp \
   /usr/include/boost/smart_ptr/detail/local_sp_deleter.hpp \
   /usr/include/boost/smart_ptr/detail/local_counted_base.hpp \
@@ -676,11 +744,6 @@ src/application/CMakeFiles/popsift-match.dir/match.cpp.o: src/application/match.
   /usr/include/boost/io_fwd.hpp \
   /usr/include/boost/functional/hash_fwd.hpp \
   /usr/include/boost/functional/hash/hash_fwd.hpp \
-  /usr/include/c++/7/cstring \
-  /usr/include/string.h \
-  /usr/include/strings.h \
-  /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
-  /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
   /usr/include/boost/filesystem/operations.hpp \
   /usr/include/boost/detail/scoped_enum_emulation.hpp \
   /usr/include/boost/core/scoped_enum.hpp \
@@ -719,7 +782,6 @@ src/application/CMakeFiles/popsift-match.dir/match.cpp.o: src/application/match.
   /usr/include/boost/function/function_base.hpp \
   /usr/include/boost/integer.hpp \
   /usr/include/boost/integer_fwd.hpp \
-  /usr/include/c++/7/climits \
   /usr/include/boost/limits.hpp \
   /usr/include/boost/integer_traits.hpp \
   /usr/include/boost/type_traits/has_trivial_copy.hpp \
@@ -866,17 +928,6 @@ src/application/CMakeFiles/popsift-match.dir/match.cpp.o: src/application/match.
   /usr/include/boost/mpl/aux_/preprocessed/gcc/less.hpp \
   /usr/include/boost/numeric/conversion/converter_policies.hpp \
   /usr/include/boost/config/no_tr1/cmath.hpp \
-  /usr/include/c++/7/cmath \
-  /usr/include/math.h \
-  /usr/include/x86_64-linux-gnu/bits/math-vector.h \
-  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
-  /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
-  /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
-  /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
-  /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
-  /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
-  /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
-  /usr/include/x86_64-linux-gnu/bits/mathinline.h \
   /usr/include/boost/numeric/conversion/detail/converter.hpp \
   /usr/include/boost/numeric/conversion/bounds.hpp \
   /usr/include/boost/numeric/conversion/detail/bounds.hpp \
@@ -897,15 +948,11 @@ src/application/CMakeFiles/popsift-match.dir/match.cpp.o: src/application/match.
   /usr/include/boost/move/detail/std_ns_begin.hpp \
   /usr/include/boost/move/detail/std_ns_end.hpp \
   /usr/include/boost/lexical_cast/detail/converter_lexical_streams.hpp \
-  /usr/include/c++/7/sstream \
-  /usr/include/c++/7/bits/sstream.tcc \
   /usr/include/boost/lexical_cast/detail/lcast_char_constants.hpp \
   /usr/include/boost/lexical_cast/detail/lcast_unsigned_converters.hpp \
   /usr/include/boost/lexical_cast/detail/inf_nan.hpp \
   /usr/include/boost/math/special_functions/sign.hpp \
   /usr/include/boost/math/tools/config.hpp \
-  /usr/include/c++/7/cfloat \
-  /usr/lib/gcc/x86_64-linux-gnu/7/include/float.h \
   /usr/include/boost/math/tools/user.hpp \
   /usr/include/boost/math/special_functions/math_fwd.hpp \
   /usr/include/boost/math/special_functions/detail/round_fwd.hpp \
@@ -1046,10 +1093,8 @@ src/application/CMakeFiles/popsift-match.dir/match.cpp.o: src/application/match.
   /usr/include/boost/mpl/aux_/preprocessed/gcc/less_equal.hpp \
   /usr/include/boost/mpl/greater_equal.hpp \
   /usr/include/boost/mpl/aux_/preprocessed/gcc/greater_equal.hpp \
-  /usr/include/c++/7/stdlib.h \
   /usr/include/c++/7/math.h \
   /usr/include/boost/config/no_tr1/complex.hpp \
-  /usr/include/c++/7/complex \
   /usr/include/boost/math/special_functions/detail/fp_traits.hpp \
   /usr/include/boost/detail/endian.hpp \
   /usr/include/boost/predef/detail/endian_compat.h \
@@ -1081,51 +1126,6 @@ src/application/CMakeFiles/popsift-match.dir/match.cpp.o: src/application/match.
   /usr/include/boost/program_options/variables_map.hpp \
   /usr/include/boost/program_options/version.hpp \
   /usr/include/c++/7/iomanip \
-  /usr/local/include/opencv4/opencv2/core/core.hpp \
-  /usr/local/include/opencv4/opencv2/core.hpp \
-  /usr/local/include/opencv4/opencv2/core/cvdef.h \
-  /usr/local/include/opencv4/opencv2/core/version.hpp \
-  /usr/local/include/opencv4/opencv2/core/hal/interface.h \
-  /usr/local/include/opencv4/opencv2/core/cv_cpu_dispatch.h \
-  /usr/lib/gcc/x86_64-linux-gnu/7/include/emmintrin.h \
-  /usr/lib/gcc/x86_64-linux-gnu/7/include/xmmintrin.h \
-  /usr/lib/gcc/x86_64-linux-gnu/7/include/mmintrin.h \
-  /usr/lib/gcc/x86_64-linux-gnu/7/include/mm_malloc.h \
-  /usr/local/include/opencv4/opencv2/core/base.hpp \
-  /usr/local/include/opencv4/opencv2/opencv_modules.hpp \
-  /usr/local/include/opencv4/opencv2/core/cvstd.hpp \
-  /usr/local/include/opencv4/opencv2/core/cvstd_wrapper.hpp \
-  /usr/local/include/opencv4/opencv2/core/neon_utils.hpp \
-  /usr/local/include/opencv4/opencv2/core/vsx_utils.hpp \
-  /usr/local/include/opencv4/opencv2/core/check.hpp \
-  /usr/local/include/opencv4/opencv2/core/traits.hpp \
-  /usr/local/include/opencv4/opencv2/core/matx.hpp \
-  /usr/local/include/opencv4/opencv2/core/saturate.hpp \
-  /usr/local/include/opencv4/opencv2/core/fast_math.hpp \
-  /usr/local/include/opencv4/opencv2/core/types.hpp \
-  /usr/local/include/opencv4/opencv2/core/mat.hpp \
-  /usr/local/include/opencv4/opencv2/core/bufferpool.hpp \
-  /usr/local/include/opencv4/opencv2/core/mat.inl.hpp \
-  /usr/local/include/opencv4/opencv2/core/persistence.hpp \
-  /usr/local/include/opencv4/opencv2/core/operations.hpp \
-  /usr/local/include/opencv4/opencv2/core/cvstd.inl.hpp \
-  /usr/local/include/opencv4/opencv2/core/utility.hpp \
-  /usr/local/include/opencv4/opencv2/core/optim.hpp \
-  /usr/local/include/opencv4/opencv2/core/ovx.hpp \
-  /usr/local/include/opencv4/opencv2/core/cvdef.h \
-  /usr/local/include/opencv4/opencv2/highgui/highgui.hpp \
-  /usr/local/include/opencv4/opencv2/highgui.hpp \
-  /usr/local/include/opencv4/opencv2/imgcodecs.hpp \
-  /usr/local/include/opencv4/opencv2/videoio.hpp \
-  /usr/local/include/opencv4/opencv2/imgproc/imgproc.hpp \
-  /usr/local/include/opencv4/opencv2/imgproc.hpp \
-  /usr/local/include/opencv4/opencv2/imgproc/segmentation.hpp \
-  /usr/local/include/opencv4/opencv2/features2d.hpp \
-  /usr/local/include/opencv4/opencv2/flann/miniflann.hpp \
-  /usr/local/include/opencv4/opencv2/flann/defines.h \
-  /usr/local/include/opencv4/opencv2/flann/config.h \
-  /usr/local/include/opencv4/opencv2/calib3d.hpp \
-  /usr/local/include/opencv4/opencv2/core/affine.hpp \
   src/application/pgmread.h
 
 src/application/CMakeFiles/popsift-match.dir/pgmread.cpp.o: src/application/pgmread.cpp \
@@ -1887,99 +1887,19 @@ src/application/CMakeFiles/popsift-match.dir/pgmread.cpp.o: src/application/pgmr
 
 /usr/include/boost/algorithm/string/config.hpp:
 
-/usr/local/include/opencv4/opencv2/calib3d.hpp:
+/usr/include/c++/7/iomanip:
 
-/usr/local/include/opencv4/opencv2/flann/config.h:
+/usr/include/boost/program_options/variables_map.hpp:
 
-/usr/local/include/opencv4/opencv2/flann/defines.h:
+/usr/include/boost/program_options/detail/parsers.hpp:
 
-/usr/local/include/opencv4/opencv2/flann/miniflann.hpp:
+/usr/include/boost/program_options/detail/cmdline.hpp:
 
-/usr/local/include/opencv4/opencv2/features2d.hpp:
+/usr/include/boost/program_options/option.hpp:
 
-/usr/local/include/opencv4/opencv2/imgproc/segmentation.hpp:
+/usr/include/boost/program_options/parsers.hpp:
 
-/usr/local/include/opencv4/opencv2/imgproc/imgproc.hpp:
-
-/usr/include/boost/smart_ptr/detail/sp_disable_deprecated.hpp:
-
-/usr/include/c++/7/bits/hash_bytes.h:
-
-/usr/local/cuda/include/driver_functions.h:
-
-/usr/include/boost/detail/sp_typeinfo.hpp:
-
-/usr/include/boost/utility/binary.hpp:
-
-/usr/include/boost/mpl/list/aux_/preprocessed/plain/list10.hpp:
-
-/usr/include/boost/smart_ptr/detail/sp_counted_base_std_atomic.hpp:
-
-/usr/include/boost/mpl/inserter.hpp:
-
-/usr/include/boost/smart_ptr/detail/sp_counted_base.hpp:
-
-/usr/include/c++/7/bits/locale_classes.h:
-
-/usr/include/boost/current_function.hpp:
-
-/usr/include/boost/exception/exception.hpp:
-
-/usr/include/boost/smart_ptr/shared_ptr.hpp:
-
-/usr/include/boost/mpl/aux_/has_type.hpp:
-
-/usr/include/boost/iterator.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/typesizes.h:
-
-/usr/include/boost/numeric/conversion/detail/udt_builtin_mixture.hpp:
-
-/usr/include/boost/mpl/quote.hpp:
-
-/usr/include/boost/preprocessor/identity.hpp:
-
-/usr/include/boost/mpl/bind_fwd.hpp:
-
-/usr/include/boost/mpl/bind.hpp:
-
-/usr/include/c++/7/ostream:
-
-/usr/include/limits.h:
-
-/usr/include/boost/mpl/list/aux_/empty.hpp:
-
-/usr/include/boost/preprocessor/repetition/enum_params.hpp:
-
-/usr/include/boost/mpl/aux_/config/msvc_typename.hpp:
-
-/usr/include/boost/mpl/aux_/type_wrapper.hpp:
-
-/usr/include/boost/preprocessor/list/adt.hpp:
-
-/usr/include/boost/mpl/has_xxx.hpp:
-
-/usr/include/boost/mpl/at_fwd.hpp:
-
-/usr/include/boost/mpl/apply_wrap.hpp:
-
-/usr/include/boost/mpl/apply_fwd.hpp:
-
-/usr/include/boost/type_traits/is_pod.hpp:
-
-/usr/include/boost/type_traits/add_const.hpp:
-
-/usr/include/boost/utility/enable_if.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/select2.h:
-
-/usr/include/boost/mpl/int.hpp:
-
-/usr/include/boost/iterator/detail/enable_if.hpp:
-
-/usr/include/c++/7/bits/cpp_type_traits.h:
-
-/usr/include/boost/type_traits/remove_pointer.hpp:
+/usr/include/boost/program_options/positional_options.hpp:
 
 /usr/include/boost/type_traits/is_same.hpp:
 
@@ -2015,17 +1935,7 @@ src/application/CMakeFiles/popsift-match.dir/pgmread.cpp.o: src/application/pgmr
 
 /usr/include/boost/range/iterator.hpp:
 
-/usr/include/boost/range/rend.hpp:
-
-/usr/include/boost/mpl/arg.hpp:
-
-/usr/include/boost/range/empty.hpp:
-
 /usr/include/boost/lexical_cast/detail/lcast_unsigned_converters.hpp:
-
-/usr/include/boost/lexical_cast/detail/converter_lexical_streams.hpp:
-
-/usr/include/boost/iterator/iterator_traits.hpp:
 
 /usr/include/boost/type_traits/add_reference.hpp:
 
@@ -2035,21 +1945,11 @@ src/application/CMakeFiles/popsift-match.dir/pgmread.cpp.o: src/application/pgmr
 
 /usr/include/boost/type_traits/intrinsics.hpp:
 
-/usr/include/boost/mpl/aux_/config/compiler.hpp:
-
 /usr/include/x86_64-linux-gnu/c++/7/bits/messages_members.h:
 
 /usr/include/boost/preprocessor/tuple/rem.hpp:
 
 /usr/include/boost/preprocessor/facilities/overload.hpp:
-
-/usr/include/boost/preprocessor/facilities/expand.hpp:
-
-/usr/include/boost/preprocessor/enum_params.hpp:
-
-/usr/include/boost/preprocessor/seq/enum.hpp:
-
-/usr/lib/gcc/x86_64-linux-gnu/7/include/mm_malloc.h:
 
 /usr/include/boost/preprocessor/list/reverse.hpp:
 
@@ -2067,6 +1967,10 @@ src/application/CMakeFiles/popsift-match.dir/pgmread.cpp.o: src/application/pgmr
 
 /usr/local/include/opencv4/opencv2/core/saturate.hpp:
 
+/usr/include/boost/preprocessor/list/adt.hpp:
+
+/usr/include/boost/mpl/aux_/type_wrapper.hpp:
+
 /usr/include/x86_64-linux-gnu/bits/types/timer_t.h:
 
 /usr/include/boost/preprocessor/list/fold_left.hpp:
@@ -2081,9 +1985,15 @@ src/popsift/common/sync_queue.h:
 
 /usr/include/boost/config/detail/posix_features.hpp:
 
-/usr/include/boost/mpl/protect.hpp:
-
 /usr/include/boost/preprocessor/facilities/identity.hpp:
+
+/usr/include/boost/preprocessor/identity.hpp:
+
+/usr/include/boost/mpl/quote.hpp:
+
+/usr/include/boost/mpl/arg.hpp:
+
+/usr/include/boost/range/rend.hpp:
 
 /usr/include/boost/preprocessor/control/while.hpp:
 
@@ -2163,21 +2073,11 @@ src/popsift/common/sync_queue.h:
 
 /usr/include/boost/config/compiler/gcc.hpp:
 
-/usr/include/boost/smart_ptr/detail/sp_convertible.hpp:
-
-/usr/include/boost/config/platform/linux.hpp:
-
 /usr/include/boost/iterator/iterator_facade.hpp:
 
 /usr/include/c++/7/cassert:
 
 /usr/lib/gcc/x86_64-linux-gnu/7/include/stdarg.h:
-
-/usr/include/boost/mpl/aux_/preprocessed/gcc/bind_fwd.hpp:
-
-/usr/include/boost/preprocessor/array/size.hpp:
-
-/usr/include/boost/preprocessor/inc.hpp:
 
 /usr/include/c++/7/bits/locale_facets_nonio.tcc:
 
@@ -2191,29 +2091,13 @@ src/popsift/common/sync_queue.h:
 
 /usr/include/boost/mpl/aux_/contains_impl.hpp:
 
-/usr/include/boost/core/typeinfo.hpp:
-
-src/popsift/common/device_prop.h:
-
-/usr/include/boost/bind/mem_fn_template.hpp:
-
-/usr/include/boost/move/detail/std_ns_begin.hpp:
-
 /usr/include/c++/7/iterator:
-
-/usr/include/boost/mpl/apply.hpp:
-
-/usr/include/c++/7/bits/vector.tcc:
-
-/usr/include/boost/config/detail/select_compiler_config.hpp:
-
-/usr/include/c++/7/functional:
 
 /usr/include/boost/predef/platform/ios.h:
 
-/usr/include/boost/preprocessor/array/data.hpp:
+/usr/include/boost/mpl/int.hpp:
 
-/usr/include/boost/type_traits/remove_reference.hpp:
+/usr/include/boost/preprocessor/repetition/enum_params.hpp:
 
 /usr/include/boost/predef/os/windows.h:
 
@@ -2223,23 +2107,11 @@ src/popsift/common/device_prop.h:
 
 /usr/include/boost/predef/make.h:
 
-/usr/include/boost/program_options/option.hpp:
-
 /usr/include/boost/predef/version_number.h:
 
 /usr/include/boost/predef/platform/mingw.h:
 
-/usr/include/x86_64-linux-gnu/c++/7/bits/cxxabi_tweaks.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
-
 /usr/include/boost/system/error_code.hpp:
-
-/usr/include/boost/mpl/aux_/config/has_apply.hpp:
-
-/usr/include/boost/type_traits/remove_cv.hpp:
-
-/usr/include/boost/preprocessor/repeat.hpp:
 
 /usr/include/boost/type_traits/add_pointer.hpp:
 
@@ -2263,15 +2135,17 @@ src/popsift/common/device_prop.h:
 
 /usr/include/boost/type_traits/is_function.hpp:
 
+/usr/local/include/opencv4/opencv2/imgproc/imgproc.hpp:
+
 /usr/include/boost/mpl/aux_/config/gcc.hpp:
 
 /usr/include/boost/numeric/conversion/bounds.hpp:
 
 /usr/include/boost/mpl/aux_/config/preprocessor.hpp:
 
-/usr/include/c++/7/type_traits:
-
 /usr/include/x86_64-linux-gnu/bits/environments.h:
+
+/usr/include/c++/7/type_traits:
 
 /usr/include/c++/7/bits/locale_facets_nonio.h:
 
@@ -2283,11 +2157,19 @@ src/popsift/common/device_prop.h:
 
 /usr/include/c++/7/bits/atomic_lockfree_defines.h:
 
+/usr/include/boost/utility/enable_if.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/select2.h:
+
+/usr/include/boost/type_traits/add_const.hpp:
+
 /usr/include/boost/filesystem/path.hpp:
 
-/usr/include/linux/errno.h:
-
 /usr/include/boost/type_traits/is_class.hpp:
+
+/usr/include/boost/config/platform/linux.hpp:
+
+/usr/include/boost/smart_ptr/detail/sp_convertible.hpp:
 
 /usr/include/boost/config/detail/select_platform_config.hpp:
 
@@ -2295,13 +2177,17 @@ src/popsift/common/device_prop.h:
 
 /usr/include/boost/numeric/conversion/detail/meta.hpp:
 
-/usr/include/boost/detail/basic_pointerbuf.hpp:
+/usr/include/boost/iterator.hpp:
 
-/usr/include/boost/range/config.hpp:
+/usr/include/x86_64-linux-gnu/bits/typesizes.h:
+
+/usr/include/boost/numeric/conversion/detail/udt_builtin_mixture.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/getopt_core.h:
 
 /usr/include/x86_64-linux-gnu/bits/posix_opt.h:
+
+/usr/include/boost/exception/exception.hpp:
 
 /usr/include/boost/array.hpp:
 
@@ -2310,6 +2196,132 @@ src/popsift/common/device_prop.h:
 /usr/include/c++/7/bits/exception.h:
 
 /usr/include/boost/mpl/aux_/config/eti.hpp:
+
+/usr/include/boost/config/detail/select_compiler_config.hpp:
+
+/usr/include/c++/7/bits/vector.tcc:
+
+/usr/include/boost/mpl/apply.hpp:
+
+/usr/include/c++/7/bits/stl_iterator_base_funcs.h:
+
+/usr/include/c++/7/stack:
+
+src/generated/popsift/sift_config.h:
+
+src/popsift/sift_conf.h:
+
+/usr/include/c++/7/bits/stl_queue.h:
+
+/usr/include/c++/7/bits/deque.tcc:
+
+/usr/include/boost/mpl/aux_/include_preprocessed.hpp:
+
+/usr/include/boost/detail/indirect_traits.hpp:
+
+/usr/include/boost/preprocessor/facilities/expand.hpp:
+
+/usr/lib/gcc/x86_64-linux-gnu/7/include/mm_malloc.h:
+
+/usr/include/boost/preprocessor/enum_params.hpp:
+
+/usr/include/boost/preprocessor/seq/enum.hpp:
+
+/usr/local/include/opencv4/opencv2/calib3d.hpp:
+
+/usr/local/include/opencv4/opencv2/flann/miniflann.hpp:
+
+/usr/local/cuda/include/driver_types.h:
+
+/usr/local/include/opencv4/opencv2/features2d.hpp:
+
+/usr/local/include/opencv4/opencv2/imgproc/segmentation.hpp:
+
+/usr/include/boost/preprocessor/enum.hpp:
+
+/usr/include/c++/7/bits/stl_deque.h:
+
+/usr/include/boost/mpl/aux_/is_msvc_eti_arg.hpp:
+
+/usr/local/include/opencv4/opencv2/highgui/highgui.hpp:
+
+/usr/include/boost/type_traits/composite_traits.hpp:
+
+/usr/include/boost/mpl/aux_/config/compiler.hpp:
+
+/usr/local/include/opencv4/opencv2/core/ovx.hpp:
+
+/usr/include/c++/7/memory:
+
+/usr/include/c++/7/queue:
+
+/usr/local/include/opencv4/opencv2/core/optim.hpp:
+
+/usr/include/boost/mpl/aux_/numeric_op.hpp:
+
+/usr/include/c++/7/ctime:
+
+/usr/include/boost/type_traits/declval.hpp:
+
+/usr/include/c++/7/mutex:
+
+/usr/include/c++/7/bits/std_function.h:
+
+/usr/include/c++/7/functional:
+
+/usr/local/include/opencv4/opencv2/core/utility.hpp:
+
+/usr/include/c++/7/bits/sstream.tcc:
+
+/usr/include/c++/7/new:
+
+/usr/include/c++/7/sstream:
+
+/usr/include/boost/preprocessor/repeat.hpp:
+
+/usr/include/boost/type_traits/remove_reference.hpp:
+
+/usr/include/boost/preprocessor/array/data.hpp:
+
+/usr/local/include/opencv4/opencv2/core/mat.hpp:
+
+/usr/include/boost/config/abi_prefix.hpp:
+
+/usr/include/c++/7/system_error:
+
+/usr/include/x86_64-linux-gnu/sys/types.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/7/include/float.h:
+
+/usr/local/include/opencv4/opencv2/core/types.hpp:
+
+/usr/local/cuda/include/texture_types.h:
+
+/usr/local/include/opencv4/opencv2/core/matx.hpp:
+
+/usr/include/boost/move/detail/std_ns_end.hpp:
+
+/usr/include/boost/mpl/aux_/preprocessed/gcc/or.hpp:
+
+/usr/local/include/opencv4/opencv2/core/core.hpp:
+
+/usr/local/include/opencv4/opencv2/core/check.hpp:
+
+/usr/include/boost/mpl/vector/aux_/back.hpp:
+
+/usr/include/boost/mpl/aux_/preprocessed/gcc/minus.hpp:
+
+/usr/include/boost/preprocessor/iteration/detail/iter/forward1.hpp:
+
+/usr/include/c++/7/bits/shared_ptr_atomic.h:
+
+/usr/include/c++/7/ext/aligned_buffer.h:
+
+/usr/local/include/opencv4/opencv2/core/cvdef.h:
+
+/usr/include/c++/7/bits/allocated_ptr.h:
+
+/usr/include/boost/mpl/back_inserter.hpp:
 
 /usr/include/boost/mpl/arg_fwd.hpp:
 
@@ -2320,12 +2332,6 @@ src/popsift/common/device_prop.h:
 /usr/include/wchar.h:
 
 /usr/include/boost/predef/compiler/edg.h:
-
-/usr/include/boost/mpl/aux_/preprocessed/gcc/template_arity.hpp:
-
-/usr/include/boost/mpl/aux_/config/bcc.hpp:
-
-/usr/include/ctype.h:
 
 /usr/include/x86_64-linux-gnu/bits/locale.h:
 
@@ -2339,9 +2345,13 @@ src/popsift/common/device_prop.h:
 
 /usr/include/c++/7/bits/localefwd.h:
 
-/usr/include/x86_64-linux-gnu/c++/7/bits/error_constants.h:
+/usr/local/include/opencv4/opencv2/flann/config.h:
 
-/usr/include/boost/shared_ptr.hpp:
+/usr/include/c++/7/bits/unique_ptr.h:
+
+/usr/include/boost/predef/architecture/convex.h:
+
+/usr/include/x86_64-linux-gnu/c++/7/bits/error_constants.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
 
@@ -2359,15 +2369,29 @@ src/popsift/common/device_prop.h:
 
 /usr/include/boost/mpl/reverse_fold.hpp:
 
-/usr/include/boost/concept/assert.hpp:
+/usr/include/boost/predef/language/objc.h:
 
-/usr/include/c++/7/queue:
+/usr/include/boost/filesystem/operations.hpp:
+
+/usr/include/boost/config.hpp:
+
+/usr/include/boost/predef/compiler/mpw.h:
+
+/usr/include/boost/functional/hash/hash_fwd.hpp:
+
+/usr/include/boost/program_options/config.hpp:
+
+/usr/include/boost/concept/usage.hpp:
+
+/usr/include/boost/concept/assert.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h:
 
 /usr/include/boost/predef/compiler/gcc.h:
 
 /usr/include/boost/type_traits/conditional.hpp:
+
+/usr/include/boost/filesystem/config.hpp:
 
 /usr/include/boost/config/stdlib/libstdcpp3.hpp:
 
@@ -2376,10 +2400,6 @@ src/popsift/common/device_prop.h:
 /usr/include/c++/7/cstdint:
 
 /usr/include/boost/predef/library/std/_prefix.h:
-
-/usr/include/boost/mpl/aux_/config/bind.hpp:
-
-/usr/include/boost/type_traits/remove_bounds.hpp:
 
 /usr/local/cuda/include/channel_descriptor.h:
 
@@ -2409,9 +2429,9 @@ src/popsift/common/device_prop.h:
 
 /usr/include/c++/7/cwchar:
 
-/usr/include/boost/predef/architecture.h:
-
 /usr/include/c++/7/cstring:
+
+/usr/include/boost/predef/architecture.h:
 
 /usr/include/c++/7/exception:
 
@@ -2425,35 +2445,15 @@ src/popsift/common/device_prop.h:
 
 /usr/local/cuda/include/vector_types.h:
 
-/usr/include/boost/mpl/aux_/common_name_wknd.hpp:
-
-/usr/include/boost/core/addressof.hpp:
-
-/usr/include/boost/io/detail/quoted_manip.hpp:
-
 /usr/include/boost/mpl/aux_/config/workaround.hpp:
-
-/usr/include/boost/type_traits/detail/config.hpp:
-
-/usr/include/boost/type_traits/is_enum.hpp:
 
 /usr/include/boost/type_traits/detail/is_mem_fun_pointer_impl.hpp:
 
-/usr/include/x86_64-linux-gnu/bits/types/clockid_t.h:
+src/popsift/features.h:
 
-/usr/include/c++/7/iosfwd:
+/usr/include/c++/7/bits/stl_bvector.h:
 
 /usr/include/c++/7/initializer_list:
-
-/usr/include/c++/7/bits/stl_uninitialized.h:
-
-/usr/include/c++/7/list:
-
-/usr/include/boost/preprocessor/facilities/empty.hpp:
-
-/usr/include/c++/7/bits/std_function.h:
-
-/usr/include/boost/smart_ptr/detail/sp_counted_impl.hpp:
 
 /usr/include/c++/7/bits/alloc_traits.h:
 
@@ -2461,39 +2461,17 @@ src/popsift/common/device_prop.h:
 
 /usr/include/c++/7/bits/stl_construct.h:
 
-/usr/include/boost/smart_ptr/bad_weak_ptr.hpp:
-
-/usr/include/c++/7/thread:
-
 /usr/include/boost/predef/platform/windows_runtime.h:
 
 /usr/include/c++/7/bits/memoryfwd.h:
 
 /usr/local/cuda/include/crt/host_defines.h:
 
-/usr/include/c++/7/bits/stl_deque.h:
-
-/usr/include/boost/mpl/aux_/is_msvc_eti_arg.hpp:
-
-/usr/include/boost/predef/compiler/mpw.h:
-
-/usr/include/boost/functional/hash/hash_fwd.hpp:
-
-/usr/include/boost/program_options/config.hpp:
-
-/usr/include/boost/concept/usage.hpp:
-
-/usr/include/boost/config.hpp:
-
 /usr/include/x86_64-linux-gnu/bits/types/locale_t.h:
 
 /usr/include/boost/predef/compiler/intel.h:
 
 /usr/include/boost/mpl/aux_/preprocessed/gcc/list.hpp:
-
-/usr/include/boost/core/demangle.hpp:
-
-/usr/include/c++/7/bits/concept_check.h:
 
 /usr/include/c++/7/bits/stl_list.h:
 
@@ -2502,10 +2480,6 @@ src/popsift/common/device_prop.h:
 /usr/include/boost/mpl/aux_/na_spec.hpp:
 
 /usr/include/c++/7/bits/shared_ptr_base.h:
-
-/usr/include/c++/7/cxxabi.h:
-
-/usr/include/c++/7/bits/ios_base.h:
 
 /usr/include/c++/7/vector:
 
@@ -2523,21 +2497,23 @@ src/popsift/common/device_prop.h:
 
 /usr/include/boost/mpl/long.hpp:
 
-/usr/include/c++/7/bits/unique_ptr.h:
-
-/usr/include/boost/predef/architecture/convex.h:
-
-/usr/include/boost/mpl/remove_if.hpp:
-
-/usr/include/c++/7/bits/exception_ptr.h:
-
 /usr/include/x86_64-linux-gnu/c++/7/bits/ctype_base.h:
 
 /usr/include/x86_64-linux-gnu/bits/errno.h:
 
-/usr/include/c++/7/new:
+/usr/include/boost/iterator/detail/config_def.hpp:
 
-/usr/include/c++/7/bits/sstream.tcc:
+/usr/include/boost/config/user.hpp:
+
+/usr/include/boost/predef/hardware/simd/arm/versions.h:
+
+/usr/include/boost/container/detail/std_fwd.hpp:
+
+/usr/include/wctype.h:
+
+/usr/include/boost/bind/mem_fn_cc.hpp:
+
+/usr/include/boost/mpl/greater.hpp:
 
 /usr/include/boost/mpl/aux_/config/integral.hpp:
 
@@ -2545,11 +2521,29 @@ src/popsift/common/device_prop.h:
 
 /usr/include/c++/7/bits/istream.tcc:
 
+/usr/include/c++/7/backward/auto_ptr.h:
+
+/usr/include/x86_64-linux-gnu/bits/floatn-common.h:
+
+/usr/include/c++/7/bits/move.h:
+
+/usr/include/c++/7/bits/stl_iterator.h:
+
+/usr/include/boost/predef/architecture/x86/64.h:
+
+/usr/include/c++/7/bits/atomic_base.h:
+
+/usr/local/cuda/include/builtin_types.h:
+
 /usr/include/boost/preprocessor/tuple/elem.hpp:
 
 /usr/include/boost/mpl/O1_size_fwd.hpp:
 
 /usr/include/boost/preprocessor/punctuation/comma.hpp:
+
+/usr/include/c++/7/bits/cxxabi_forced.h:
+
+/usr/include/boost/mpl/integral_c_tag.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/types/time_t.h:
 
@@ -2559,7 +2553,7 @@ src/popsift/common/device_prop.h:
 
 /usr/include/math.h:
 
-/usr/include/c++/7/iomanip:
+/usr/include/boost/type_traits/is_pod.hpp:
 
 /usr/include/x86_64-linux-gnu/sys/sysmacros.h:
 
@@ -2573,35 +2567,19 @@ src/popsift/common/device_prop.h:
 
 /usr/include/locale.h:
 
-/usr/include/c++/7/bits/atomic_futex.h:
-
 /usr/local/include/opencv4/opencv2/core/neon_utils.hpp:
 
 /usr/include/c++/7/bits/stl_iterator_base_types.h:
 
-/usr/include/c++/7/bits/stl_queue.h:
+/usr/include/boost/preprocessor/control/detail/while.hpp:
 
-/usr/include/boost/mpl/aux_/preprocessed/gcc/apply_fwd.hpp:
-
-/usr/include/boost/predef/architecture/parisc.h:
+/usr/include/c++/7/bits/cxxabi_init_exception.h:
 
 /usr/include/x86_64-linux-gnu/bits/posix2_lim.h:
 
 /usr/include/boost/predef/architecture/m68k.h:
 
 /usr/include/boost/mpl/list/aux_/push_back.hpp:
-
-/usr/include/boost/checked_delete.hpp:
-
-/usr/include/boost/predef.h:
-
-/usr/include/boost/mpl/aux_/numeric_cast_utils.hpp:
-
-/usr/include/boost/type_traits/is_abstract.hpp:
-
-/usr/include/c++/7/bits/locale_facets.h:
-
-/usr/include/c++/7/fstream:
 
 /usr/include/boost/mpl/equal_to.hpp:
 
@@ -2613,17 +2591,21 @@ src/popsift/common/device_prop.h:
 
 /usr/local/include/opencv4/opencv2/core/hal/interface.h:
 
-/usr/include/c++/7/bits/uses_allocator.h:
+src/popsift/common/device_prop.h:
 
-/usr/include/c++/7/bits/allocated_ptr.h:
+/usr/include/boost/core/typeinfo.hpp:
 
-/usr/include/boost/mpl/back_inserter.hpp:
+/usr/include/boost/bind/mem_fn_template.hpp:
+
+/usr/include/boost/move/detail/std_ns_begin.hpp:
 
 /usr/include/c++/7/ios:
 
-/usr/include/boost/preprocessor/repetition/enum_trailing_params.hpp:
+/usr/include/boost/static_assert.hpp:
 
-/usr/include/boost/smart_ptr/detail/operator_bool.hpp:
+/usr/include/boost/type_traits/detail/has_binary_operator.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/sched.h:
 
 /usr/include/boost/mpl/identity.hpp:
 
@@ -2637,6 +2619,8 @@ src/popsift/common/device_prop.h:
 
 /usr/include/c++/7/string:
 
+/usr/local/include/opencv4/opencv2/core.hpp:
+
 /usr/include/errno.h:
 
 /usr/include/c++/7/ext/atomicity.h:
@@ -2649,25 +2633,11 @@ src/popsift/common/device_prop.h:
 
 /usr/include/boost/mpl/sequence_tag_fwd.hpp:
 
-/usr/include/boost/mpl/aux_/preprocessed/gcc/full_lambda.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
+/usr/include/boost/mpl/aux_/preprocessed/gcc/times.hpp:
 
 /usr/include/boost/predef/hardware/simd/arm.h:
 
 /usr/include/x86_64-linux-gnu/bits/waitflags.h:
-
-/usr/include/c++/7/cstddef:
-
-/usr/include/boost/mpl/aux_/full_lambda.hpp:
-
-/usr/include/c++/7/bits/ptr_traits.h:
-
-/usr/include/boost/iterator/detail/config_def.hpp:
-
-/usr/include/boost/config/user.hpp:
-
-/usr/include/boost/predef/hardware/simd/arm/versions.h:
 
 /usr/include/c++/7/complex:
 
@@ -2689,17 +2659,21 @@ src/popsift/common/device_prop.h:
 
 /usr/local/cuda/include/surface_types.h:
 
-/usr/local/cuda/include/builtin_types.h:
+/usr/local/include/opencv4/opencv2/core/cv_cpu_dispatch.h:
 
-/usr/include/c++/7/bits/atomic_base.h:
+/usr/include/c++/7/bits/algorithmfwd.h:
+
+/usr/include/boost/range/distance.hpp:
+
+/usr/include/boost/mpl/vector/aux_/include_preprocessed.hpp:
+
+/usr/local/include/opencv4/opencv2/flann/defines.h:
+
+/usr/include/boost/mpl/empty_fwd.hpp:
 
 /usr/include/x86_64-linux-gnu/c++/7/bits/c++locale.h:
 
 /usr/include/boost/detail/bitmask.hpp:
-
-/usr/include/boost/predef/compiler/llvm.h:
-
-/usr/include/boost/mpl/next_prior.hpp:
 
 /usr/include/boost/cerrno.hpp:
 
@@ -2713,23 +2687,67 @@ src/popsift/common/device_prop.h:
 
 /usr/local/cuda/include/cuda_runtime_api.h:
 
+/usr/include/boost/mpl/aux_/config/arrays.hpp:
+
+/usr/include/c++/7/cstddef:
+
 /usr/include/x86_64-linux-gnu/bits/wordsize.h:
 
 /usr/include/c++/7/bits/stl_relops.h:
 
-/usr/local/cuda/include/driver_types.h:
+/usr/include/x86_64-linux-gnu/bits/fp-logb.h:
 
-/usr/include/c++/7/bits/stl_iterator_base_funcs.h:
+/usr/include/boost/type_traits/is_integral.hpp:
 
-/usr/include/c++/7/bits/cxxabi_init_exception.h:
+/usr/include/boost/config/detail/suffix.hpp:
 
-/usr/include/boost/preprocessor/control/detail/while.hpp:
+/usr/include/boost/mpl/list/aux_/iterator.hpp:
+
+/usr/local/include/opencv4/opencv2/core/base.hpp:
+
+/usr/include/boost/mpl/aux_/config/ttp.hpp:
+
+/usr/include/boost/any.hpp:
+
+/usr/include/boost/predef/hardware/simd/ppc/versions.h:
+
+/usr/include/boost/predef/os/os400.h:
+
+/usr/include/boost/system/api_config.hpp:
+
+/usr/include/boost/concept/detail/concept_def.hpp:
+
+/usr/include/boost/mpl/sequence_tag.hpp:
+
+/usr/include/boost/predef/compiler/greenhills.h:
+
+/usr/include/boost/predef/compiler/palm.h:
 
 /usr/include/x86_64-linux-gnu/c++/7/bits/os_defines.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/7/include-fixed/syslimits.h:
 
+/usr/include/boost/iterator/iterator_categories.hpp:
+
+/usr/local/include/opencv4/opencv2/core/traits.hpp:
+
+/usr/include/boost/detail/workaround.hpp:
+
 /usr/local/cuda/include/cuda_device_runtime_api.h:
+
+/usr/include/boost/config/auto_link.hpp:
+
+/usr/include/boost/iterator/iterator_concepts.hpp:
+
+/usr/include/boost/predef/compiler/borland.h:
+
+/usr/include/boost/smart_ptr/detail/local_counted_base.hpp:
+
+/usr/include/boost/mpl/aux_/preprocessed/gcc/reverse_fold_impl.hpp:
+
+/usr/include/boost/range/config.hpp:
+
+/usr/include/boost/detail/basic_pointerbuf.hpp:
 
 /usr/include/c++/7/iostream:
 
@@ -2737,23 +2755,29 @@ src/application/pgmread.cpp:
 
 /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h:
 
-/usr/include/boost/preprocessor/arithmetic/inc.hpp:
-
 /usr/include/c++/7/cfloat:
 
-/usr/include/x86_64-linux-gnu/bits/select.h:
+/usr/include/boost/preprocessor/arithmetic/inc.hpp:
 
-/usr/include/boost/throw_exception.hpp:
+/usr/include/boost/range/empty.hpp:
 
-/usr/include/boost/core/checked_delete.hpp:
+/usr/local/cuda/include/vector_functions.hpp:
 
-/usr/include/boost/smart_ptr/detail/shared_count.hpp:
+/usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h:
 
-/usr/include/boost/preprocessor/repetition/repeat.hpp:
+/usr/include/boost/mpl/aux_/adl_barrier.hpp:
 
-/usr/include/boost/mpl/push_back.hpp:
+/usr/include/c++/7/bits/range_access.h:
 
 /usr/include/boost/core/ref.hpp:
+
+/usr/include/c++/7/bits/cpp_type_traits.h:
+
+/usr/include/c++/7/iosfwd:
+
+/usr/include/x86_64-linux-gnu/bits/types/clockid_t.h:
+
+/usr/include/boost/iterator/detail/enable_if.hpp:
 
 /usr/include/boost/mpl/aux_/lambda_spec.hpp:
 
@@ -2769,13 +2793,21 @@ src/application/pgmread.cpp:
 
 /usr/include/boost/preprocessor/slot/detail/def.hpp:
 
-/usr/include/c++/7/bits/stl_iterator.h:
-
-/usr/include/c++/7/bits/move.h:
-
-/usr/include/boost/predef/architecture/x86/64.h:
-
 /usr/include/boost/mpl/aux_/lambda_support.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/fp-fast.h:
+
+/usr/include/x86_64-linux-gnu/gnu/stubs.h:
+
+/usr/local/cuda/include/library_types.h:
+
+/usr/include/limits.h:
+
+/usr/include/boost/type_traits/remove_cv.hpp:
+
+/usr/include/boost/mpl/aux_/config/has_apply.hpp:
+
+/usr/include/boost/mpl/list/aux_/empty.hpp:
 
 /usr/include/boost/type_traits/is_convertible.hpp:
 
@@ -2785,31 +2817,25 @@ src/application/pgmread.cpp:
 
 /usr/include/c++/7/array:
 
+/usr/include/x86_64-linux-gnu/bits/string_fortified.h:
+
 /usr/include/pthread.h:
 
-/usr/include/stdlib.h:
+/usr/local/include/opencv4/opencv2/opencv_modules.hpp:
 
-/usr/include/c++/7/bits/stream_iterator.h:
+/usr/local/cuda/include/driver_functions.h:
 
-/usr/local/include/opencv4/opencv2/core/cvdef.h:
+/usr/include/c++/7/bits/ios_base.h:
+
+/usr/include/c++/7/cxxabi.h:
+
+/usr/local/include/opencv4/opencv2/core/bufferpool.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/byteswap-16.h:
 
 /usr/include/boost/predef/version.h:
 
 /usr/include/boost/program_options/detail/value_semantic.hpp:
-
-/usr/include/c++/7/bits/deque.tcc:
-
-/usr/include/boost/predef/compiler/palm.h:
-
-/usr/include/boost/predef/compiler/greenhills.h:
-
-/usr/include/boost/config/abi_prefix.hpp:
-
-/usr/include/c++/7/system_error:
-
-/usr/include/x86_64-linux-gnu/sys/types.h:
-
-/usr/local/include/opencv4/opencv2/core/mat.hpp:
 
 /usr/local/cuda/include/cuda_runtime.h:
 
@@ -2825,15 +2851,19 @@ src/application/pgmread.cpp:
 
 /usr/include/c++/7/bits/stl_algobase.h:
 
+/usr/include/c++/7/bits/hash_bytes.h:
+
+/usr/include/boost/smart_ptr/detail/sp_disable_deprecated.hpp:
+
 /usr/include/boost/predef/platform/windows_desktop.h:
+
+/usr/local/include/opencv4/opencv2/core/mat.inl.hpp:
 
 /usr/include/x86_64-linux-gnu/c++/7/bits/c++config.h:
 
 /usr/include/boost/mpl/aux_/has_tag.hpp:
 
 /usr/include/boost/mpl/not_equal_to.hpp:
-
-/usr/include/boost/mpl/void.hpp:
 
 /usr/include/boost/mpl/aux_/config/ctps.hpp:
 
@@ -2843,25 +2873,15 @@ src/application/pgmread.cpp:
 
 /usr/include/boost/assert.hpp:
 
-/usr/include/boost/type_traits/is_integral.hpp:
-
-/usr/include/boost/config/detail/suffix.hpp:
-
-/usr/include/boost/mpl/list/aux_/iterator.hpp:
-
-/usr/include/boost/mpl/aux_/preprocessed/gcc/apply_wrap.hpp:
-
-/usr/include/c++/7/atomic:
-
 /usr/include/x86_64-linux-gnu/c++/7/bits/gthr-default.h:
-
-/usr/include/c++/7/bits/stl_bvector.h:
-
-src/popsift/features.h:
 
 /usr/include/x86_64-linux-gnu/bits/mathcalls.h:
 
-/usr/include/boost/mpl/aux_/preprocessed/gcc/apply.hpp:
+/usr/include/boost/program_options/cmdline.hpp:
+
+/usr/include/c++/7/bits/locale_conv.h:
+
+/usr/include/c++/7/debug/debug.h:
 
 /usr/include/c++/7/bits/locale_facets.tcc:
 
@@ -2872,6 +2892,10 @@ src/popsift/features.h:
 /usr/include/c++/7/bits/char_traits.h:
 
 /usr/include/boost/predef/os/bsd/dragonfly.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
+
+/usr/include/x86_64-linux-gnu/c++/7/bits/cxxabi_tweaks.h:
 
 /usr/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp:
 
@@ -2891,27 +2915,11 @@ src/popsift/features.h:
 
 /usr/include/x86_64-linux-gnu/asm/errno.h:
 
-/usr/include/c++/7/bits/basic_string.tcc:
+/usr/include/c++/7/cwctype:
 
-/usr/include/boost/range/as_literal.hpp:
-
-/usr/include/boost/mpl/lambda.hpp:
-
-/usr/include/boost/type_traits/is_member_pointer.hpp:
-
-/usr/include/boost/type_traits/has_right_shift.hpp:
+/usr/local/include/opencv4/opencv2/core/version.hpp:
 
 /usr/include/boost/mem_fn.hpp:
-
-/usr/include/c++/7/bits/locale_conv.h:
-
-/usr/include/c++/7/debug/debug.h:
-
-/usr/include/boost/program_options/cmdline.hpp:
-
-/usr/local/cuda/include/texture_types.h:
-
-/usr/local/include/opencv4/opencv2/core/types.hpp:
 
 /usr/include/time.h:
 
@@ -2921,6 +2929,12 @@ src/popsift/features.h:
 
 /usr/include/x86_64-linux-gnu/c++/7/bits/atomic_word.h:
 
+/usr/local/include/opencv4/opencv2/core/operations.hpp:
+
+/usr/include/c++/7/bits/locale_classes.h:
+
+/usr/include/boost/smart_ptr/detail/sp_counted_base.hpp:
+
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
 
 /usr/include/x86_64-linux-gnu/bits/sysmacros.h:
@@ -2928,14 +2942,6 @@ src/popsift/features.h:
 /usr/include/c++/7/bits/ostream_insert.h:
 
 /usr/include/boost/type_traits/has_minus_assign.hpp:
-
-/usr/include/boost/mpl/integral_c_tag.hpp:
-
-/usr/include/c++/7/bits/cxxabi_forced.h:
-
-/usr/include/boost/type_traits/composite_traits.hpp:
-
-/usr/local/include/opencv4/opencv2/highgui/highgui.hpp:
 
 /usr/include/c++/7/bits/basic_string.h:
 
@@ -2949,11 +2955,21 @@ src/application/match.cpp:
 
 /usr/include/boost/preprocessor/cat.hpp:
 
+/usr/include/c++/7/bits/stream_iterator.h:
+
+/usr/include/stdlib.h:
+
+/usr/include/boost/type_traits/remove_pointer.hpp:
+
 /usr/include/x86_64-linux-gnu/bits/waitstatus.h:
 
 /usr/include/x86_64-linux-gnu/bits/time.h:
 
 /usr/include/boost/predef/compiler/pgi.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
+
+/usr/include/boost/mpl/aux_/preprocessed/gcc/full_lambda.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
 
@@ -2961,15 +2977,17 @@ src/application/match.cpp:
 
 /usr/include/boost/range/detail/misc_concept.hpp:
 
-/usr/include/boost/mpl/aux_/config/arrays.hpp:
+/usr/include/c++/7/bits/basic_string.tcc:
+
+/usr/include/c++/7/climits:
 
 /usr/include/c++/7/bits/stl_tempbuf.h:
-
-/usr/include/boost/predef/language/stdcpp.h:
 
 /usr/include/x86_64-linux-gnu/c++/7/bits/time_members.h:
 
 /usr/include/string.h:
+
+/usr/include/boost/predef/language/stdcpp.h:
 
 /usr/include/boost/preprocessor/arithmetic/sub.hpp:
 
@@ -2991,6 +3009,24 @@ src/application/match.cpp:
 
 /usr/include/boost/detail/lcast_precision.hpp:
 
+/usr/include/alloca.h:
+
+/usr/include/boost/mpl/bool_fwd.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/math-vector.h:
+
+/usr/include/c++/7/chrono:
+
+/usr/include/boost/function_equal.hpp:
+
+/usr/include/boost/type_traits/has_plus_assign.hpp:
+
+/usr/include/boost/preprocessor/slot/slot.hpp:
+
+/usr/local/include/opencv4/opencv2/core/cvstd.inl.hpp:
+
+/usr/include/c++/7/istream:
+
 /usr/include/boost/mpl/aux_/config/dtp.hpp:
 
 /usr/include/boost/preprocessor/seq/size.hpp:
@@ -3007,7 +3043,9 @@ src/application/match.cpp:
 
 /usr/include/boost/mpl/if.hpp:
 
-/usr/include/x86_64-linux-gnu/bits/floatn-common.h:
+/usr/include/boost/predef/compiler/kai.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdio2.h:
 
 /usr/include/boost/function/detail/function_iterate.hpp:
 
@@ -3016,6 +3054,14 @@ src/application/match.cpp:
 /usr/include/boost/preprocessor/list/detail/fold_right.hpp:
 
 /usr/include/boost/preprocessor/seq/detail/is_empty.hpp:
+
+/usr/include/c++/7/ext/type_traits.h:
+
+/usr/include/linux/errno.h:
+
+/usr/include/x86_64-linux-gnu/bits/strings_fortified.h:
+
+/usr/include/boost/mpl/aux_/preprocessed/gcc/quote.hpp:
 
 /usr/include/c++/7/bits/list.tcc:
 
@@ -3029,9 +3075,11 @@ src/application/match.cpp:
 
 /usr/include/boost/mpl/tag.hpp:
 
-/usr/include/asm-generic/errno-base.h:
+/usr/include/c++/7/list:
 
-/usr/include/boost/predef/architecture/rs6k.h:
+/usr/include/c++/7/bits/stl_uninitialized.h:
+
+/usr/include/boost/preprocessor/facilities/empty.hpp:
 
 /usr/include/c++/7/stdexcept:
 
@@ -3049,12 +3097,6 @@ src/application/match.cpp:
 
 /usr/include/boost/iterator/detail/config_undef.hpp:
 
-/usr/include/c++/7/bits/stl_multiset.h:
-
-/usr/include/boost/mpl/aux_/config/has_xxx.hpp:
-
-/usr/include/assert.h:
-
 /usr/include/boost/mpl/greater_equal.hpp:
 
 /usr/include/c++/7/bits/streambuf.tcc:
@@ -3062,6 +3104,24 @@ src/application/match.cpp:
 /usr/include/c++/7/bits/basic_ios.h:
 
 /usr/include/boost/type_traits/is_arithmetic.hpp:
+
+/usr/include/c++/7/deque:
+
+/usr/include/boost/mpl/limits/vector.hpp:
+
+/usr/local/include/opencv4/opencv2/imgproc.hpp:
+
+/usr/include/c++/7/bits/stl_algo.h:
+
+/usr/include/c++/7/bits/atomic_futex.h:
+
+/usr/local/include/opencv4/opencv2/core/cvstd.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdlib.h:
+
+/usr/include/boost/preprocessor/iterate.hpp:
 
 /usr/include/boost/predef/platform/windows_store.h:
 
@@ -3079,33 +3139,13 @@ src/application/match.cpp:
 
 /usr/include/c++/7/bits/ostream.tcc:
 
-/usr/include/alloca.h:
+/usr/lib/gcc/x86_64-linux-gnu/7/include/emmintrin.h:
 
-/usr/include/boost/smart_ptr/detail/sp_nullptr_t.hpp:
+/usr/include/boost/predef/os/macos.h:
 
-/usr/include/c++/7/bits/invoke.h:
+/usr/include/c++/7/ostream:
 
-/usr/include/boost/program_options.hpp:
-
-/usr/include/boost/mpl/aux_/include_preprocessed.hpp:
-
-/usr/include/boost/detail/indirect_traits.hpp:
-
-/usr/include/boost/static_assert.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/sched.h:
-
-/usr/include/boost/type_traits/detail/has_binary_operator.hpp:
-
-/usr/include/boost/mpl/bool_fwd.hpp:
-
-/usr/include/boost/type_traits/has_plus_assign.hpp:
-
-/usr/include/boost/preprocessor/slot/slot.hpp:
-
-/usr/include/boost/function_equal.hpp:
-
-/usr/include/c++/7/ctime:
+/usr/include/boost/mpl/bind.hpp:
 
 /usr/include/boost/preprocessor/stringize.hpp:
 
@@ -3113,27 +3153,15 @@ src/application/match.cpp:
 
 /usr/include/boost/mpl/list/list0.hpp:
 
-/usr/include/c++/7/tuple:
+/usr/include/x86_64-linux-gnu/bits/wchar.h:
 
-/usr/include/c++/7/bits/shared_ptr.h:
+/usr/include/c++/7/stdlib.h:
 
-/usr/include/c++/7/ext/aligned_buffer.h:
+/usr/include/ctype.h:
 
-/usr/include/boost/type_traits/declval.hpp:
+/usr/include/boost/type_traits/conversion_traits.hpp:
 
-/usr/include/c++/7/mutex:
-
-/usr/include/c++/7/ext/type_traits.h:
-
-/usr/include/boost/mpl/limits/vector.hpp:
-
-/usr/include/c++/7/deque:
-
-/usr/include/boost/preprocessor/enum.hpp:
-
-/usr/include/boost/mpl/aux_/adl_barrier.hpp:
-
-/usr/include/c++/7/bits/range_access.h:
+/usr/include/boost/mpl/vector/aux_/tag.hpp:
 
 /usr/include/boost/preprocessor/empty.hpp:
 
@@ -3143,33 +3171,181 @@ src/application/match.cpp:
 
 /usr/include/c++/7/bits/stl_heap.h:
 
-src/popsift/sift_conf.h:
+/usr/include/strings.h:
 
-src/generated/popsift/sift_config.h:
+/usr/include/boost/type_traits/remove_bounds.hpp:
 
-/usr/include/c++/7/memory:
+/usr/include/boost/mpl/aux_/config/bind.hpp:
 
-/usr/local/include/opencv4/opencv2/core/ovx.hpp:
+/usr/include/asm-generic/errno-base.h:
+
+/usr/include/boost/predef/architecture/rs6k.h:
+
+/usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h:
+
+/usr/include/c++/7/bits/stl_multimap.h:
+
+/usr/include/boost/predef/os/qnxnto.h:
+
+/usr/include/boost/io_fwd.hpp:
+
+/usr/include/boost/type_traits/is_abstract.hpp:
+
+/usr/include/c++/7/bits/locale_facets.h:
+
+/usr/include/c++/7/fstream:
+
+/usr/include/boost/smart_ptr/detail/local_sp_deleter.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/iscanonical.h:
+
+/usr/include/c++/7/tuple:
+
+/usr/include/x86_64-linux-gnu/bits/mathinline.h:
+
+/usr/include/c++/7/bits/uses_allocator.h:
+
+/usr/include/c++/7/bits/ptr_traits.h:
+
+/usr/include/boost/mpl/aux_/full_lambda.hpp:
+
+/usr/include/c++/7/bits/invoke.h:
+
+/usr/include/boost/program_options.hpp:
+
+/usr/include/c++/7/bits/shared_ptr.h:
+
+/usr/include/boost/numeric/conversion/numeric_cast_traits.hpp:
+
+/usr/include/boost/predef/hardware/simd/x86/versions.h:
+
+/usr/include/boost/type_traits/is_member_pointer.hpp:
+
+/usr/include/boost/type_traits/has_right_shift.hpp:
+
+/usr/include/boost/core/addressof.hpp:
+
+/usr/include/boost/io/detail/quoted_manip.hpp:
+
+/usr/include/boost/mpl/aux_/has_type.hpp:
+
+/usr/include/boost/type_traits/detail/config.hpp:
+
+/usr/include/boost/type_traits/is_enum.hpp:
+
+/usr/include/boost/mpl/apply_fwd.hpp:
+
+/usr/include/boost/mpl/aux_/preprocessed/gcc/apply_fwd.hpp:
+
+/usr/include/boost/predef/architecture/parisc.h:
+
+/usr/include/boost/mpl/apply_wrap.hpp:
+
+/usr/include/boost/mpl/has_xxx.hpp:
+
+/usr/include/boost/mpl/at_fwd.hpp:
+
+/usr/include/c++/7/bits/stl_multiset.h:
+
+/usr/include/assert.h:
+
+/usr/include/boost/mpl/aux_/config/has_xxx.hpp:
+
+/usr/include/boost/mpl/aux_/config/msvc_typename.hpp:
 
 /usr/include/boost/preprocessor/array/elem.hpp:
 
-/usr/include/c++/7/bits/shared_ptr_atomic.h:
+/usr/include/boost/preprocessor/repetition/enum_trailing_params.hpp:
 
-/usr/include/c++/7/backward/auto_ptr.h:
+/usr/include/boost/smart_ptr/detail/operator_bool.hpp:
 
-/usr/include/c++/7/stack:
+/usr/include/boost/preprocessor/repetition/repeat.hpp:
 
-/usr/include/boost/filesystem/config.hpp:
+/usr/include/boost/mpl/push_back.hpp:
+
+/usr/include/c++/7/atomic:
+
+/usr/include/boost/mpl/aux_/preprocessed/gcc/apply_wrap.hpp:
+
+/usr/include/boost/range/as_literal.hpp:
+
+/usr/include/boost/mpl/lambda.hpp:
+
+/usr/include/boost/mpl/bind_fwd.hpp:
+
+/usr/include/boost/preprocessor/inc.hpp:
+
+/usr/include/boost/preprocessor/array/size.hpp:
+
+/usr/include/boost/mpl/aux_/preprocessed/gcc/bind_fwd.hpp:
+
+/usr/include/boost/iterator/iterator_traits.hpp:
+
+/usr/include/boost/lexical_cast/detail/converter_lexical_streams.hpp:
+
+/usr/include/boost/predef/compiler/llvm.h:
+
+/usr/include/boost/mpl/next_prior.hpp:
+
+/usr/include/boost/mpl/aux_/common_name_wknd.hpp:
+
+/usr/include/boost/mpl/protect.hpp:
+
+/usr/include/boost/mpl/void.hpp:
+
+/usr/include/boost/mpl/aux_/config/bcc.hpp:
+
+/usr/include/boost/mpl/aux_/preprocessed/gcc/template_arity.hpp:
+
+/usr/include/c++/7/bits/exception_ptr.h:
+
+/usr/include/boost/mpl/remove_if.hpp:
+
+/usr/include/boost/mpl/aux_/preprocessed/gcc/apply.hpp:
+
+/usr/include/boost/shared_ptr.hpp:
+
+/usr/include/boost/smart_ptr/shared_ptr.hpp:
 
 /usr/include/boost/config/no_tr1/memory.hpp:
 
-/usr/include/boost/container/detail/std_fwd.hpp:
+/usr/include/boost/checked_delete.hpp:
 
-/usr/include/wctype.h:
+/usr/include/boost/predef.h:
 
-/usr/include/boost/bind/mem_fn_cc.hpp:
+/usr/include/boost/mpl/aux_/numeric_cast_utils.hpp:
 
-/usr/include/boost/mpl/greater.hpp:
+/usr/include/x86_64-linux-gnu/bits/select.h:
+
+/usr/include/boost/throw_exception.hpp:
+
+/usr/include/boost/current_function.hpp:
+
+/usr/include/boost/core/checked_delete.hpp:
+
+/usr/include/boost/smart_ptr/detail/shared_count.hpp:
+
+/usr/include/c++/7/thread:
+
+/usr/include/boost/smart_ptr/bad_weak_ptr.hpp:
+
+/usr/include/boost/smart_ptr/detail/sp_counted_base_std_atomic.hpp:
+
+/usr/include/boost/mpl/inserter.hpp:
+
+/usr/include/boost/detail/sp_typeinfo.hpp:
+
+/usr/include/boost/utility/binary.hpp:
+
+/usr/include/boost/mpl/list/aux_/preprocessed/plain/list10.hpp:
+
+/usr/include/c++/7/bits/concept_check.h:
+
+/usr/include/boost/core/demangle.hpp:
+
+/usr/include/boost/smart_ptr/detail/sp_counted_impl.hpp:
+
+/usr/include/boost/smart_ptr/detail/sp_nullptr_t.hpp:
 
 /usr/include/boost/range/detail/extract_optional_type.hpp:
 
@@ -3198,16 +3374,6 @@ src/popsift/sift_extremum.h:
 /usr/local/include/opencv4/opencv2/videoio.hpp:
 
 /usr/include/boost/range/functions.hpp:
-
-/usr/include/boost/predef/language/objc.h:
-
-/usr/include/boost/filesystem/operations.hpp:
-
-/usr/include/x86_64-linux-gnu/gnu/stubs.h:
-
-/usr/local/cuda/include/library_types.h:
-
-/usr/include/x86_64-linux-gnu/bits/fp-fast.h:
 
 /usr/include/x86_64-linux-gnu/bits/getopt_posix.h:
 
@@ -3249,24 +3415,6 @@ src/popsift/sift_extremum.h:
 
 /usr/include/boost/predef/compiler.h:
 
-/usr/include/boost/config/auto_link.hpp:
-
-/usr/include/boost/iterator/iterator_concepts.hpp:
-
-/usr/include/boost/predef/compiler/borland.h:
-
-/usr/include/boost/smart_ptr/detail/local_counted_base.hpp:
-
-/usr/include/c++/7/chrono:
-
-/usr/include/x86_64-linux-gnu/bits/math-vector.h:
-
-/usr/include/boost/predef/hardware/simd/x86/versions.h:
-
-/usr/include/boost/numeric/conversion/numeric_cast_traits.hpp:
-
-/usr/include/boost/mpl/aux_/preprocessed/gcc/reverse_fold_impl.hpp:
-
 /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h:
 
 /usr/include/boost/predef/compiler/clang.h:
@@ -3293,12 +3441,6 @@ src/popsift/sift_extremum.h:
 
 /usr/include/boost/predef/library/c.h:
 
-/usr/include/x86_64-linux-gnu/bits/stdio2.h:
-
-/usr/include/boost/predef/compiler/kai.h:
-
-/usr/include/c++/7/sstream:
-
 /usr/include/boost/predef/compiler/metaware.h:
 
 src/application/pgmread.h:
@@ -3310,6 +3452,10 @@ src/application/pgmread.h:
 /usr/include/c++/7/bits/codecvt.h:
 
 /usr/include/boost/predef/compiler/sgi_mipspro.h:
+
+/usr/include/c++/7/algorithm:
+
+/usr/include/boost/preprocessor/repetition/detail/for.hpp:
 
 /usr/include/boost/predef/compiler/sunpro.h:
 
@@ -3339,6 +3485,12 @@ src/application/pgmread.h:
 
 /usr/include/boost/predef/detail/_exception.h:
 
+/usr/include/boost/preprocessor/logical/and.hpp:
+
+/usr/local/include/opencv4/opencv2/core/vsx_utils.hpp:
+
+/usr/include/boost/predef/library/std/cxx.h:
+
 /usr/include/boost/predef/library/std/dinkumware.h:
 
 /usr/include/boost/predef/compiler/ibm.h:
@@ -3350,6 +3502,12 @@ src/application/pgmread.h:
 /usr/include/boost/predef/library/std/libcomo.h:
 
 /usr/include/boost/predef/library/std/modena.h:
+
+/usr/include/boost/utility/addressof.hpp:
+
+/usr/include/boost/mpl/aux_/inserter_algorithm.hpp:
+
+/usr/include/boost/predef/library/std/msl.h:
 
 /usr/include/boost/predef/library/std/roguewave.h:
 
@@ -3391,10 +3549,6 @@ src/generated/popsift/version.hpp:
 
 /usr/include/boost/predef/os/bsd.h:
 
-/usr/include/boost/predef/os/macos.h:
-
-/usr/lib/gcc/x86_64-linux-gnu/7/include/emmintrin.h:
-
 /usr/include/boost/predef/os/bsd/bsdi.h:
 
 /usr/include/boost/type_traits/remove_const.hpp:
@@ -3423,22 +3577,6 @@ src/generated/popsift/version.hpp:
 
 /usr/include/boost/math/tools/config.hpp:
 
-/usr/include/boost/system/api_config.hpp:
-
-/usr/include/boost/concept/detail/concept_def.hpp:
-
-/usr/include/boost/mpl/sequence_tag.hpp:
-
-/usr/local/include/opencv4/opencv2/core/base.hpp:
-
-/usr/include/c++/7/bits/stl_multimap.h:
-
-/usr/include/boost/predef/os/qnxnto.h:
-
-/usr/include/boost/io_fwd.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h:
-
 /usr/include/boost/predef/os/solaris.h:
 
 /usr/include/boost/predef/os/unix.h:
@@ -3463,33 +3601,7 @@ src/generated/popsift/version.hpp:
 
 /usr/include/boost/mpl/aux_/preprocessed/gcc/less.hpp:
 
-/usr/include/boost/preprocessor/repetition/detail/for.hpp:
-
-/usr/include/c++/7/algorithm:
-
-/usr/include/boost/type_traits/conversion_traits.hpp:
-
-/usr/include/boost/mpl/vector/aux_/tag.hpp:
-
-/usr/local/include/opencv4/opencv2/imgproc.hpp:
-
-/usr/include/c++/7/bits/stl_algo.h:
-
-/usr/include/c++/7/bits/algorithmfwd.h:
-
-/usr/include/boost/range/distance.hpp:
-
-/usr/include/boost/mpl/vector/aux_/include_preprocessed.hpp:
-
 /usr/include/boost/io/ios_state.hpp:
-
-/usr/include/strings.h:
-
-/usr/include/boost/mpl/aux_/preprocessed/gcc/quote.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/strings_fortified.h:
-
-/usr/include/x86_64-linux-gnu/bits/string_fortified.h:
 
 /usr/include/boost/detail/scoped_enum_emulation.hpp:
 
@@ -3527,16 +3639,6 @@ src/generated/popsift/version.hpp:
 
 /usr/include/boost/program_options/value_semantic.hpp:
 
-/usr/include/boost/mpl/aux_/config/ttp.hpp:
-
-/usr/include/boost/predef/hardware/simd/ppc/versions.h:
-
-/usr/include/boost/predef/os/os400.h:
-
-/usr/include/boost/any.hpp:
-
-/usr/lib/gcc/x86_64-linux-gnu/7/include/float.h:
-
 /usr/include/x86_64-linux-gnu/bits/uio_lim.h:
 
 /usr/include/boost/type_index.hpp:
@@ -3572,8 +3674,6 @@ src/generated/popsift/version.hpp:
 /usr/include/boost/predef/compiler/comeau.h:
 
 /usr/include/boost/integer.hpp:
-
-/usr/include/c++/7/climits:
 
 /usr/include/boost/limits.hpp:
 
@@ -3619,9 +3719,9 @@ src/generated/popsift/version.hpp:
 
 /usr/include/boost/bind/mem_fn.hpp:
 
-/usr/include/boost/lexical_cast/detail/converter_lexical.hpp:
-
 /usr/include/c++/7/bits/stl_function.h:
+
+/usr/include/boost/lexical_cast/detail/converter_lexical.hpp:
 
 /usr/include/boost/get_pointer.hpp:
 
@@ -3668,6 +3768,10 @@ src/generated/popsift/version.hpp:
 /usr/include/boost/range/detail/sfinae.hpp:
 
 /usr/include/boost/range/size.hpp:
+
+/usr/local/include/opencv4/opencv2/core/fast_math.hpp:
+
+/usr/include/boost/range/size_type.hpp:
 
 /usr/include/boost/range/difference_type.hpp:
 
@@ -3724,8 +3828,6 @@ src/popsift/sift_constants.h:
 /usr/include/c++/7/utility:
 
 /usr/include/boost/mpl/iterator_tags.hpp:
-
-/usr/include/boost/program_options/parsers.hpp:
 
 /usr/include/boost/preprocessor/repetition/enum_binary_params.hpp:
 
@@ -3791,10 +3893,6 @@ src/popsift/sift_constants.h:
 
 /usr/include/boost/mpl/aux_/comparison_op.hpp:
 
-/usr/include/boost/mpl/aux_/numeric_op.hpp:
-
-/usr/local/include/opencv4/opencv2/core/optim.hpp:
-
 /usr/include/boost/mpl/aux_/config/forwarding.hpp:
 
 /usr/include/boost/mpl/aux_/msvc_eti_base.hpp:
@@ -3819,8 +3917,6 @@ src/popsift/sift_constants.h:
 
 /usr/include/boost/mpl/times.hpp:
 
-/usr/include/boost/mpl/aux_/preprocessed/gcc/times.hpp:
-
 /usr/include/boost/mpl/less.hpp:
 
 /usr/include/boost/mpl/vector/aux_/push_front.hpp:
@@ -3834,22 +3930,6 @@ src/popsift/sift_constants.h:
 /usr/include/boost/mpl/find_if.hpp:
 
 /usr/include/boost/config/no_tr1/cmath.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/stdlib.h:
-
-/usr/include/boost/preprocessor/iterate.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/fp-logb.h:
-
-/usr/local/cuda/include/vector_functions.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h:
-
-/usr/include/boost/smart_ptr/detail/local_sp_deleter.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/iscanonical.h:
-
-/usr/include/x86_64-linux-gnu/bits/mathinline.h:
 
 /usr/local/include/opencv4/opencv2/core/cvstd_wrapper.hpp:
 
@@ -3866,10 +3946,6 @@ src/popsift/sift_constants.h:
 /usr/include/boost/core/swap.hpp:
 
 /usr/include/boost/type_traits/has_left_shift.hpp:
-
-/usr/include/boost/move/detail/std_ns_end.hpp:
-
-/usr/local/include/opencv4/opencv2/core/matx.hpp:
 
 /usr/include/boost/preprocessor/seq/transform.hpp:
 
@@ -3908,8 +3984,6 @@ src/popsift/sift_constants.h:
 /usr/include/boost/mpl/front_fwd.hpp:
 
 /usr/include/boost/mpl/list/aux_/clear.hpp:
-
-/usr/include/boost/mpl/empty_fwd.hpp:
 
 /usr/include/boost/mpl/list/aux_/begin_end.hpp:
 
@@ -3961,16 +4035,6 @@ src/popsift/popsift.h:
 
 /usr/include/boost/mpl/at.hpp:
 
-/usr/include/boost/utility/addressof.hpp:
-
-/usr/include/boost/predef/library/std/msl.h:
-
-/usr/include/boost/mpl/aux_/inserter_algorithm.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/wchar.h:
-
-/usr/include/c++/7/stdlib.h:
-
 /usr/include/boost/mpl/aux_/push_back_impl.hpp:
 
 /usr/include/boost/mpl/front_inserter.hpp:
@@ -3991,13 +4055,11 @@ src/popsift/popsift.h:
 
 /usr/include/boost/mpl/vector/aux_/front.hpp:
 
-/usr/include/boost/mpl/vector/aux_/back.hpp:
+/usr/include/boost/mpl/next.hpp:
 
-/usr/include/boost/mpl/aux_/preprocessed/gcc/minus.hpp:
+/usr/lib/gcc/x86_64-linux-gnu/7/include/xmmintrin.h:
 
-/usr/include/boost/preprocessor/iteration/detail/iter/forward1.hpp:
-
-/usr/local/include/opencv4/opencv2/core/check.hpp:
+/usr/include/boost/mpl/vector/aux_/push_back.hpp:
 
 /usr/include/boost/range/rbegin.hpp:
 
@@ -4030,8 +4092,6 @@ src/popsift/popsift.h:
 /usr/include/boost/mpl/negate.hpp:
 
 /usr/include/boost/mpl/aux_/advance_forward.hpp:
-
-/usr/include/boost/program_options/detail/parsers.hpp:
 
 /usr/include/boost/mpl/size.hpp:
 
@@ -4080,63 +4140,3 @@ src/popsift/popsift.h:
 /usr/include/boost/predef/compiler/tendra.h:
 
 /usr/include/c++/7/bits/stl_set.h:
-
-/usr/include/boost/program_options/positional_options.hpp:
-
-/usr/include/boost/program_options/detail/cmdline.hpp:
-
-/usr/include/boost/program_options/variables_map.hpp:
-
-/usr/include/boost/mpl/aux_/preprocessed/gcc/or.hpp:
-
-/usr/local/include/opencv4/opencv2/core/core.hpp:
-
-/usr/include/boost/iterator/iterator_categories.hpp:
-
-/usr/include/boost/detail/workaround.hpp:
-
-/usr/local/include/opencv4/opencv2/core/traits.hpp:
-
-/usr/local/include/opencv4/opencv2/core.hpp:
-
-/usr/include/c++/7/cwctype:
-
-/usr/local/include/opencv4/opencv2/core/version.hpp:
-
-/usr/local/include/opencv4/opencv2/core/cv_cpu_dispatch.h:
-
-/usr/include/boost/mpl/next.hpp:
-
-/usr/include/boost/mpl/vector/aux_/push_back.hpp:
-
-/usr/lib/gcc/x86_64-linux-gnu/7/include/xmmintrin.h:
-
-/usr/local/include/opencv4/opencv2/opencv_modules.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
-
-/usr/local/include/opencv4/opencv2/core/cvstd.hpp:
-
-/usr/include/boost/preprocessor/logical/and.hpp:
-
-/usr/include/boost/predef/library/std/cxx.h:
-
-/usr/local/include/opencv4/opencv2/core/vsx_utils.hpp:
-
-/usr/include/boost/range/size_type.hpp:
-
-/usr/local/include/opencv4/opencv2/core/fast_math.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/byteswap-16.h:
-
-/usr/local/include/opencv4/opencv2/core/bufferpool.hpp:
-
-/usr/local/include/opencv4/opencv2/core/mat.inl.hpp:
-
-/usr/local/include/opencv4/opencv2/core/operations.hpp:
-
-/usr/include/c++/7/istream:
-
-/usr/local/include/opencv4/opencv2/core/cvstd.inl.hpp:
-
-/usr/local/include/opencv4/opencv2/core/utility.hpp:

@@ -249,24 +249,6 @@ void read_job( SiftJob* job, bool really_write )
     cerr << "Number of feature points: " << feature_list->getFeatureCount()
          << " number of feature descriptors: " << feature_list->getDescriptorCount()
          << endl;
-//// Rahul experiments
-
-         cout << feature_list->getFeatures()->xpos;
-
-         popsift::FeaturesHost* features = new popsift::FeaturesHost( feature_list->getFeatureCount(), feature_list->getDescriptorCount() );
-features->pin( );
-cudaMemcpy( features->getFeatures(),
-                         feature_list->getFeatures(),
-                         feature_list->getFeatureCount() * sizeof(popsift::Feature),
-                         cudaMemcpyDeviceToHost );
-cudaMemcpy( features->getDescriptors(),
-                         feature_list->getDescriptors(),
-                         feature_list->getDescriptorCount() * sizeof(popsift::Descriptor),
-                         cudaMemcpyDeviceToHost );
-features->unpin( );
-
-cout<<features->getFeatures()<<"\n";
-//// Rahul experiments
 
     if( really_write ) {
         nvtxRangePushA( "Writing features to disk" );

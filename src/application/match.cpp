@@ -38,6 +38,7 @@
 #include <devil_cpp_wrapper.hpp>
 #endif
 #include "pgmread.h"
+#include <ctime>
 
 #if POPSIFT_IS_DEFINED(POPSIFT_USE_NVTX)
 #include <nvToolsExtCuda.h>
@@ -181,7 +182,9 @@ SiftJob* process_image( const string& inputFile, PopSift& PopSift )
     SiftJob* job;
 
     nvtxRangePushA( "load and convert image" );
+
 #ifdef USE_DEVIL
+
     if( ! pgmread_loading )
     {
         ilImage img;
@@ -261,13 +264,10 @@ int main(int argc, char **argv)
 
     cout << "OpenCV version : " << CV_VERSION << endl;
 
-  cout << "Major version : " << CV_MAJOR_VERSION << endl;
-  cout << "Minor version : " << CV_MINOR_VERSION << endl;
+   cout << "Major version : " << CV_MAJOR_VERSION << endl;
+   cout << "Minor version : " << CV_MINOR_VERSION << endl;
 
   cout << "Subminor version : " << CV_SUBMINOR_VERSION << endl;
-
-
-
 
     popsift::Config config;
     string         lFile{};
@@ -304,8 +304,15 @@ int main(int argc, char **argv)
 
     PopSift PopSift( config, popsift::Config::MatchingMode );
 
+    clock_t begin_time = clock();
+
     SiftJob* lJob = process_image( lFile, PopSift );
+
+    std::cout <<"\n\nSift detection and description time"<< float( clock () - begin_time ) /  CLOCKS_PER_SEC;
+
     SiftJob* rJob = process_image( rFile, PopSift );
+
+    std::cout <<"\n\nSift detection and description"<< float( clock () - begin_time ) /  CLOCKS_PER_SEC;
 
     popsift::FeaturesDev* lFeatures = lJob->getDev();
 
@@ -316,15 +323,19 @@ int main(int argc, char **argv)
     cout << "Number of features:    " << rFeatures->getFeatureCount() << endl;
     cout << "Number of descriptors: " << rFeatures->getDescriptorCount() << endl;
 
-    // lFeatures->match( rFeatures );
+    vector<float> good_matches2;
+    begin_time = clock();
+
+    lFeatures->match( rFeatures);
+
+    std::cout <<"\n\nMatching time "<< float( clock () - begin_time ) /  CLOCKS_PER_SEC;
+
 
     popsift::FeaturesHost* left_features = new popsift::FeaturesHost( lFeatures->getFeatureCount(), lFeatures->getDescriptorCount() );
     popsift::FeaturesHost* right_features = new popsift::FeaturesHost( rFeatures->getFeatureCount(), rFeatures->getDescriptorCount() );
 
-
     // cv::Mat leftDescMat=convertFeaturesDevToMat(lFeatures,left_features);
     // cout<<leftDescMat;
-
 
     std::vector<const float*> descriptors_fl;
 
@@ -346,239 +357,84 @@ int main(int argc, char **argv)
                         lFeatures->getDescriptors(),
                         lFeatures->getDescriptorCount() * sizeof(popsift::Descriptor),
                         cudaMemcpyDeviceToHost );
+    cudaMemcpy( left_features->getObj(),
+                        lFeatures->getObj(),
+                        lFeatures->getDescriptorCount() * sizeof(float),
+                        cudaMemcpyDeviceToHost );
+
+
+    cudaMemcpy( left_features->getNumGoodMatches(),
+                        lFeatures->getNumGoodMatches(),
+                        sizeof(int),
+                        cudaMemcpyDeviceToHost );
+    //
+
     left_features->unpin( );
 
-    right_features->pin( );
-    cudaMemcpy( right_features->getFeatures(),
-                        rFeatures->getFeatures(),
-                        rFeatures->getFeatureCount() * sizeof(popsift::Feature),
-                        cudaMemcpyDeviceToHost );
-    cudaMemcpy( right_features->getDescriptors(),
-                        rFeatures->getDescriptors(),
-                        rFeatures->getDescriptorCount() * sizeof(popsift::Descriptor),
-                        cudaMemcpyDeviceToHost );
-    right_features->unpin( );
+     int newVar;
+     cout<<"\n\nFeatures vec\n";
 
+     begin_time = clock();
+     float* objFeatures=left_features->getObj();
 
+     int numGoodMatches=*left_features->getNumGoodMatches();
+     numGoodMatches/=4;
 
-    std::vector<popsift::Feature> leftFeaturesVec(left_features->getFeatures(), left_features->getFeatures() +  lFeatures->getFeatureCount());
-    std::vector<popsift::Descriptor> leftFeaturesDesc(left_features->getDescriptors(), left_features->getDescriptors() +  lFeatures->getDescriptorCount());
+     cv::Mat matchesImg;
+     matchesImg=cv::Mat::ones(std::max(limg.rows,rimg.rows),limg.cols+rimg.cols,CV_8UC3);
 
-    std::vector<cv::KeyPoint> leftKpts,rightKpts;
+     //
+     limg.copyTo(matchesImg(cv::Rect(0,0,limg.cols,limg.rows)));
+     rimg.copyTo(matchesImg(cv::Rect(limg.cols,0,rimg.cols,rimg.rows)));
 
-    std::vector<popsift::Feature> rightFeaturesVec(right_features->getFeatures(), right_features->getFeatures() +  rFeatures->getFeatureCount());
-    std::vector<popsift::Descriptor> rightFeaturesDesc(right_features->getDescriptors(), right_features->getDescriptors() +  rFeatures->getDescriptorCount());
 
+     std::vector<cv::Point2f> objPts;
+     std::vector<cv::Point2f> scenePts;
 
-    for(int i=0;i<leftFeaturesVec.size();i++)
-    {
-      leftKpts.push_back(cv::KeyPoint((int)leftFeaturesVec[i].xpos,(int)leftFeaturesVec[i].ypos,-1));
-    }
 
-    for(int i=0;i<rightFeaturesVec.size();i++)
-    {
-      rightKpts.push_back(cv::KeyPoint((int)rightFeaturesVec[i].xpos,(int)rightFeaturesVec[i].ypos,-1));
-    }
+     for(int i=0;i<numGoodMatches ;i++)
+     {
+       cv::Point2f objPt(objFeatures[i*4],objFeatures[i*4+1]);
+       cv::Point2f scenePt(objFeatures[i*4+2],objFeatures[i*4+3]);
 
-    cv::drawKeypoints(limg,leftKpts,outLimg);
+       // cout<<"\n\nPoint info"<<i<<" "<<objFeatures[i*4]<<" \t"<< objFeatures[i*4+1];
+      line(matchesImg, objPt,   cv::Point2f((float)limg.cols, 0)+scenePt, cv::Scalar(255, 0, 0), 4, cv::LINE_8);
 
-    cv::imshow("Left Keypoints",outLimg);
+      objPts.push_back(objPt);
+      scenePts.push_back(scenePt);
 
-    cv::drawKeypoints(rimg,rightKpts,outRimg);
-    cv::imshow("Right Keypoints",outRimg);
+     }
 
-    // std::ofstream of( "output-features-l.txt" );
-    // lFeatures->print( of, write_as_uchar );
 
-    cout<<leftFeaturesVec[0].xpos<<"  "<<leftFeaturesVec[0].ypos<<"\n";
 
-    float* descPtr  = (float*)( leftFeaturesVec[0].desc);
-    cv::Mat descMatPtr(1,128,CV_8UC1, descPtr);
+    cv::Mat H = cv::findHomography( objPts, scenePts,cv::RANSAC );
+    std::cout <<"\n\nHomography "<< float( clock () - begin_time ) /  CLOCKS_PER_SEC;
 
 
-     cout<<descMatPtr<<"\n\n";
+    std::vector<cv::Point2f> scene_corners(4);
+    std::vector<cv::Point2f> obj_corners(4);
+    obj_corners[0] = cv::Point2f(0, 0);
+    obj_corners[1] = cv::Point2f( (float)limg.cols, 0 );
+    obj_corners[2] = cv::Point2f( (float)limg.cols, (float)limg.rows );
+    obj_corners[3] = cv::Point2f( 0, (float)limg.rows );
 
+    perspectiveTransform( obj_corners, scene_corners, H);
 
-    // cout<<"\n"<<left_features->getDescriptors();
 
-    float* lptr  = (float*)( left_features->getDescriptors());
+    //-- Draw lines between the corners (the mapped object in the scene - image_2 )
+    line( matchesImg, scene_corners[0] + cv::Point2f((float)limg.cols, 0),
+          scene_corners[1] + cv::Point2f((float)limg.cols, 0), cv::Scalar(0, 255, 0), 4 );
+    line( matchesImg, scene_corners[1] + cv::Point2f((float)limg.cols, 0),
+          scene_corners[2] + cv::Point2f((float)limg.cols, 0), cv::Scalar( 0, 255, 0), 4 );
+    line( matchesImg, scene_corners[2] + cv::Point2f((float)limg.cols, 0),
+          scene_corners[3] + cv::Point2f((float)limg.cols, 0), cv::Scalar( 0, 255, 0), 4 );
+    line( matchesImg, scene_corners[3] + cv::Point2f((float)limg.cols, 0),
+          scene_corners[0] + cv::Point2f((float)limg.cols, 0), cv::Scalar( 0, 255, 0), 4 );
+    //-- Show detected matches
 
-    cv::Mat lDescMat(lFeatures->getDescriptorCount(),128,CV_32FC1, lptr);
-    cout<<lDescMat.row(1)<<"\n\n\n";
+     cv::imshow("Matches",matchesImg);
 
-    cv::FileStorage file("lDescMat.mat", cv::FileStorage::WRITE);
-    file<<"LMat"<<lDescMat;
-
-
-        delete lFeatures;
-        delete rFeatures;
-
-        PopSift.uninit( );
-
-
-
-    cout<<"\n\n\n\n";
-
-
-    float* rptr  = (float*)(right_features->getDescriptors());
-    cv::Mat rDescMat(rFeatures->getDescriptorCount(),128,CV_32FC1, rptr);
-    cout<<rDescMat.row(0)<<"\n\n\n";
-
-
-
-
-    cv::Ptr<cv::DescriptorMatcher> matcher =cv:: DescriptorMatcher::create("BruteForce");
-
-    std::vector< std::vector<cv::DMatch> > cpuKnnMatches;
-    std::vector<cv::DMatch> good_matches;
-
-     matcher->knnMatch( lDescMat, rDescMat, cpuKnnMatches,2);
-
-     // const float ratio_thresh = 0.7f;
-
-    double max_dist = 0;
-      double min_dist = 100;
-//
-//   for(int i=0;i<cpuKnnMatches.size();i++)
-//   {
-//      double dist = cpuKnnMatches[i].distance;
-//
-//
-//      // std::cout<<"\n"<<dist<<"\t"<<cpuKnnMatches[i].queryIdx<<"  "<<cpuKnnMatches[i].trainIdx;
-//      if (dist < min_dist)
-//           min_dist = dist;
-//      if (dist > max_dist)
-//           max_dist = dist;
-//
-// }
-
-
-cv::Mat matchesImg;
-//
-// for(int i=0;i<cpuKnnMatches.size();i++)
-// {
-//    if( cpuKnnMatches[i].distance <= max(2*min_dist, 0.02) )
-//     {
-//       cout<<"\n\n"<<leftFeaturesVec[cpuKnnMatches[i].queryIdx].xpos<<"    "<<leftFeaturesVec[cpuKnnMatches[i].queryIdx].ypos<<"   "<<rightFeaturesVec[cpuKnnMatches[i].trainIdx].xpos<<"   "<<rightFeaturesVec[cpuKnnMatches[i].trainIdx].ypos;
-//       cout<<"\n\n"<<limg.cols*leftFeaturesVec[cpuKnnMatches[i].queryIdx].xpos<<"    "<<limg.rows*leftFeaturesVec[cpuKnnMatches[i].queryIdx].ypos<<"   "<<rimg.cols*rightFeaturesVec[cpuKnnMatches[i].trainIdx].xpos<<"   "<<rimg.rows*rightFeaturesVec[cpuKnnMatches[i].trainIdx].ypos;
-//       good_matches.push_back( cpuKnnMatches[i]);
-//     }
-// }
-
-
-    const float ratio_thresh = 0.7f;
-
-    for (size_t i = 0; i < cpuKnnMatches.size(); i++)
-    {
-        if (cpuKnnMatches[i][0].distance < ratio_thresh * cpuKnnMatches[i][1].distance)
-        {
-            good_matches.push_back(cpuKnnMatches[i][0]);
-
-            // cout<<"\n Good match found at "<<leftKpts[good_matches[i].queryIdx].pt<<" \t\t"<<rightKpts[good_matches[i].trainIdx].pt;
-
-        }
-    }
-
-
-// cv::waitKey(0);
-
-    // drawMatches( outLimg, leftKpts, outRimg, rightKpts, good_matches, matchesImg, cv::Scalar::all(-1), cv::Scalar::all(-1), std::vector<char>(), cv::DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS );
-
-    // cv::imshow("Matches",matchesImg);
-
-cout<<"\n\n"<<"Total Matches"<<cpuKnnMatches.size()<<" out of which good matches are:  "<<good_matches.size()<<"\n";
-
-cout<<"Distances"<<min_dist<<"    \t\t\t"<<max_dist;
-
-
-
-
-//
-// for(int i=0;i<leftFeaturesVec.size();i++)
-// {
-//   cv::circle(limg, cv::Point(leftFeaturesVec[i].xpos,leftFeaturesVec[i].ypos),4, cv::Scalar(0,0,255));
-// }
-//
-//
-//
-// for(int i=0;i<rightFeaturesVec.size();i++)
-// {
-//   cv::circle(rimg, cv::Point(rightFeaturesVec[i].xpos,rightFeaturesVec[i].ypos),4, cv::Scalar(0,0,255));
-// }
-//
-
-
-
-
-
-
-
-// matchesImg=cv::Mat::ones(std::max(limg.rows,rimg.rows),limg.cols+rimg.cols,CV_8UC3);
-
-std::cout<<limg.channels()<<"   "<<rimg.channels()<<"  "<<matchesImg.channels();
-
-std::cout<<"Rows"<<limg.rows<<"   "<<rimg.rows<<"  "<<matchesImg.rows;
-std::cout<<"Cols"<<limg.cols<<"   "<<rimg.cols<<"  "<<matchesImg.cols;
-
-
-std::cout<<"\n Matches image"<<matchesImg.rows<< " "<<matchesImg.cols<<std::endl;
-//
-// limg.copyTo(matchesImg(cv::Rect(0,0,limg.cols,limg.rows)));
-// rimg.copyTo(matchesImg(cv::Rect(limg.cols,0,rimg.cols,rimg.rows)));
-
-//
-for(int i=0;i<good_matches.size();i++)
-{
-
-  line(matchesImg, cv::Point(leftKpts[good_matches[i].queryIdx].pt.x,leftKpts[good_matches[i].queryIdx].pt.y),  cv::Point(rightKpts[good_matches[i].trainIdx].pt.x+limg.cols,rightKpts[good_matches[i].trainIdx].pt.y), cv::Scalar(255, 0, 0),
-     4, cv::LINE_8);
-
-
-}
-
-
-cv::imshow("Left img",limg);
-cv::imshow("Right img",rimg);
-cv::waitKey(0);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
-// Ptr<DescriptorMatcher> matcher2 = DescriptorMatcher::create(DescriptorMatcher::FLANNBASED);
-//   std::vector< std::vector<DMatch> > knn_matches;
-
-
-
-///////
-
-
-
-
-
-
-
-
-
-     // cout<<mat1.rows<<mat1.cols<<endl;
-
-
-
-    // std::vector<float> descriptorsvec(lptr,lptr+128);
-    // cout<<descriptorsvec.size();
-    //
-    // for(int i=0;i<descriptorsvec.size();i++)
-    // cout<<"\n"<<descriptorsvec[i]<<"\t";
+     cv::waitKey(0);
 
 
 

@@ -271,14 +271,70 @@ src/CMakeFiles/popsift.dir/popsift/popsift.cpp.o
  /home/rahul/Work/LiveGoggle/Code/popsift/src/popsift/gauss_filter.h
  /home/rahul/Work/LiveGoggle/Code/popsift/src/popsift/sift_pyramid.h
  /home/rahul/Work/LiveGoggle/Code/popsift/src/popsift/features.h
+ /usr/local/include/opencv4/opencv2/core/core.hpp
+ /usr/local/include/opencv4/opencv2/core.hpp
+ /usr/local/include/opencv4/opencv2/core/cvdef.h
+ /usr/local/include/opencv4/opencv2/core/version.hpp
+ /usr/local/include/opencv4/opencv2/core/hal/interface.h
+ /usr/include/c++/7/cstddef
+ /usr/local/include/opencv4/opencv2/core/cv_cpu_dispatch.h
+ /usr/lib/gcc/x86_64-linux-gnu/7/include/emmintrin.h
+ /usr/lib/gcc/x86_64-linux-gnu/7/include/xmmintrin.h
+ /usr/lib/gcc/x86_64-linux-gnu/7/include/mmintrin.h
+ /usr/lib/gcc/x86_64-linux-gnu/7/include/mm_malloc.h
+ /usr/include/c++/7/stdlib.h
+ /usr/local/include/opencv4/opencv2/core/base.hpp
+ /usr/local/include/opencv4/opencv2/opencv_modules.hpp
+ /usr/include/c++/7/climits
+ /usr/include/c++/7/algorithm
+ /usr/include/c++/7/bits/stl_algo.h
+ /usr/include/c++/7/bits/algorithmfwd.h
+ /usr/include/c++/7/bits/uniform_int_dist.h
+ /usr/local/include/opencv4/opencv2/core/cvstd.hpp
+ /usr/local/include/opencv4/opencv2/core/cvstd_wrapper.hpp
+ /usr/local/include/opencv4/opencv2/core/neon_utils.hpp
+ /usr/local/include/opencv4/opencv2/core/vsx_utils.hpp
+ /usr/include/assert.h
+ /usr/local/include/opencv4/opencv2/core/check.hpp
+ /usr/local/include/opencv4/opencv2/core/traits.hpp
+ /usr/local/include/opencv4/opencv2/core/matx.hpp
+ /usr/local/include/opencv4/opencv2/core/saturate.hpp
+ /usr/local/include/opencv4/opencv2/core/fast_math.hpp
+ /usr/local/include/opencv4/opencv2/core/types.hpp
+ /usr/include/c++/7/cfloat
+ /usr/lib/gcc/x86_64-linux-gnu/7/include/float.h
+ /usr/local/include/opencv4/opencv2/core/mat.hpp
+ /usr/local/include/opencv4/opencv2/core/bufferpool.hpp
+ /usr/local/include/opencv4/opencv2/core/mat.inl.hpp
+ /usr/local/include/opencv4/opencv2/core/persistence.hpp
+ /usr/local/include/opencv4/opencv2/core/operations.hpp
+ /usr/local/include/opencv4/opencv2/core/cvstd.inl.hpp
+ /usr/include/c++/7/complex
+ /usr/include/c++/7/sstream
+ /usr/include/c++/7/bits/sstream.tcc
+ /usr/local/include/opencv4/opencv2/core/utility.hpp
+ /usr/include/c++/7/functional
+ /usr/local/include/opencv4/opencv2/core/optim.hpp
+ /usr/local/include/opencv4/opencv2/core/ovx.hpp
+ /usr/local/include/opencv4/opencv2/core/cvdef.h
+ /usr/local/include/opencv4/opencv2/highgui/highgui.hpp
+ /usr/local/include/opencv4/opencv2/highgui.hpp
+ /usr/local/include/opencv4/opencv2/imgcodecs.hpp
+ /usr/local/include/opencv4/opencv2/videoio.hpp
+ /usr/local/include/opencv4/opencv2/imgproc/imgproc.hpp
+ /usr/local/include/opencv4/opencv2/imgproc.hpp
+ /usr/local/include/opencv4/opencv2/imgproc/segmentation.hpp
+ /usr/local/include/opencv4/opencv2/features2d.hpp
+ /usr/local/include/opencv4/opencv2/flann/miniflann.hpp
+ /usr/local/include/opencv4/opencv2/flann/defines.h
+ /usr/local/include/opencv4/opencv2/flann/config.h
+ /usr/local/include/opencv4/opencv2/calib3d.hpp
+ /usr/local/include/opencv4/opencv2/core/affine.hpp
  /home/rahul/Work/LiveGoggle/Code/popsift/src/popsift/s_image.h
  /home/rahul/Work/LiveGoggle/Code/popsift/src/popsift/common/plane_2d.h
  /usr/include/c++/7/cassert
- /usr/include/assert.h
  /usr/include/c++/7/cinttypes
  /usr/include/inttypes.h
- /usr/include/c++/7/sstream
- /usr/include/c++/7/bits/sstream.tcc
  /home/rahul/Work/LiveGoggle/Code/popsift/src/popsift/sift_octave.h
  /usr/include/c++/7/fstream
  /usr/include/c++/7/bits/codecvt.h

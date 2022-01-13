@@ -207,50 +207,125 @@ src/application/CMakeFiles/popsift-demo.dir/main.cpp.o
  /usr/include/c++/7/bits/ostream.tcc
  /usr/include/c++/7/istream
  /usr/include/c++/7/bits/istream.tcc
- /home/rahul/Work/LiveGoggle/Code/popsift/src/popsift/popsift.h
- /home/rahul/Work/LiveGoggle/Code/popsift/src/popsift/common/sync_queue.h
- /usr/include/c++/7/condition_variable
- /usr/include/c++/7/chrono
- /usr/include/c++/7/ratio
+ /usr/local/include/opencv4/opencv2/core/core.hpp
+ /usr/local/include/opencv4/opencv2/core.hpp
+ /usr/local/include/opencv4/opencv2/core/cvdef.h
+ /usr/local/include/opencv4/opencv2/core/version.hpp
  /usr/include/c++/7/limits
- /usr/include/c++/7/ctime
- /usr/include/c++/7/bits/parse_numbers.h
- /usr/include/c++/7/bits/std_mutex.h
- /usr/include/c++/7/ext/concurrence.h
- /usr/include/c++/7/bits/unique_ptr.h
+ /usr/local/include/opencv4/opencv2/core/hal/interface.h
+ /usr/include/c++/7/cstddef
+ /usr/local/include/opencv4/opencv2/core/cv_cpu_dispatch.h
+ /usr/lib/gcc/x86_64-linux-gnu/7/include/emmintrin.h
+ /usr/lib/gcc/x86_64-linux-gnu/7/include/xmmintrin.h
+ /usr/lib/gcc/x86_64-linux-gnu/7/include/mmintrin.h
+ /usr/lib/gcc/x86_64-linux-gnu/7/include/mm_malloc.h
+ /usr/include/c++/7/stdlib.h
+ /usr/include/c++/7/array
  /usr/include/c++/7/utility
  /usr/include/c++/7/bits/stl_relops.h
- /usr/include/c++/7/tuple
- /usr/include/c++/7/array
+ /usr/local/include/opencv4/opencv2/core/base.hpp
+ /usr/local/include/opencv4/opencv2/opencv_modules.hpp
+ /usr/include/c++/7/climits
+ /usr/include/c++/7/algorithm
+ /usr/include/c++/7/bits/stl_algo.h
+ /usr/include/c++/7/bits/algorithmfwd.h
+ /usr/include/c++/7/bits/stl_heap.h
+ /usr/include/c++/7/bits/stl_tempbuf.h
+ /usr/include/c++/7/bits/uniform_int_dist.h
+ /usr/local/include/opencv4/opencv2/core/cvstd.hpp
+ /usr/include/c++/7/cstring
+ /usr/include/string.h
+ /usr/include/strings.h
+ /usr/include/x86_64-linux-gnu/bits/strings_fortified.h
+ /usr/include/x86_64-linux-gnu/bits/string_fortified.h
+ /usr/include/c++/7/cmath
+ /usr/include/math.h
+ /usr/include/x86_64-linux-gnu/bits/math-vector.h
+ /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h
+ /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h
+ /usr/include/x86_64-linux-gnu/bits/fp-logb.h
+ /usr/include/x86_64-linux-gnu/bits/fp-fast.h
+ /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h
+ /usr/include/x86_64-linux-gnu/bits/mathcalls.h
+ /usr/include/x86_64-linux-gnu/bits/iscanonical.h
+ /usr/include/x86_64-linux-gnu/bits/mathinline.h
+ /usr/local/include/opencv4/opencv2/core/cvstd_wrapper.hpp
+ /usr/include/c++/7/memory
+ /usr/include/c++/7/bits/stl_raw_storage_iter.h
+ /usr/include/c++/7/ext/concurrence.h
  /usr/include/c++/7/bits/uses_allocator.h
+ /usr/include/c++/7/bits/unique_ptr.h
+ /usr/include/c++/7/tuple
  /usr/include/c++/7/bits/invoke.h
  /usr/include/c++/7/bits/shared_ptr.h
  /usr/include/c++/7/bits/shared_ptr_base.h
  /usr/include/c++/7/bits/allocated_ptr.h
  /usr/include/c++/7/bits/refwrap.h
  /usr/include/c++/7/ext/aligned_buffer.h
+ /usr/include/c++/7/bits/shared_ptr_atomic.h
+ /usr/include/c++/7/bits/atomic_base.h
+ /usr/include/c++/7/bits/atomic_lockfree_defines.h
+ /usr/include/c++/7/backward/auto_ptr.h
+ /usr/local/include/opencv4/opencv2/core/neon_utils.hpp
+ /usr/local/include/opencv4/opencv2/core/vsx_utils.hpp
+ /usr/include/assert.h
+ /usr/local/include/opencv4/opencv2/core/check.hpp
+ /usr/local/include/opencv4/opencv2/core/traits.hpp
+ /usr/local/include/opencv4/opencv2/core/matx.hpp
+ /usr/local/include/opencv4/opencv2/core/saturate.hpp
+ /usr/local/include/opencv4/opencv2/core/fast_math.hpp
+ /usr/local/include/opencv4/opencv2/core/types.hpp
+ /usr/include/c++/7/cfloat
+ /usr/lib/gcc/x86_64-linux-gnu/7/include/float.h
+ /usr/local/include/opencv4/opencv2/core/mat.hpp
+ /usr/local/include/opencv4/opencv2/core/bufferpool.hpp
+ /usr/local/include/opencv4/opencv2/core/mat.inl.hpp
+ /usr/local/include/opencv4/opencv2/core/persistence.hpp
+ /usr/local/include/opencv4/opencv2/core/operations.hpp
+ /usr/local/include/opencv4/opencv2/core/cvstd.inl.hpp
+ /usr/include/c++/7/complex
+ /usr/include/c++/7/sstream
+ /usr/include/c++/7/bits/sstream.tcc
+ /usr/local/include/opencv4/opencv2/core/utility.hpp
+ /usr/include/c++/7/functional
+ /usr/include/c++/7/bits/std_function.h
  /usr/include/c++/7/mutex
+ /usr/include/c++/7/chrono
+ /usr/include/c++/7/ratio
+ /usr/include/c++/7/ctime
+ /usr/include/c++/7/bits/parse_numbers.h
+ /usr/include/c++/7/bits/std_mutex.h
+ /usr/local/include/opencv4/opencv2/core/optim.hpp
+ /usr/local/include/opencv4/opencv2/core/ovx.hpp
+ /usr/local/include/opencv4/opencv2/core/cvdef.h
+ /usr/local/include/opencv4/opencv2/highgui/highgui.hpp
+ /usr/local/include/opencv4/opencv2/highgui.hpp
+ /usr/local/include/opencv4/opencv2/imgcodecs.hpp
+ /usr/local/include/opencv4/opencv2/videoio.hpp
+ /usr/local/include/opencv4/opencv2/imgproc/imgproc.hpp
+ /usr/local/include/opencv4/opencv2/imgproc.hpp
+ /usr/local/include/opencv4/opencv2/imgproc/segmentation.hpp
+ /usr/local/include/opencv4/opencv2/features2d.hpp
+ /usr/local/include/opencv4/opencv2/flann/miniflann.hpp
+ /usr/local/include/opencv4/opencv2/flann/defines.h
+ /usr/local/include/opencv4/opencv2/flann/config.h
+ /usr/local/include/opencv4/opencv2/calib3d.hpp
+ /usr/local/include/opencv4/opencv2/core/affine.hpp
+ /home/rahul/Work/LiveGoggle/Code/popsift/src/popsift/popsift.h
+ /home/rahul/Work/LiveGoggle/Code/popsift/src/popsift/common/sync_queue.h
+ /usr/include/c++/7/condition_variable
  /usr/include/c++/7/queue
  /usr/include/c++/7/deque
  /usr/include/c++/7/bits/stl_deque.h
  /usr/include/c++/7/bits/deque.tcc
- /usr/include/c++/7/bits/stl_heap.h
  /usr/include/c++/7/bits/stl_queue.h
  /home/rahul/Work/LiveGoggle/Code/popsift/src/popsift/sift_conf.h
  /home/rahul/Work/LiveGoggle/Code/popsift/src/generated/popsift/sift_config.h
  /home/rahul/Work/LiveGoggle/Code/popsift/src/popsift/sift_extremum.h
  /usr/include/c++/7/future
  /usr/include/c++/7/thread
- /usr/include/c++/7/memory
- /usr/include/c++/7/bits/stl_tempbuf.h
- /usr/include/c++/7/bits/stl_raw_storage_iter.h
- /usr/include/c++/7/bits/shared_ptr_atomic.h
- /usr/include/c++/7/bits/atomic_base.h
- /usr/include/c++/7/bits/atomic_lockfree_defines.h
- /usr/include/c++/7/backward/auto_ptr.h
  /usr/include/c++/7/atomic
  /usr/include/c++/7/bits/atomic_futex.h
- /usr/include/c++/7/bits/std_function.h
  /usr/include/c++/7/stack
  /usr/include/c++/7/bits/stl_stack.h
  /home/rahul/Work/LiveGoggle/Code/popsift/src/generated/popsift/version.hpp
@@ -260,7 +335,6 @@ src/application/CMakeFiles/popsift-demo.dir/main.cpp.o
  /usr/include/boost/config/user.hpp
  /usr/include/boost/config/detail/select_compiler_config.hpp
  /usr/include/boost/config/compiler/gcc.hpp
- /usr/include/c++/7/cstddef
  /usr/include/boost/config/detail/select_stdlib_config.hpp
  /usr/include/boost/config/stdlib/libstdcpp3.hpp
  /usr/include/unistd.h
@@ -313,10 +387,8 @@ src/application/CMakeFiles/popsift-demo.dir/main.cpp.o
  /usr/include/boost/predef/os/ios.h
  /usr/include/boost/cstdint.hpp
  /usr/include/boost/assert.hpp
- /usr/include/assert.h
  /usr/include/boost/noncopyable.hpp
  /usr/include/boost/core/noncopyable.hpp
- /usr/include/c++/7/functional
  /usr/include/boost/cerrno.hpp
  /usr/include/boost/config/abi_prefix.hpp
  /usr/include/boost/config/abi_suffix.hpp
@@ -665,10 +737,6 @@ src/application/CMakeFiles/popsift-demo.dir/main.cpp.o
  /usr/include/boost/predef/hardware/simd/ppc.h
  /usr/include/boost/predef/hardware/simd/ppc/versions.h
  /usr/include/boost/predef/version.h
- /usr/include/c++/7/algorithm
- /usr/include/c++/7/bits/stl_algo.h
- /usr/include/c++/7/bits/algorithmfwd.h
- /usr/include/c++/7/bits/uniform_int_dist.h
  /usr/include/boost/smart_ptr/detail/operator_bool.hpp
  /usr/include/boost/smart_ptr/detail/local_sp_deleter.hpp
  /usr/include/boost/smart_ptr/detail/local_counted_base.hpp
@@ -677,11 +745,6 @@ src/application/CMakeFiles/popsift-demo.dir/main.cpp.o
  /usr/include/boost/io_fwd.hpp
  /usr/include/boost/functional/hash_fwd.hpp
  /usr/include/boost/functional/hash/hash_fwd.hpp
- /usr/include/c++/7/cstring
- /usr/include/string.h
- /usr/include/strings.h
- /usr/include/x86_64-linux-gnu/bits/strings_fortified.h
- /usr/include/x86_64-linux-gnu/bits/string_fortified.h
  /usr/include/boost/filesystem/operations.hpp
  /usr/include/boost/detail/scoped_enum_emulation.hpp
  /usr/include/boost/core/scoped_enum.hpp
@@ -720,7 +783,6 @@ src/application/CMakeFiles/popsift-demo.dir/main.cpp.o
  /usr/include/boost/function/function_base.hpp
  /usr/include/boost/integer.hpp
  /usr/include/boost/integer_fwd.hpp
- /usr/include/c++/7/climits
  /usr/include/boost/limits.hpp
  /usr/include/boost/integer_traits.hpp
  /usr/include/boost/type_traits/has_trivial_copy.hpp
@@ -867,17 +929,6 @@ src/application/CMakeFiles/popsift-demo.dir/main.cpp.o
  /usr/include/boost/mpl/aux_/preprocessed/gcc/less.hpp
  /usr/include/boost/numeric/conversion/converter_policies.hpp
  /usr/include/boost/config/no_tr1/cmath.hpp
- /usr/include/c++/7/cmath
- /usr/include/math.h
- /usr/include/x86_64-linux-gnu/bits/math-vector.h
- /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h
- /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h
- /usr/include/x86_64-linux-gnu/bits/fp-logb.h
- /usr/include/x86_64-linux-gnu/bits/fp-fast.h
- /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h
- /usr/include/x86_64-linux-gnu/bits/mathcalls.h
- /usr/include/x86_64-linux-gnu/bits/iscanonical.h
- /usr/include/x86_64-linux-gnu/bits/mathinline.h
  /usr/include/boost/numeric/conversion/detail/converter.hpp
  /usr/include/boost/numeric/conversion/bounds.hpp
  /usr/include/boost/numeric/conversion/detail/bounds.hpp
@@ -898,15 +949,11 @@ src/application/CMakeFiles/popsift-demo.dir/main.cpp.o
  /usr/include/boost/move/detail/std_ns_begin.hpp
  /usr/include/boost/move/detail/std_ns_end.hpp
  /usr/include/boost/lexical_cast/detail/converter_lexical_streams.hpp
- /usr/include/c++/7/sstream
- /usr/include/c++/7/bits/sstream.tcc
  /usr/include/boost/lexical_cast/detail/lcast_char_constants.hpp
  /usr/include/boost/lexical_cast/detail/lcast_unsigned_converters.hpp
  /usr/include/boost/lexical_cast/detail/inf_nan.hpp
  /usr/include/boost/math/special_functions/sign.hpp
  /usr/include/boost/math/tools/config.hpp
- /usr/include/c++/7/cfloat
- /usr/lib/gcc/x86_64-linux-gnu/7/include/float.h
  /usr/include/boost/math/tools/user.hpp
  /usr/include/boost/math/special_functions/math_fwd.hpp
  /usr/include/boost/math/special_functions/detail/round_fwd.hpp
@@ -1047,10 +1094,8 @@ src/application/CMakeFiles/popsift-demo.dir/main.cpp.o
  /usr/include/boost/mpl/aux_/preprocessed/gcc/less_equal.hpp
  /usr/include/boost/mpl/greater_equal.hpp
  /usr/include/boost/mpl/aux_/preprocessed/gcc/greater_equal.hpp
- /usr/include/c++/7/stdlib.h
  /usr/include/c++/7/math.h
  /usr/include/boost/config/no_tr1/complex.hpp
- /usr/include/c++/7/complex
  /usr/include/boost/math/special_functions/detail/fp_traits.hpp
  /usr/include/boost/detail/endian.hpp
  /usr/include/boost/predef/detail/endian_compat.h

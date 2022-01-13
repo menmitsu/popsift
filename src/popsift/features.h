@@ -12,6 +12,18 @@
 #include <iostream>
 #include <vector>
 
+
+
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+
+#include "opencv2/features2d.hpp"
+
+#include "opencv2/calib3d.hpp"
+#include "opencv2/core.hpp"
+
+
 namespace popsift {
 
 struct Descriptor; // float features[128];
@@ -70,6 +82,13 @@ class FeaturesHost : public FeaturesBase
 {
     Feature*     _ext;
     Descriptor*  _ori;
+    int*         _rev; // the reverse map from descriptors to extrema
+    int* _var;
+
+    float* _obj;
+    float* _scene;
+
+      int* _numGoodMatches;
 
 public:
     FeaturesHost( );
@@ -90,8 +109,13 @@ public:
 
     inline Feature*    getFeatures()    { return _ext; }
     inline Descriptor* getDescriptors() { return _ori; }
+    inline int*         getVar(){ return _var;}
+    inline float*      getObj()  { return _obj; }
+    inline float*        getScene()  { return _scene; }
+    inline int*       getNumGoodMatches() { return _numGoodMatches;}
 
     void print( std::ostream& ostr, bool write_as_uchar ) const;
+    int *aaa;
 
 protected:
     friend class Pyramid;
@@ -106,6 +130,12 @@ class FeaturesDev : public FeaturesBase
     Feature*     _ext;
     Descriptor*  _ori;
     int*         _rev; // the reverse map from descriptors to extrema
+    int* _var;
+
+    float* _obj;
+    float* _scene;
+
+    int* _numGoodMatches;
 
 public:
     FeaturesDev( );
@@ -114,11 +144,19 @@ public:
 
     void reset( int num_ext, int num_ori );
 
-    void match( FeaturesDev* other );
+    void match( FeaturesDev* other);
+    // void match( FeaturesDev* other ,std::vector<float>goodMatches);
+
 
     inline Feature*    getFeatures()    { return _ext; }
     inline Descriptor* getDescriptors() { return _ori; }
     inline int*        getReverseMap()  { return _rev; }
+    inline int*        getVar()  { return _var; }
+    inline float*      getObj()  { return _obj; }
+    inline float*      getScene()  { return _scene; }
+    inline int*       getNumGoodMatches() { return _numGoodMatches;}
+    // inline void        resetGoodMatches() { *_numGoodMatches=0;}
+
 };
 
 } // namespace popsift
