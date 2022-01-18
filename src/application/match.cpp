@@ -176,27 +176,52 @@ static void collectFilenames( list<string>& inputFiles, const boost::filesystem:
     }
 }
 
-SiftJob* detectFeaturesAndDescriptors(Mat &img,PopSift& PopSift)
+SiftJob* detectFeaturesAndDescriptors(cv::Mat img,PopSift& PopSift)
 {
 
   unsigned char* image_data;
   SiftJob* job;
+  cv::Mat greyMat;
+  cv::cvtColor(img, greyMat, cv::COLOR_BGR2GRAY);
+  // imwrite("input_test.pgm",greyMat);
 
   nvtxRangePushA( "load and convert image" );
 
-  image_data = img.GetData();
+  // {
+  //     int h{};
+  //     int w{};
+  //     image_data = readPGMfile( "input_test.pgm", w, h );
+  //     if( image_data == nullptr ) {
+  //         exit( EXIT_FAILURE );
+  //     }
+  //
+  //     nvtxRangePop( );
+  //
+  //     // PopSift.init( w, h );
+  //     job = PopSift.enqueue( w, h, image_data );
+  //
+  //     delete [] image_data;
+  // }
+
+
+  image_data = greyMat.data;
 
   nvtxRangePop( );
 
-  // PopSift.init( w, h );
-  job = PopSift.enqueue( w, h, image_data );
+  job = PopSift.enqueue( img.cols, img.rows, image_data );
 
-  img.Clear();
-
+return job;
 }
 
 SiftJob* process_image( const string& inputFile, PopSift& PopSift )
 {
+
+
+    unsigned char* image_data;
+    SiftJob* job;
+
+
+      nvtxRangePushA( "load and convert image" );
 
 #ifdef USE_DEVIL
 
@@ -273,6 +298,9 @@ cv::Mat convertFeaturesDevToMat(popsift::FeaturesDev* lFeatures, popsift::Featur
 
 }
 
+
+
+
 int main(int argc, char **argv)
 {
     cudaDeviceReset();
@@ -313,6 +341,14 @@ int main(int argc, char **argv)
         }
     }
 
+
+    cv::Mat limg=cv::imread(lFile);
+    cv::Mat outLimg=limg.clone();
+
+    cv::Mat rimg=cv::imread(rFile);
+    cv::Mat outRimg=rimg.clone();
+
+
     popsift::cuda::device_prop_t deviceInfo;
     deviceInfo.set( 0, print_dev_info );
     if( print_dev_info ) deviceInfo.print( );
@@ -321,63 +357,53 @@ int main(int argc, char **argv)
 
     clock_t begin_time = clock();
 
-    cv::VideoCapture video("Footage/packet_orientations.mp4");
+    string streamName="Footage/packet_orientations.mp4";
 
+    cv::VideoCapture video(streamName.c_str());
 
+    cv::VideoWriter outputWriter;
+    int codec = cv::VideoWriter::fourcc('M', 'J', 'P', 'G');
 
-    SiftJob* lJob = process_image( lFile, PopSift );
+    cv::Size captureSize = cv::Size( (int) video.get(cv::CAP_PROP_FRAME_WIDTH)+limg.cols,max((int) video.get(cv::CAP_PROP_FRAME_HEIGHT),limg.rows));
+
+    outputWriter.open(streamName.substr(0, streamName.length()-3)+"avi", codec, 30, captureSize, true);
+
+    // SiftJob* lJob = process_image( lFile, PopSift );
+    SiftJob* lJob = detectFeaturesAndDescriptors(cv::imread(lFile),PopSift);
     std::cout <<"\n\nSift detection and description time"<< float( clock () - begin_time ) /  CLOCKS_PER_SEC;
 
     popsift::FeaturesDev* lFeatures = lJob->getDev();
 
     cout << "Number of features:    " << lFeatures->getFeatureCount() << endl;
-    cout << "Number of descriptors: " << lFeatures->getDesc
+    cout << "Number of descriptors: " << lFeatures->getDescriptorCount() << endl;
+
+    /////////////
 
 
+///
+    cv::Mat colorFrame,img2;
 
-    Mat frame;
-
-
-
-
-
-    SiftJob* rJob = process_image( rFile, PopSift );
+    SiftJob* rJob = detectFeaturesAndDescriptors( cv::imread(rFile), PopSift );
 
     std::cout <<"\n\nSift detection and description"<< float( clock () - begin_time ) /  CLOCKS_PER_SEC;
 
-  riptorCount() << endl;
-
     popsift::FeaturesDev* rFeatures = rJob->getDev();
-    cout << "Number of features:    " << rFeatures->getFeatureCount() << endl;
-    cout << "Number of descriptors: " << rFeatures->getDescriptorCount() << endl;
-
-while(cv::waitKey(1)!=27)
-{
-
-
-    begin_time = clock();
 
     lFeatures->match( rFeatures);
 
-    std::cout <<"\n\nMatching time "<< float( clock () - begin_time ) /  CLOCKS_PER_SEC;
+
+    cout << "Number of features:    " << rFeatures->getFeatureCount() << endl;
+    cout << "Number of descriptors: " << rFeatures->getDescriptorCount() << endl;
+    video>>colorFrame;
 
     popsift::FeaturesHost* left_features = new popsift::FeaturesHost( lFeatures->getFeatureCount(), lFeatures->getDescriptorCount() );
-    popsift::FeaturesHost* right_features = new popsift::FeaturesHost( rFeatures->getFeatureCount(), rFeatures->getDescriptorCount() );
+    popsift::FeaturesHost* right_features;
 
-    // cv::Mat leftDescMat=convertFeaturesDevToMat(lFeatures,left_features);
-    // cout<<leftDescMat;
 
-    std::vector<const float*> descriptors_fl;
 
-    cv::Mat limg=cv::imread(lFile);
-    cv::Mat outLimg=limg.clone();
+    std::vector<cv::Point2f> scene_corners(4);
+    std::vector<cv::Point2f> obj_corners(4);
 
-    cv::Mat rimg=cv::imread(rFile);
-    cv::Mat outRimg=rimg.clone();
-
-/////
-
-    left_features->pin( );
     cudaMemcpy( left_features->getFeatures(),
                         lFeatures->getFeatures(),
                         lFeatures->getFeatureCount() * sizeof(popsift::Feature),
@@ -386,6 +412,111 @@ while(cv::waitKey(1)!=27)
                         lFeatures->getDescriptors(),
                         lFeatures->getDescriptorCount() * sizeof(popsift::Descriptor),
                         cudaMemcpyDeviceToHost );
+
+
+    cudaMemcpy( left_features->getObj(),
+                        lFeatures->getObj(),
+                        lFeatures->getDescriptorCount() * sizeof(float),
+                        cudaMemcpyDeviceToHost );
+
+
+    cudaMemcpy( left_features->getNumGoodMatches(),
+                        lFeatures->getNumGoodMatches(),
+                        sizeof(int),
+                        cudaMemcpyDeviceToHost );
+                            //
+    int numGoodMatches=*left_features->getNumGoodMatches();
+     numGoodMatches/=4;
+
+     cout<<"\n\nNumber of good matches\t"<<numGoodMatches<<endl;
+    cv::Mat matchesImg;
+
+     if(numGoodMatches>8)
+     {
+
+
+           float* objFeatures=left_features->getObj();
+
+
+           matchesImg=cv::Mat::ones(std::max(limg.rows,rimg.rows),limg.cols+rimg.cols,CV_8UC3);
+
+           //
+           limg.copyTo(matchesImg(cv::Rect(0,0,limg.cols,limg.rows)));
+           rimg.copyTo(matchesImg(cv::Rect(limg.cols,0,rimg.cols,rimg.rows)));
+
+           std::vector<cv::Point2f> objPts;
+           std::vector<cv::Point2f> scenePts;
+
+           for(int i=0;i<numGoodMatches ;i++)
+           {
+
+             cv::Point2f objPt(objFeatures[i*4],objFeatures[i*4+1]);
+             cv::Point2f scenePt(objFeatures[i*4+2],objFeatures[i*4+3]);
+
+             // cout<<"\n\nPoint info"<<i<<" "<<objFeatures[i*4]<<" \t"<< objFeatures[i*4+1];
+            line(matchesImg, objPt,   cv::Point2f((float)limg.cols, 0)+scenePt, cv::Scalar(255, 0, 0), 4, cv::LINE_8);
+
+            objPts.push_back(objPt);
+            scenePts.push_back(scenePt);
+
+           }
+
+          cv::Mat H = cv::findHomography( objPts, scenePts,cv::RANSAC );
+          std::cout <<"\n\n Matching and Homography "<< float( clock () - begin_time ) /  CLOCKS_PER_SEC;
+
+          obj_corners[0] = cv::Point2f(0, 0);
+          obj_corners[1] = cv::Point2f( (float)limg.cols, 0 );
+          obj_corners[2] = cv::Point2f( (float)limg.cols, (float)limg.rows );
+          obj_corners[3] = cv::Point2f( 0, (float)limg.rows );
+
+          perspectiveTransform( obj_corners, scene_corners, H);
+
+          //-- Draw lines between the corners (the mapped object in the scene - image_2 )
+          line( matchesImg, scene_corners[0] + cv::Point2f((float)limg.cols, 0),
+                scene_corners[1] + cv::Point2f((float)limg.cols, 0), cv::Scalar(0, 255, 0), 4 );
+          line( matchesImg, scene_corners[1] + cv::Point2f((float)limg.cols, 0),
+                scene_corners[2] + cv::Point2f((float)limg.cols, 0), cv::Scalar( 0, 255, 0), 4 );
+          line( matchesImg, scene_corners[2] + cv::Point2f((float)limg.cols, 0),
+                scene_corners[3] + cv::Point2f((float)limg.cols, 0), cv::Scalar( 0, 255, 0), 4 );
+          line( matchesImg, scene_corners[3] + cv::Point2f((float)limg.cols, 0),
+                scene_corners[0] + cv::Point2f((float)limg.cols, 0), cv::Scalar( 0, 255, 0), 4 );
+
+
+          cv::imshow("Matches",matchesImg);
+
+  }
+
+cv::imshow("Matches",matchesImg);
+cv::waitKey(0);
+
+
+
+while(cv::waitKey(1)!=2)
+{
+    begin_time = clock();
+
+    video>>colorFrame;
+    cv::imshow("Image",colorFrame);
+
+    cv::cvtColor(colorFrame,img2, cv::COLOR_BGR2GRAY);
+
+   //
+
+   rJob = detectFeaturesAndDescriptors( colorFrame, PopSift );
+    //
+    rFeatures = rJob->getDev();
+
+    lFeatures->match( rFeatures);
+
+    right_features = new popsift::FeaturesHost( rFeatures->getFeatureCount(), rFeatures->getDescriptorCount() );
+
+    // cv::Mat leftDescMat=convertFeaturesDevToMat(lFeatures,left_features);
+    // cout<<leftDescMat;
+
+/////
+
+    left_features->pin( );
+
     cudaMemcpy( left_features->getObj(),
                         lFeatures->getObj(),
                         lFeatures->getDescriptorCount() * sizeof(float),
@@ -400,25 +531,23 @@ while(cv::waitKey(1)!=27)
 
     left_features->unpin( );
 
-     int newVar;
-     cout<<"\n\nFeatures vec\n";
+    int numGoodMatches=*left_features->getNumGoodMatches();
+     numGoodMatches/=4;
+
+     if(numGoodMatches<8)
+     continue;
 
      begin_time = clock();
      float* objFeatures=left_features->getObj();
 
-     int numGoodMatches=*left_features->getNumGoodMatches();
-     numGoodMatches/=4;
-
-     cv::Mat matchesImg;
      matchesImg=cv::Mat::ones(std::max(limg.rows,rimg.rows),limg.cols+rimg.cols,CV_8UC3);
 
      //
      limg.copyTo(matchesImg(cv::Rect(0,0,limg.cols,limg.rows)));
-     rimg.copyTo(matchesImg(cv::Rect(limg.cols,0,rimg.cols,rimg.rows)));
+     colorFrame.copyTo(matchesImg(cv::Rect(limg.cols,0,rimg.cols,rimg.rows)));
 
      std::vector<cv::Point2f> objPts;
      std::vector<cv::Point2f> scenePts;
-
 
      for(int i=0;i<numGoodMatches ;i++)
      {
@@ -435,10 +564,12 @@ while(cv::waitKey(1)!=27)
      }
 
     cv::Mat H = cv::findHomography( objPts, scenePts,cv::RANSAC );
-    std::cout <<"\n\nHomography "<< float( clock () - begin_time ) /  CLOCKS_PER_SEC;
+    std::cout <<"\n\n Matching and Homography "<< float( clock () - begin_time ) /  CLOCKS_PER_SEC;
 
-    std::vector<cv::Point2f> scene_corners(4);
-    std::vector<cv::Point2f> obj_corners(4);
+
+
+    if(!H.empty())
+    {
 
     obj_corners[0] = cv::Point2f(0, 0);
     obj_corners[1] = cv::Point2f( (float)limg.cols, 0 );
@@ -451,15 +582,36 @@ while(cv::waitKey(1)!=27)
     line( matchesImg, scene_corners[0] + cv::Point2f((float)limg.cols, 0),
           scene_corners[1] + cv::Point2f((float)limg.cols, 0), cv::Scalar(0, 255, 0), 4 );
     line( matchesImg, scene_corners[1] + cv::Point2f((float)limg.cols, 0),
-          scene_corners[2] + cv::Point2f((float)limg.cols, 0), cv::Scalar( 0, 255, 0), 4 );
+          scene_corners[2]   + cv::Point2f((float)limg.cols, 0), cv::Scalar( 0, 255, 0), 4 );
     line( matchesImg, scene_corners[2] + cv::Point2f((float)limg.cols, 0),
           scene_corners[3] + cv::Point2f((float)limg.cols, 0), cv::Scalar( 0, 255, 0), 4 );
     line( matchesImg, scene_corners[3] + cv::Point2f((float)limg.cols, 0),
           scene_corners[0] + cv::Point2f((float)limg.cols, 0), cv::Scalar( 0, 255, 0), 4 );
     //-- Show detected matches
+    }
 
-    cv::imshow("Matches",matchesImg);
+   if(matchesImg.rows>0)
+   cv::imshow("Matches",matchesImg);
+
+   outputWriter<<matchesImg;
+  //
+  //
+  // rFeatures->reset( rFeatures->getFeatureCount(), rFeatures->getDescriptorCount());
+  // right_features->reset(rFeatures->getFeatureCount(), rFeatures->getDescriptorCount());
+  //
+  // rJob=nullptr;
+  // rFeatures=nullptr;
+  // right_features=nullptr;
+  // objFeatures=nullptr;
+  //
+  // delete rJob;
+  // delete rFeatures;
+  // delete right_features;
+
+
 }
+
+outputWriter.release();
 
     return EXIT_SUCCESS;
 }

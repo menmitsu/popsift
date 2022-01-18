@@ -86,9 +86,9 @@ class FeaturesHost : public FeaturesBase
     int* _var;
 
     float* _obj;
-    float* _scene;
 
-      int* _numGoodMatches;
+    int * _numGoodMatches;
+
 
 public:
     FeaturesHost( );
@@ -104,6 +104,7 @@ public:
     inline F_const_iterator end() const   { return &_ext[size()]; }
 
     void reset( int num_ext, int num_ori );
+    void clearObjPts();
     void pin( );
     void unpin( );
 
@@ -111,7 +112,7 @@ public:
     inline Descriptor* getDescriptors() { return _ori; }
     inline int*         getVar(){ return _var;}
     inline float*      getObj()  { return _obj; }
-    inline float*        getScene()  { return _scene; }
+
     inline int*       getNumGoodMatches() { return _numGoodMatches;}
 
     void print( std::ostream& ostr, bool write_as_uchar ) const;
@@ -133,9 +134,9 @@ class FeaturesDev : public FeaturesBase
     int* _var;
 
     float* _obj;
-    float* _scene;
 
-    int* _numGoodMatches;
+
+    int * _numGoodMatches;
 
 public:
     FeaturesDev( );
@@ -147,13 +148,14 @@ public:
     void match( FeaturesDev* other);
     // void match( FeaturesDev* other ,std::vector<float>goodMatches);
 
+    void clearStructs();
 
     inline Feature*    getFeatures()    { return _ext; }
     inline Descriptor* getDescriptors() { return _ori; }
     inline int*        getReverseMap()  { return _rev; }
     inline int*        getVar()  { return _var; }
     inline float*      getObj()  { return _obj; }
-    inline float*      getScene()  { return _scene; }
+
     inline int*       getNumGoodMatches() { return _numGoodMatches;}
     // inline void        resetGoodMatches() { *_numGoodMatches=0;}
 

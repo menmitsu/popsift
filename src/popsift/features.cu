@@ -92,7 +92,6 @@ void FeaturesHost::reset( int num_ext, int num_ori )
     }
 
 
-    aaa= (int*)memalign( getPageSize(),  sizeof(int) );
 
 
     _numGoodMatches= (int*)memalign( getPageSize(),  sizeof(int) );
@@ -141,6 +140,8 @@ void FeaturesHost::unpin( )
     cudaHostUnregister( _ext );
     cudaHostUnregister( _ori );
     cudaHostUnregister( _obj );
+    cudaHostUnregister( _numGoodMatches );
+
 
 }
 
@@ -166,7 +167,8 @@ FeaturesDev::FeaturesDev( )
     , _ori( nullptr )
     , _rev( nullptr )
     , _obj(nullptr)
-    , _scene(nullptr)
+    , _numGoodMatches(nullptr)
+
 {
 
 }
@@ -176,7 +178,8 @@ FeaturesDev::FeaturesDev( int num_ext, int num_ori )
     , _ori( nullptr )
     , _rev( nullptr )
     , _obj(nullptr)
-    , _scene(nullptr)
+    , _numGoodMatches(nullptr)
+
 {
     reset( num_ext, num_ori );
 }
@@ -187,7 +190,8 @@ FeaturesDev::~FeaturesDev( )
     cudaFree( _ori );
     cudaFree( _rev );
     cudaFree( _obj );
-    cudaFree( _scene );
+    cudaFree( _numGoodMatches );
+
 }
 
 void FeaturesDev::reset( int num_ext, int num_ori )
@@ -196,13 +200,13 @@ void FeaturesDev::reset( int num_ext, int num_ori )
     if( _ori != nullptr ) { cudaFree( _ori ); _ori = nullptr; }
     if( _rev != nullptr ) { cudaFree( _rev ); _rev = nullptr; }
     if( _obj != nullptr ) { cudaFree( _obj ); _obj = nullptr; }
-    if( _scene != nullptr ) { cudaFree( _scene ); _scene = nullptr; }
+    if( _numGoodMatches != nullptr ) { cudaFree( _numGoodMatches ); _numGoodMatches = nullptr; }
+
 
     _ext = popsift::cuda::malloc_devT<Feature>   ( num_ext, __FILE__, __LINE__ );
     _ori = popsift::cuda::malloc_devT<Descriptor>( num_ori, __FILE__, __LINE__ );
     _rev = popsift::cuda::malloc_devT<int>       ( num_ori, __FILE__, __LINE__ );
     _obj = popsift::cuda::malloc_devT<float>( num_ori, __FILE__, __LINE__ );
-    _scene = popsift::cuda::malloc_devT<float>       ( num_ori, __FILE__, __LINE__ );
 
     _numGoodMatches = popsift::cuda::malloc_devT<int>       ( 1, __FILE__, __LINE__ );
 
@@ -292,7 +296,6 @@ show_distance( int3*       match_matrix,
                int         r_len,
                int*         var,
                float*      obj,
-               float*      scene,
                int*        numGoodMatches
              )
 {
@@ -311,7 +314,7 @@ show_distance( int3*       match_matrix,
       	float d1 = l2_in_t0( lptr, rptr1 );
       	float d2 = l2_in_t0( lptr, rptr2 );
 
-        const float ratio_thresh = 0.4f;
+        const float ratio_thresh = 0.45f;
 
       	if( threadIdx.x == 0 )
               {
@@ -352,7 +355,7 @@ show_distance( int3*       match_matrix,
               __syncthreads();
           }
 
-          
+
 
 
 }
@@ -407,13 +410,23 @@ void FeaturesDev::match( FeaturesDev* other)
                 r_len,
                 _var,
                 _obj,
-                _scene,
                 _numGoodMatches);
 
     POP_SYNC_CHK;
 
 
     cudaFree( match_matrix );
+}
+
+void FeaturesDev::clearStructs()
+{
+
+  if( _ext != nullptr ) { cudaFree( _ext ); _ext = nullptr; }
+  if( _ori != nullptr ) { cudaFree( _ori ); _ori = nullptr; }
+  if( _rev != nullptr ) { cudaFree( _rev ); _rev = nullptr; }
+  if( _obj != nullptr ) { cudaFree( _obj ); _obj = nullptr; }
+  if( _numGoodMatches != nullptr ) { cudaFree( _numGoodMatches ); _numGoodMatches = nullptr; }
+
 }
 
 
