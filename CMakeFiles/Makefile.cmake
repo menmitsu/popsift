@@ -188,4 +188,5 @@ set(CMAKE_DEPEND_INFO_FILES
   "src/CMakeFiles/popsift.dir/DependInfo.cmake"
   "src/application/CMakeFiles/popsift-demo.dir/DependInfo.cmake"
   "src/application/CMakeFiles/popsift-match.dir/DependInfo.cmake"
+  "src/application/CMakeFiles/collablens-match.dir/DependInfo.cmake"
   )

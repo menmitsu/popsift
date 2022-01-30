@@ -14,6 +14,7 @@
 /home/rahul/Work/LiveGoggle/Code/popsift/src/CMakeFiles/install/strip.dir
 /home/rahul/Work/LiveGoggle/Code/popsift/src/application/CMakeFiles/popsift-demo.dir
 /home/rahul/Work/LiveGoggle/Code/popsift/src/application/CMakeFiles/popsift-match.dir
+/home/rahul/Work/LiveGoggle/Code/popsift/src/application/CMakeFiles/collablens-match.dir
 /home/rahul/Work/LiveGoggle/Code/popsift/src/application/CMakeFiles/edit_cache.dir
 /home/rahul/Work/LiveGoggle/Code/popsift/src/application/CMakeFiles/rebuild_cache.dir
 /home/rahul/Work/LiveGoggle/Code/popsift/src/application/CMakeFiles/list_install_components.dir

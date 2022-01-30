@@ -362,60 +362,46 @@ show_distance( int3*       match_matrix,
 
 void FeaturesDev::match( FeaturesDev* other)
 {
-    int l_len = getDescriptorCount( );
-    int r_len = other->getDescriptorCount( );
-    // resetGoodMatches();
-
-      int3* match_matrix = popsift::cuda::malloc_devT<int3>( l_len, __FILE__, __LINE__ );
-
-    dim3 grid;
-    grid.x = l_len;
-    grid.y = 1;
-    grid.z = 1;
-    dim3 block;
-    block.x = 32;
-    block.y = 1;
-    block.z = 1;
-
-    compute_distance
-        <<<grid,block>>>
-        ( match_matrix, getDescriptors(), l_len, other->getDescriptors(), r_len );
-
-    POP_SYNC_CHK;
-
-// Original
-
-    // show_distance
-    //     <<<1,32>>>
-    //     ( match_matrix,
-    //       getFeatures(),
-    //       getDescriptors(),
-    //       getReverseMap(),
-    //       l_len,
-    //       other->getFeatures(),
-    //       other->getDescriptors(),
-    //       other->getReverseMap(),
-    //       r_len );
-
-          show_distance
-              <<<1,32>>>
-              ( match_matrix,
-                getFeatures(),
-                getDescriptors(),
-                getReverseMap(),
-                l_len,
-                other->getFeatures(),
-                other->getDescriptors(),
-                other->getReverseMap(),
-                r_len,
-                _var,
-                _obj,
-                _numGoodMatches);
-
-    POP_SYNC_CHK;
-
-
-    cudaFree( match_matrix );
+    // int l_len = getDescriptorCount( );
+    // int r_len = other->getDescriptorCount( );
+    // // resetGoodMatches();
+    //
+    //   int3* match_matrix = popsift::cuda::malloc_devT<int3>( l_len, __FILE__, __LINE__ );
+    //
+    // dim3 grid;
+    // grid.x = l_len;
+    // grid.y = 1;
+    // grid.z = 1;
+    // dim3 block;
+    // block.x = 32;
+    // block.y = 1;
+    // block.z = 1;
+    //
+    // compute_distance
+    //     <<<grid,block>>>
+    //     ( match_matrix, getDescriptors(), l_len, other->getDescriptors(), r_len );
+    //
+    // POP_SYNC_CHK;
+    //
+    //       show_distance
+    //           <<<1,32>>>
+    //           ( match_matrix,
+    //             getFeatures(),
+    //             getDescriptors(),
+    //             getReverseMap(),
+    //             l_len,
+    //             other->getFeatures(),
+    //             other->getDescriptors(),
+    //             other->getReverseMap(),
+    //             r_len,
+    //             _var,
+    //             _obj,
+    //             _numGoodMatches);
+    //
+    // POP_SYNC_CHK;
+    //
+    //
+    // cudaFree( match_matrix );
 }
 
 void FeaturesDev::clearStructs()

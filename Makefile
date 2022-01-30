@@ -213,6 +213,19 @@ popsift-match/fast:
 	$(MAKE) $(MAKESILENT) -f src/application/CMakeFiles/popsift-match.dir/build.make src/application/CMakeFiles/popsift-match.dir/build
 .PHONY : popsift-match/fast
 
+#=============================================================================
+# Target rules for targets named collablens-match
+
+# Build rule for target.
+collablens-match: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 collablens-match
+.PHONY : collablens-match
+
+# fast build rule for target.
+collablens-match/fast:
+	$(MAKE) $(MAKESILENT) -f src/application/CMakeFiles/collablens-match.dir/build.make src/application/CMakeFiles/collablens-match.dir/build
+.PHONY : collablens-match/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -226,6 +239,7 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... uninstall"
+	@echo "... collablens-match"
 	@echo "... popsift"
 	@echo "... popsift-demo"
 	@echo "... popsift-match"

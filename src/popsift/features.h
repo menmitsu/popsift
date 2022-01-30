@@ -80,6 +80,7 @@ public:
  */
 class FeaturesHost : public FeaturesBase
 {
+  public:
     Feature*     _ext;
     Descriptor*  _ori;
     int*         _rev; // the reverse map from descriptors to extrema
@@ -90,7 +91,7 @@ class FeaturesHost : public FeaturesBase
     int * _numGoodMatches;
 
 
-public:
+
     FeaturesHost( );
     FeaturesHost( int num_ext, int num_ori );
     ~FeaturesHost( ) override;

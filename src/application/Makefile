@@ -189,6 +189,20 @@ popsift-match/fast:
 	cd /home/rahul/Work/LiveGoggle/Code/popsift && $(MAKE) $(MAKESILENT) -f src/application/CMakeFiles/popsift-match.dir/build.make src/application/CMakeFiles/popsift-match.dir/build
 .PHONY : popsift-match/fast
 
+# Convenience name for target.
+src/application/CMakeFiles/collablens-match.dir/rule:
+	cd /home/rahul/Work/LiveGoggle/Code/popsift && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/application/CMakeFiles/collablens-match.dir/rule
+.PHONY : src/application/CMakeFiles/collablens-match.dir/rule
+
+# Convenience name for target.
+collablens-match: src/application/CMakeFiles/collablens-match.dir/rule
+.PHONY : collablens-match
+
+# fast build rule for target.
+collablens-match/fast:
+	cd /home/rahul/Work/LiveGoggle/Code/popsift && $(MAKE) $(MAKESILENT) -f src/application/CMakeFiles/collablens-match.dir/build.make src/application/CMakeFiles/collablens-match.dir/build
+.PHONY : collablens-match/fast
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -237,6 +251,30 @@ match.cpp.s:
 	cd /home/rahul/Work/LiveGoggle/Code/popsift && $(MAKE) $(MAKESILENT) -f src/application/CMakeFiles/popsift-match.dir/build.make src/application/CMakeFiles/popsift-match.dir/match.cpp.s
 .PHONY : match.cpp.s
 
+match_opencv.o: match_opencv.cpp.o
+.PHONY : match_opencv.o
+
+# target to build an object file
+match_opencv.cpp.o:
+	cd /home/rahul/Work/LiveGoggle/Code/popsift && $(MAKE) $(MAKESILENT) -f src/application/CMakeFiles/collablens-match.dir/build.make src/application/CMakeFiles/collablens-match.dir/match_opencv.cpp.o
+.PHONY : match_opencv.cpp.o
+
+match_opencv.i: match_opencv.cpp.i
+.PHONY : match_opencv.i
+
+# target to preprocess a source file
+match_opencv.cpp.i:
+	cd /home/rahul/Work/LiveGoggle/Code/popsift && $(MAKE) $(MAKESILENT) -f src/application/CMakeFiles/collablens-match.dir/build.make src/application/CMakeFiles/collablens-match.dir/match_opencv.cpp.i
+.PHONY : match_opencv.cpp.i
+
+match_opencv.s: match_opencv.cpp.s
+.PHONY : match_opencv.s
+
+# target to generate assembly for a file
+match_opencv.cpp.s:
+	cd /home/rahul/Work/LiveGoggle/Code/popsift && $(MAKE) $(MAKESILENT) -f src/application/CMakeFiles/collablens-match.dir/build.make src/application/CMakeFiles/collablens-match.dir/match_opencv.cpp.s
+.PHONY : match_opencv.cpp.s
+
 pgmread.o: pgmread.cpp.o
 .PHONY : pgmread.o
 
@@ -244,6 +282,7 @@ pgmread.o: pgmread.cpp.o
 pgmread.cpp.o:
 	cd /home/rahul/Work/LiveGoggle/Code/popsift && $(MAKE) $(MAKESILENT) -f src/application/CMakeFiles/popsift-demo.dir/build.make src/application/CMakeFiles/popsift-demo.dir/pgmread.cpp.o
 	cd /home/rahul/Work/LiveGoggle/Code/popsift && $(MAKE) $(MAKESILENT) -f src/application/CMakeFiles/popsift-match.dir/build.make src/application/CMakeFiles/popsift-match.dir/pgmread.cpp.o
+	cd /home/rahul/Work/LiveGoggle/Code/popsift && $(MAKE) $(MAKESILENT) -f src/application/CMakeFiles/collablens-match.dir/build.make src/application/CMakeFiles/collablens-match.dir/pgmread.cpp.o
 .PHONY : pgmread.cpp.o
 
 pgmread.i: pgmread.cpp.i
@@ -253,6 +292,7 @@ pgmread.i: pgmread.cpp.i
 pgmread.cpp.i:
 	cd /home/rahul/Work/LiveGoggle/Code/popsift && $(MAKE) $(MAKESILENT) -f src/application/CMakeFiles/popsift-demo.dir/build.make src/application/CMakeFiles/popsift-demo.dir/pgmread.cpp.i
 	cd /home/rahul/Work/LiveGoggle/Code/popsift && $(MAKE) $(MAKESILENT) -f src/application/CMakeFiles/popsift-match.dir/build.make src/application/CMakeFiles/popsift-match.dir/pgmread.cpp.i
+	cd /home/rahul/Work/LiveGoggle/Code/popsift && $(MAKE) $(MAKESILENT) -f src/application/CMakeFiles/collablens-match.dir/build.make src/application/CMakeFiles/collablens-match.dir/pgmread.cpp.i
 .PHONY : pgmread.cpp.i
 
 pgmread.s: pgmread.cpp.s
@@ -262,6 +302,7 @@ pgmread.s: pgmread.cpp.s
 pgmread.cpp.s:
 	cd /home/rahul/Work/LiveGoggle/Code/popsift && $(MAKE) $(MAKESILENT) -f src/application/CMakeFiles/popsift-demo.dir/build.make src/application/CMakeFiles/popsift-demo.dir/pgmread.cpp.s
 	cd /home/rahul/Work/LiveGoggle/Code/popsift && $(MAKE) $(MAKESILENT) -f src/application/CMakeFiles/popsift-match.dir/build.make src/application/CMakeFiles/popsift-match.dir/pgmread.cpp.s
+	cd /home/rahul/Work/LiveGoggle/Code/popsift && $(MAKE) $(MAKESILENT) -f src/application/CMakeFiles/collablens-match.dir/build.make src/application/CMakeFiles/collablens-match.dir/pgmread.cpp.s
 .PHONY : pgmread.cpp.s
 
 # Help Target
@@ -276,6 +317,7 @@ help:
 	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
+	@echo "... collablens-match"
 	@echo "... popsift-demo"
 	@echo "... popsift-match"
 	@echo "... main.o"
@@ -284,6 +326,9 @@ help:
 	@echo "... match.o"
 	@echo "... match.i"
 	@echo "... match.s"
+	@echo "... match_opencv.o"
+	@echo "... match_opencv.i"
+	@echo "... match_opencv.s"
 	@echo "... pgmread.o"
 	@echo "... pgmread.i"
 	@echo "... pgmread.s"

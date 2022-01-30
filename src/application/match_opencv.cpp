@@ -49,6 +49,8 @@
 
 using namespace std;
 
+using namespace cv;
+
 static bool print_dev_info  {false};
 static bool print_time_info {false};
 static bool write_as_uchar  {false};
@@ -297,7 +299,37 @@ cv::Mat convertFeaturesDevToMat(popsift::FeaturesDev* lFeatures, popsift::Featur
 
 
 }
+//
+vector<vector<float>>  convertPopsiftStructsToOpenCV(popsift::Features* feature_list,vector <cv::KeyPoint> &keypoints, Mat &descriptors)
+{
 
+    keypoints.clear();
+    // descriptors.clear();
+
+    keypoints.reserve(feature_list->getFeatureCount());
+    // descriptors.reserve(feature_list->getFeatureCount());
+
+    float descriptors2[128*feature_list->getFeatureCount()];
+    // float descriptors2=new float(128*feature_list->getFeatureCount());
+    vector<vector<float>> testDesc;
+
+    descriptors = cv::Mat(feature_list->getFeatureCount(), 128  , CV_32F);
+
+    for(int j=0;j<feature_list->getFeatureCount();j++)
+    {
+
+      // cv::Point pt=cv::Point((int)feature_list->_ext[j].xpos,(int)feature_list->_ext[j].ypos);
+      keypoints.push_back(cv::KeyPoint (feature_list->_ext[j].xpos,feature_list->_ext[j].ypos,1));
+
+      memcpy(descriptors.row(j).data,feature_list->_ext[j].desc[0],128*sizeof(float));
+
+    }
+
+
+
+
+return testDesc;
+}
 
 
 
@@ -353,265 +385,363 @@ int main(int argc, char **argv)
     deviceInfo.set( 0, print_dev_info );
     if( print_dev_info ) deviceInfo.print( );
 
-    PopSift PopSift( config, popsift::Config::MatchingMode );
+    PopSift PopSift( config, popsift::Config::ExtractingMode );
 
-    clock_t begin_time = clock();
 
-    string streamName="Footage/topCamera_18Jan.mp4";
+    string streamName="Footage/27Jan/Take2/test11.mp4";
 
-    cv::VideoCapture video(streamName.c_str());
+     cv::VideoCapture video(streamName.c_str());
+    //VideoCapture video("udpsrc port=5000 ! application/x-rtp, media=(string)video, payload=(int)96, clock-rate=(int)90000, encoding-name=(string)H264, packetization-mode=(string)1, profile-level-id=(string)640028, ssrc=(uint)3572028551, timestamp-offset=(uint)600628017, seqnum-offset=(uint)516, a-framerate=(string)15 ! queue ! rtph264depay !  decodebin ! queue !  videoconvert ! appsink",CAP_GSTREAMER);
 
     cv::VideoWriter outputWriter;
     int codec = cv::VideoWriter::fourcc('M', 'J', 'P', 'G');
 
-    cv::Size captureSize = cv::Size( (int) video.get(cv::CAP_PROP_FRAME_WIDTH)+limg.cols,max((int) video.get(cv::CAP_PROP_FRAME_HEIGHT),limg.rows));
+    // cv::Size captureSize = cv::Size( (int) video.get(cv::CAP_PROP_FRAME_WIDTH)+limg.cols,max((int) video.get(cv::CAP_PROP_FRAME_HEIGHT),limg.rows));
+    cv::Size captureSize = cv::Size( (int) video.get(cv::CAP_PROP_FRAME_WIDTH),(int) video.get(cv::CAP_PROP_FRAME_HEIGHT));
 
     outputWriter.open(streamName.substr(0, streamName.length()-3)+"avi", codec, 30, captureSize, true);
 
-    // SiftJob* lJob = process_image( lFile, PopSift );
+    // Detect Features and Descriptors in Left image
+
+    clock_t begin_time = clock();
+
     SiftJob* lJob = detectFeaturesAndDescriptors(cv::imread(lFile),PopSift);
     std::cout <<"\n\nSift detection and description time"<< float( clock () - begin_time ) /  CLOCKS_PER_SEC;
 
-    popsift::FeaturesDev* lFeatures = lJob->getDev();
+    popsift::Features* lFeatures = lJob->get();
 
     cout << "Number of features:    " << lFeatures->getFeatureCount() << endl;
     cout << "Number of descriptors: " << lFeatures->getDescriptorCount() << endl;
 
-    /////////////
+    vector<cv::KeyPoint> lKeypoints,rKeypoints;
+    Mat lDescriptors,rDescriptors;
 
+    Mat lImage,rImage;
 
-///
+    vector<vector<float>> testLDesc=convertPopsiftStructsToOpenCV(lFeatures,lKeypoints,lDescriptors);
+
+    std::cout <<"\n\nSift detection and description"<< float( clock () - begin_time ) /  CLOCKS_PER_SEC;
+
     cv::Mat colorFrame,img2;
 
     SiftJob* rJob = detectFeaturesAndDescriptors( cv::imread(rFile), PopSift );
 
-    std::cout <<"\n\nSift detection and description"<< float( clock () - begin_time ) /  CLOCKS_PER_SEC;
 
-    popsift::FeaturesDev* rFeatures = rJob->getDev();
-
-    lFeatures->match( rFeatures);
-
+    popsift::Features* rFeatures = rJob->get();
 
     cout << "Number of features:    " << rFeatures->getFeatureCount() << endl;
     cout << "Number of descriptors: " << rFeatures->getDescriptorCount() << endl;
-    video>>colorFrame;
 
-    popsift::FeaturesHost* left_features = new popsift::FeaturesHost( lFeatures->getFeatureCount(), lFeatures->getDescriptorCount() );
-    popsift::FeaturesHost* right_features;
-
-
+    vector<vector<float>> testRDesc=convertPopsiftStructsToOpenCV(rFeatures,rKeypoints,rDescriptors);
 
     std::vector<cv::Point2f> scene_corners(4);
     std::vector<cv::Point2f> obj_corners(4);
 
-    cudaMemcpy( left_features->getFeatures(),
-                        lFeatures->getFeatures(),
-                        lFeatures->getFeatureCount() * sizeof(popsift::Feature),
-                        cudaMemcpyDeviceToHost );
-    cudaMemcpy( left_features->getDescriptors(),
-                        lFeatures->getDescriptors(),
-                        lFeatures->getDescriptorCount() * sizeof(popsift::Descriptor),
-                        cudaMemcpyDeviceToHost );
+
+    drawKeypoints(limg,lKeypoints,lImage);
+
+    drawKeypoints(rimg,rKeypoints,rImage);
+
+    cout<<"Left Keypoints"<<lKeypoints.size();
+
+    cv::imshow("Left Image",lImage);
+    cv::imshow("Right Image",rImage);
 
 
-    cudaMemcpy( left_features->getObj(),
-                        lFeatures->getObj(),
-                        lFeatures->getDescriptorCount() * sizeof(float),
-                        cudaMemcpyDeviceToHost );
+
+    Ptr<DescriptorMatcher> matcher = DescriptorMatcher::create(DescriptorMatcher::FLANNBASED);
+
+    std::vector< std::vector<DMatch> > knn_matches;
+
+    matcher->knnMatch( lDescriptors, rDescriptors, knn_matches, 2 );
+
+    //-- Filter matches using the Lowe's ratio test
+     float ratio_thresh = 0.5f;
+    std::vector<DMatch> good_matches;
+    Mat img_Matches;
+
+    double max_dist = 0; double min_dist = 100;
+
+    for (size_t i = 0; i < knn_matches.size(); i++)
+    {
+
+      // cout<<knn_matches[i][0].distance<<"    "<<knn_matches[i][1].distance<<endl;
+        if (knn_matches[i][0].distance < ratio_thresh * knn_matches[i][1].distance)
+        {
+            good_matches.push_back(knn_matches[i][0]);
+        }
+    }
+    std::cout <<"\n\nSift detection and description"<< float( clock () - begin_time ) /  CLOCKS_PER_SEC;
 
 
-    cudaMemcpy( left_features->getNumGoodMatches(),
-                        lFeatures->getNumGoodMatches(),
-                        sizeof(int),
-                        cudaMemcpyDeviceToHost );
-                            //
-    int numGoodMatches=*left_features->getNumGoodMatches();
-     numGoodMatches/=4;
+drawMatches( limg, lKeypoints, rimg, rKeypoints, good_matches, img_Matches, Scalar::all(-1),
+  Scalar::all(-1), std::vector<char>(), DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS );
 
-     cout<<"\n\nNumber of good matches\t"<<numGoodMatches<<endl;
-    cv::Mat matchesImg;
+  std::vector<Point2f> obj;
+      std::vector<Point2f> scene;
 
-     if(numGoodMatches>8)
-     {
+if(good_matches.size()>8)
+{
+        for( size_t i = 0; i < good_matches.size(); i++ )
+      {
+          //-- Get the keypoints from the good matches
+          obj.push_back( lKeypoints[ good_matches[i].queryIdx ].pt );
+          scene.push_back( rKeypoints[ good_matches[i].trainIdx ].pt );
+      }
 
-
-           float* objFeatures=left_features->getObj();
-
-
-           matchesImg=cv::Mat::ones(std::max(limg.rows,rimg.rows),limg.cols+rimg.cols,CV_8UC3);
-
-           //
-           limg.copyTo(matchesImg(cv::Rect(0,0,limg.cols,limg.rows)));
-           rimg.copyTo(matchesImg(cv::Rect(limg.cols,0,rimg.cols,rimg.rows)));
-
-           std::vector<cv::Point2f> objPts;
-           std::vector<cv::Point2f> scenePts;
-
-           for(int i=0;i<numGoodMatches ;i++)
-           {
-
-             cv::Point2f objPt(objFeatures[i*4],objFeatures[i*4+1]);
-             cv::Point2f scenePt(objFeatures[i*4+2],objFeatures[i*4+3]);
-
-             // cout<<"\n\nPoint info"<<i<<" "<<objFeatures[i*4]<<" \t"<< objFeatures[i*4+1];
-            line(matchesImg, objPt,   cv::Point2f((float)limg.cols, 0)+scenePt, cv::Scalar(255, 0, 0), 4, cv::LINE_8);
-
-            objPts.push_back(objPt);
-
-           }
-
-          cv::Mat H = cv::findHomography( objPts, scenePts,cv::RANSAC );
-          std::cout <<"\n\n Matching and Homography "<< float( clock () - begin_time ) /  CLOCKS_PER_SEC;
-
-          obj_corners[0] = cv::Point2f(0, 0);
-          obj_corners[1] = cv::Point2f( (float)limg.cols, 0 );
-          obj_corners[2] = cv::Point2f( (float)limg.cols, (float)limg.rows );
-          obj_corners[3] = cv::Point2f( 0, (float)limg.rows );
-
-          perspectiveTransform( obj_corners, scene_corners, H);
-
-          //-- Draw lines between the corners (the mapped object in the scene - image_2 )
-          line( matchesImg, scene_corners[0] + cv::Point2f((float)limg.cols, 0),
-                scene_corners[1] + cv::Point2f((float)limg.cols, 0), cv::Scalar(0, 255, 0), 4 );
-          line( matchesImg, scene_corners[1] + cv::Point2f((float)limg.cols, 0),
-                scene_corners[2] + cv::Point2f((float)limg.cols, 0), cv::Scalar( 0, 255, 0), 4 );
-          line( matchesImg, scene_corners[2] + cv::Point2f((float)limg.cols, 0),
-                scene_corners[3] + cv::Point2f((float)limg.cols, 0), cv::Scalar( 0, 255, 0), 4 );
-          line( matchesImg, scene_corners[3] + cv::Point2f((float)limg.cols, 0),
-                scene_corners[0] + cv::Point2f((float)limg.cols, 0), cv::Scalar( 0, 255, 0), 4 );
+        cv::Mat H = cv::findHomography( obj, scene,cv::RANSAC );
 
 
-          cv::imshow("Matches",matchesImg);
+            std::cout <<"\n\n Matching and Homography "<< float( clock () - begin_time ) /  CLOCKS_PER_SEC;
 
-  }
+            obj_corners[0] = cv::Point2f(0, 0);
+            obj_corners[1] = cv::Point2f( (float)limg.cols, 0 );
+            obj_corners[2] = cv::Point2f( (float)limg.cols, (float)limg.rows );
+            obj_corners[3] = cv::Point2f( 0, (float)limg.rows );
 
-if(matchesImg.rows>0)
-cv::imshow("Matches",matchesImg);
-cv::waitKey(0);
+            perspectiveTransform( obj_corners, scene_corners, H);
 
+            //-- Draw lines between the corners (the mapped object in the scene - image_2 )
+            line( img_Matches, scene_corners[0] + cv::Point2f((float)limg.cols, 0),
+                  scene_corners[1] + cv::Point2f((float)limg.cols, 0), cv::Scalar(0, 255, 0), 4 );
+            line( img_Matches, scene_corners[1] + cv::Point2f((float)limg.cols, 0),
+                  scene_corners[2] + cv::Point2f((float)limg.cols, 0), cv::Scalar( 0, 255, 0), 4 );
+            line( img_Matches, scene_corners[2] + cv::Point2f((float)limg.cols, 0),
+                  scene_corners[3] + cv::Point2f((float)limg.cols, 0), cv::Scalar( 0, 255, 0), 4 );
+            line( img_Matches, scene_corners[3] + cv::Point2f((float)limg.cols, 0),
+                  scene_corners[0] + cv::Point2f((float)limg.cols, 0), cv::Scalar( 0, 255, 0), 4 );
+
+
+
+}
+
+
+cv::imshow("Image matches",img_Matches);
+
+
+Mat newFrame;
+ ratio_thresh = 0.6f;
 
 
 while(cv::waitKey(1)!=2)
 {
     begin_time = clock();
 
-    video>>colorFrame;
-    cv::imshow("Image",colorFrame);
-
-    cv::cvtColor(colorFrame,img2, cv::COLOR_BGR2GRAY);
-
-   //
-
-   rJob = detectFeaturesAndDescriptors( colorFrame, PopSift );
-    //
-    rFeatures = rJob->getDev();
-
-    lFeatures->match( rFeatures);
-
-    right_features = new popsift::FeaturesHost( rFeatures->getFeatureCount(), rFeatures->getDescriptorCount() );
-
-    // cv::Mat leftDescMat=convertFeaturesDevToMat(lFeatures,left_features);
-    // cout<<leftDescMat;
-
-/////
-
-    left_features->pin( );
-
-    cudaMemcpy( left_features->getObj(),
-                        lFeatures->getObj(),
-                        lFeatures->getDescriptorCount() * sizeof(float),
-                        cudaMemcpyDeviceToHost );
+    video>>img2;
+    colorFrame=img2.clone();
 
 
-    cudaMemcpy( left_features->getNumGoodMatches(),
-                        lFeatures->getNumGoodMatches(),
-                        sizeof(int),
-                        cudaMemcpyDeviceToHost );
-    //
+    if(colorFrame.rows==0)
+    continue;
 
-    left_features->unpin( );
+    imshow("Current frame",colorFrame);
+    // cv::cvtColor(colorFrame,img2, cv::COLOR_BGR2GRAY);
 
-    int numGoodMatches=*left_features->getNumGoodMatches();
-     numGoodMatches/=4;
+    SiftJob* rJob = detectFeaturesAndDescriptors( colorFrame, PopSift );
 
-     if(numGoodMatches<8)
-     continue;
+    popsift::Features* rFeatures = rJob->get();
 
-     begin_time = clock();
-     float* objFeatures=left_features->getObj();
+    cout << "Number of features:    " << rFeatures->getFeatureCount() << endl;
+    cout << "Number of descriptors: " << rFeatures->getDescriptorCount() << endl;
 
-     matchesImg=cv::Mat::ones(std::max(limg.rows,rimg.rows),limg.cols+rimg.cols,CV_8UC3);
+    if(rFeatures->getDescriptorCount()<50)
+    continue;
+    convertPopsiftStructsToOpenCV(rFeatures,rKeypoints,rDescriptors);
 
-     //
-     limg.copyTo(matchesImg(cv::Rect(0,0,limg.cols,limg.rows)));
-     colorFrame.copyTo(matchesImg(cv::Rect(limg.cols,0,rimg.cols,rimg.rows)));
+    knn_matches.clear();
+    matcher->knnMatch( lDescriptors, rDescriptors, knn_matches, 2 );
 
-     std::vector<cv::Point2f> objPts;
-     std::vector<cv::Point2f> scenePts;
+    //-- Filter matches using the Lowe's ratio test
 
-     for(int i=0;i<numGoodMatches ;i++)
-     {
+    std::vector<DMatch> good_matches;
+    Mat img_Matches;
 
-       cv::Point2f objPt(objFeatures[i*4],objFeatures[i*4+1]);
-       cv::Point2f scenePt(objFeatures[i*4+2],objFeatures[i*4+3]);
+    good_matches.clear();
 
-       // cout<<"\n\nPoint info"<<i<<" "<<objFeatures[i*4]<<" \t"<< objFeatures[i*4+1];
-      line(matchesImg, objPt,   cv::Point2f((float)limg.cols, 0)+scenePt, cv::Scalar(255, 0, 0), 4, cv::LINE_8);
-
-      objPts.push_back(objPt);
-      scenePts.push_back(scenePt);
-
-     }
-
-    cv::Mat H = cv::findHomography( objPts, scenePts,cv::RANSAC );
-    std::cout <<"\n\n Matching and Homography "<< float( clock () - begin_time ) /  CLOCKS_PER_SEC;
-
-
-
-    if(!H.empty())
+    for (size_t i = 0; i < knn_matches.size(); i++)
     {
 
-    obj_corners[0] = cv::Point2f(0, 0);
-    obj_corners[1] = cv::Point2f( (float)limg.cols, 0 );
-    obj_corners[2] = cv::Point2f( (float)limg.cols, (float)limg.rows );
-    obj_corners[3] = cv::Point2f( 0, (float)limg.rows );
-
-    perspectiveTransform( obj_corners, scene_corners, H);
-
-    //-- Draw lines between the corners (the mapped object in the scene - image_2 )
-    line( matchesImg, scene_corners[0] + cv::Point2f((float)limg.cols, 0),
-          scene_corners[1] + cv::Point2f((float)limg.cols, 0), cv::Scalar(0, 255, 0), 4 );
-    line( matchesImg, scene_corners[1] + cv::Point2f((float)limg.cols, 0),
-          scene_corners[2]   + cv::Point2f((float)limg.cols, 0), cv::Scalar( 0, 255, 0), 4 );
-    line( matchesImg, scene_corners[2] + cv::Point2f((float)limg.cols, 0),
-          scene_corners[3] + cv::Point2f((float)limg.cols, 0), cv::Scalar( 0, 255, 0), 4 );
-    line( matchesImg, scene_corners[3] + cv::Point2f((float)limg.cols, 0),
-          scene_corners[0] + cv::Point2f((float)limg.cols, 0), cv::Scalar( 0, 255, 0), 4 );
-    //-- Show detected matches
+      // cout<<knn_matches[i][0].distance<<"    "<<knn_matches[i][1].distance<<endl;
+        if (knn_matches[i][0].distance < ratio_thresh * knn_matches[i][1].distance)
+        {
+            good_matches.push_back(knn_matches[i][0]);
+        }
     }
 
-   if(matchesImg.rows>0)
-   cv::imshow("Matches",matchesImg);
+//
+  std::vector<Point2f> obj;
+  std::vector<Point2f> scene;
 
-   outputWriter<<matchesImg;
-  //
-  //
-  // rFeatures->reset( rFeatures->getFeatureCount(), rFeatures->getDescriptorCount());
-  // right_features->reset(rFeatures->getFeatureCount(), rFeatures->getDescriptorCount());
-  //
-  // rJob=nullptr;
-  // rFeatures=nullptr;
-  // right_features=nullptr;
-  // objFeatures=nullptr;
-  //
-  // delete rJob;
-  // delete rFeatures;
-  // delete right_features;
 
+    if(good_matches.size()>8)
+    {
+
+        drawMatches( limg, lKeypoints, colorFrame, rKeypoints, good_matches, img_Matches, Scalar::all(-1),
+         Scalar::all(-1), std::vector<char>(), DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS );
+
+          for( size_t i = 0; i < good_matches.size(); i++ )
+          {
+              //-- Get the keypoints from the good matches
+              obj.push_back( lKeypoints[ good_matches[i].queryIdx ].pt );
+              scene.push_back( rKeypoints[ good_matches[i].trainIdx ].pt );
+          }
+
+          cv::Mat H = cv::findHomography( obj, scene,cv::RANSAC );
+
+          if(!H.empty())
+          {
+
+
+                std::cout <<"\n\n Matching and Homography "<< float( clock () - begin_time ) /  CLOCKS_PER_SEC;
+
+                obj_corners[0] = cv::Point2f(0, 0);
+                obj_corners[1] = cv::Point2f( (float)limg.cols, 0 );
+                obj_corners[2] = cv::Point2f( (float)limg.cols, (float)limg.rows );
+                obj_corners[3] = cv::Point2f( 0, (float)limg.rows );
+
+                perspectiveTransform( obj_corners, scene_corners, H);
+
+                //-- Draw lines between the corners (the mapped object in the scene - image_2 )
+                line( img_Matches, scene_corners[0] + cv::Point2f((float)limg.cols, 0),
+                      scene_corners[1] + cv::Point2f((float)limg.cols, 0), cv::Scalar(0, 255, 0), 4 );
+                line( img_Matches, scene_corners[1] + cv::Point2f((float)limg.cols, 0),
+                      scene_corners[2] + cv::Point2f((float)limg.cols, 0), cv::Scalar( 0, 255, 0), 4 );
+                line( img_Matches, scene_corners[2] + cv::Point2f((float)limg.cols, 0),
+                      scene_corners[3] + cv::Point2f((float)limg.cols, 0), cv::Scalar( 0, 255, 0), 4 );
+                line( img_Matches, scene_corners[3] + cv::Point2f((float)limg.cols, 0),
+                      scene_corners[0] + cv::Point2f((float)limg.cols, 0), cv::Scalar( 0, 255, 0), 4 );
+
+                line( img2, scene_corners[0] ,
+                      scene_corners[1] , cv::Scalar(0, 255, 0), 4 );
+                line( img2, scene_corners[1], scene_corners[2], cv::Scalar( 0, 255, 0), 4 );
+                line( img2, scene_corners[2],scene_corners[3], cv::Scalar( 0, 255, 0), 4 );
+                line( img2, scene_corners[3], scene_corners[0], cv::Scalar( 0, 255, 0), 4 );
+
+            }
+    }
+
+    outputWriter<<img_Matches;
+
+    if(img_Matches.rows>0)
+    cv::imshow("Image matches",img_Matches);
+
+    delete rJob;
 
 }
 
-outputWriter.release();
+
+//    //
+//
+//    rJob = detectFeaturesAndDescriptors( colorFrame, PopSift );
+//     //
+//     rFeatures = rJob->getDev();
+//
+//     lFeatures->match( rFeatures);
+//
+//     right_features = new popsift::FeaturesHost( rFeatures->getFeatureCount(), rFeatures->getDescriptorCount() );
+//
+//     // cv::Mat leftDescMat=convertFeaturesDevToMat(lFeatures,left_features);
+//     // cout<<leftDescMat;
+//
+// /////
+//
+//     left_features->pin( );
+//
+//     cudaMemcpy( left_features->getObj(),
+//                         lFeatures->getObj(),
+//                         lFeatures->getDescriptorCount() * sizeof(float),
+//                         cudaMemcpyDeviceToHost );
+//
+//
+//     cudaMemcpy( left_features->getNumGoodMatches(),
+//                         lFeatures->getNumGoodMatches(),
+//                         sizeof(int),
+//                         cudaMemcpyDeviceToHost );
+//     //
+//
+//     left_features->unpin( );
+//
+//     int numGoodMatches=*left_features->getNumGoodMatches();
+//      numGoodMatches/=4;
+//
+//      if(numGoodMatches<8)
+//      continue;
+//
+//      begin_time = clock();
+//      float* objFeatures=left_features->getObj();
+//
+//      matchesImg=cv::Mat::ones(std::max(limg.rows,rimg.rows),limg.cols+rimg.cols,CV_8UC3);
+//
+//      //
+//      limg.copyTo(matchesImg(cv::Rect(0,0,limg.cols,limg.rows)));
+//      colorFrame.copyTo(matchesImg(cv::Rect(limg.cols,0,rimg.cols,rimg.rows)));
+//
+//      std::vector<cv::Point2f> objPts;
+//      std::vector<cv::Point2f> scenePts;
+//
+//      for(int i=0;i<numGoodMatches ;i++)
+//      {
+//
+//        cv::Point2f objPt(objFeatures[i*4],objFeatures[i*4+1]);
+//        cv::Point2f scenePt(objFeatures[i*4+2],objFeatures[i*4+3]);
+//
+//        // cout<<"\n\nPoint info"<<i<<" "<<objFeatures[i*4]<<" \t"<< objFeatures[i*4+1];
+//       line(matchesImg, objPt,   cv::Point2f((float)limg.cols, 0)+scenePt, cv::Scalar(255, 0, 0), 4, cv::LINE_8);
+//
+//       objPts.push_back(objPt);
+//       scenePts.push_back(scenePt);
+//
+//      }
+//
+//     cv::Mat H = cv::findHomography( objPts, scenePts,cv::RANSAC );
+//     std::cout <<"\n\n Matching and Homography "<< float( clock () - begin_time ) /  CLOCKS_PER_SEC;
+//
+//
+//
+//     if(!H.empty())
+//     {
+//
+//     obj_corners[0] = cv::Point2f(0, 0);
+//     obj_corners[1] = cv::Point2f( (float)limg.cols, 0 );
+//     obj_corners[2] = cv::Point2f( (float)limg.cols, (float)limg.rows );
+//     obj_corners[3] = cv::Point2f( 0, (float)limg.rows );
+//
+//     perspectiveTransform( obj_corners, scene_corners, H);
+//
+//     //-- Draw lines between the corners (the mapped object in the scene - image_2 )
+//     line( matchesImg, scene_corners[0] + cv::Point2f((float)limg.cols, 0),
+//           scene_corners[1] + cv::Point2f((float)limg.cols, 0), cv::Scalar(0, 255, 0), 4 );
+//     line( matchesImg, scene_corners[1] + cv::Point2f((float)limg.cols, 0),
+//           scene_corners[2]   + cv::Point2f((float)limg.cols, 0), cv::Scalar( 0, 255, 0), 4 );
+//     line( matchesImg, scene_corners[2] + cv::Point2f((float)limg.cols, 0),
+//           scene_corners[3] + cv::Point2f((float)limg.cols, 0), cv::Scalar( 0, 255, 0), 4 );
+//     line( matchesImg, scene_corners[3] + cv::Point2f((float)limg.cols, 0),
+//           scene_corners[0] + cv::Point2f((float)limg.cols, 0), cv::Scalar( 0, 255, 0), 4 );
+//     //-- Show detected matches
+//     }
+//
+//    if(matchesImg.rows>0)
+//    cv::imshow("Matches",matchesImg);
+//
+//    outputWriter<<matchesImg;
+//   //
+//   //
+//   // rFeatures->reset( rFeatures->getFeatureCount(), rFeatures->getDescriptorCount());
+//   // right_features->reset(rFeatures->getFeatureCount(), rFeatures->getDescriptorCount());
+//   //
+//   // rJob=nullptr;
+//   // rFeatures=nullptr;
+//   // right_features=nullptr;
+//   // objFeatures=nullptr;
+//   //
+//   // delete rJob;
+//   // delete rFeatures;
+//   // delete right_features;
+//
+//
+// }
+//
+// outputWriter.release();
 
     return EXIT_SUCCESS;
 }

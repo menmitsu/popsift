@@ -92,6 +92,19 @@ target_compile_definitions(popsift-match PRIVATE ${Boost_DEFINITIONS})
 target_link_libraries(popsift-match PUBLIC PopSift::popsift ${PD_LINK_LIBS})
 
 #############################################################
+# collablens-match
+#############################################################
+
+add_executable(collablens-match match_opencv.cpp pgmread.cpp pgmread.h)
+
+set_property(TARGET popsift-match PROPERTY CXX_STANDARD 11)
+
+target_compile_options(collablens-match PRIVATE ${PD_COMPILE_OPTIONS} )
+target_include_directories(collablens-match PUBLIC ${PD_INCLUDE_DIRS})
+target_compile_definitions(collablens-match PRIVATE ${Boost_DEFINITIONS})
+target_link_libraries(collablens-match PUBLIC PopSift::popsift ${PD_LINK_LIBS})
+
+#############################################################
 # installation
 #############################################################
 

@@ -11,7 +11,6 @@
 #include <popsift/sift_conf.h>
 #include <popsift/sift_config.h>
 #include <popsift/version.hpp>
-
 #include <boost/filesystem.hpp>
 #include <boost/program_options.hpp>
 
@@ -250,6 +249,37 @@ void read_job( SiftJob* job, bool really_write )
          << " number of feature descriptors: " << feature_list->getDescriptorCount()
          << endl;
 
+
+    cout<<"\n Print the first feature info\n";
+
+  clock_t begin_time = clock();
+
+  vector<cv::Point2f> keypoints;
+  // vector < float[] > descriptors_array;
+  float descriptors[128];
+    for(int j=0;j<feature_list->getFeatureCount();j++)
+    {
+
+
+      keypoints.push_back(cv::Point2f(feature_list->_ext[j].xpos,feature_list->_ext[j].ypos));
+
+      memcpy(descriptors  ,feature_list->_ext[j].desc[0],128*sizeof(float));
+      // descriptors.push_back(descriptors);
+
+      for(int i=0;i<128;i++)
+      cout<<"  "<<descriptors[i];
+
+      cout<<"\n\n\n";
+
+    }
+
+
+
+
+
+std::cout <<"\n\nConverting features"<< float( clock () - begin_time ) /  CLOCKS_PER_SEC;
+
+
     if( really_write ) {
         nvtxRangePushA( "Writing features to disk" );
 
@@ -291,6 +321,7 @@ int main(int argc, char **argv)
                 return EXIT_SUCCESS;
             }
         } else if( boost::filesystem::is_regular_file( inputFile ) ) {
+
             inputFiles.push_back( inputFile );
         } else {
             cout << "Input file is neither regular file nor directory, nothing to do" << endl;
@@ -303,13 +334,14 @@ int main(int argc, char **argv)
     if( print_dev_info ) deviceInfo.print( );
 
     PopSift PopSift( config,
-                     popsift::Config::ExtractingMode,
+                      popsift::Config::ExtractingMode,
                      float_mode ? PopSift::FloatImages : PopSift::ByteImages );
 
     std::queue<SiftJob*> jobs;
     for(const auto& currFile : inputFiles)
     {
         SiftJob* job = process_image( currFile, PopSift );
+
         jobs.push( job );
     }
 
