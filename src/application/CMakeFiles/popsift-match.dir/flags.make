@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/g++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/usr/local/cuda/include -I/home/rahul/Work/LiveGoggle/Code/popsift/src -I/home/rahul/Work/LiveGoggle/Code/popsift/src/generated -I/home/rahul/Work/LiveGoggle/Code/popsift/src/generated/popsift -isystem /usr/local/include/opencv4
+CXX_INCLUDES = -I/usr/local/cuda/include -I/usr/include/IL -I/home/rahul/Work/LiveGoggle/Code/popsift/src -I/home/rahul/Work/LiveGoggle/Code/popsift/src/generated -I/home/rahul/Work/LiveGoggle/Code/popsift/src/generated/popsift -isystem /usr/local/include/opencv4
 
-CXX_FLAGS =  -std=c++14 -O3 -DNDEBUG -fPIE -std=gnu++11
+CXX_FLAGS =  -std=c++14 -O3 -DNDEBUG -fPIE -DUSE_DEVIL -std=gnu++11
 

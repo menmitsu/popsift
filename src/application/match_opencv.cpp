@@ -39,6 +39,7 @@
 #endif
 #include "pgmread.h"
 #include <ctime>
+#include <math.h>
 
 #if POPSIFT_IS_DEFINED(POPSIFT_USE_NVTX)
 #include <nvToolsExtCuda.h>
@@ -48,6 +49,9 @@
 #endif
 
 using namespace std;
+
+#define PI 3.14159265
+
 
 using namespace cv;
 
@@ -388,7 +392,10 @@ int main(int argc, char **argv)
     PopSift PopSift( config, popsift::Config::ExtractingMode );
 
 
-    string streamName="Footage/27Jan/Take2/test11.mp4";
+    string streamName="Footage/footage_jan_8.mp4";
+    // string streamName="Footage/27Jan/Take2/test11_short.mp4";
+
+
 
      cv::VideoCapture video(streamName.c_str());
     //VideoCapture video("udpsrc port=5000 ! application/x-rtp, media=(string)video, payload=(int)96, clock-rate=(int)90000, encoding-name=(string)H264, packetization-mode=(string)1, profile-level-id=(string)640028, ssrc=(uint)3572028551, timestamp-offset=(uint)600628017, seqnum-offset=(uint)516, a-framerate=(string)15 ! queue ! rtph264depay !  decodebin ! queue !  videoconvert ! appsink",CAP_GSTREAMER);
@@ -397,7 +404,7 @@ int main(int argc, char **argv)
     int codec = cv::VideoWriter::fourcc('M', 'J', 'P', 'G');
 
     // cv::Size captureSize = cv::Size( (int) video.get(cv::CAP_PROP_FRAME_WIDTH)+limg.cols,max((int) video.get(cv::CAP_PROP_FRAME_HEIGHT),limg.rows));
-    cv::Size captureSize = cv::Size( (int) video.get(cv::CAP_PROP_FRAME_WIDTH),(int) video.get(cv::CAP_PROP_FRAME_HEIGHT));
+    cv::Size captureSize = cv::Size( (int) video.get(cv::CAP_PROP_FRAME_WIDTH)+limg.cols,std::max((int) video.get(cv::CAP_PROP_FRAME_HEIGHT),limg.rows));
 
     outputWriter.open(streamName.substr(0, streamName.length()-3)+"avi", codec, 30, captureSize, true);
 
@@ -510,10 +517,9 @@ if(good_matches.size()>8)
                   scene_corners[3] + cv::Point2f((float)limg.cols, 0), cv::Scalar( 0, 255, 0), 4 );
             line( img_Matches, scene_corners[3] + cv::Point2f((float)limg.cols, 0),
                   scene_corners[0] + cv::Point2f((float)limg.cols, 0), cv::Scalar( 0, 255, 0), 4 );
-
-
-
 }
+
+
 
 
 cv::imshow("Image matches",img_Matches);
@@ -522,6 +528,13 @@ cv::imshow("Image matches",img_Matches);
 Mat newFrame;
  ratio_thresh = 0.6f;
 
+
+ float cameraIntrinsicsData[]={1.25161154e+03,0.00000000e+00,5.17238336e+02,0.00000000e+00,1.26100809e+03,3.28576642e+02,0.00000000e+00,0.00000000e+00,1.00000000e+00};
+
+ cv::Mat cameraIntrinsicsMat(3,3,CV_32F,cameraIntrinsicsData);
+
+ vector<Mat> Rs_decomp, ts_decomp, normals_decomp;
+ double angle,angle_range_threshold=15;
 
 while(cv::waitKey(1)!=2)
 {
@@ -544,8 +557,8 @@ while(cv::waitKey(1)!=2)
     cout << "Number of features:    " << rFeatures->getFeatureCount() << endl;
     cout << "Number of descriptors: " << rFeatures->getDescriptorCount() << endl;
 
-    if(rFeatures->getDescriptorCount()<50)
-    continue;
+    // if(rFeatures->getDescriptorCount()<50)
+    // continue;
     convertPopsiftStructsToOpenCV(rFeatures,rKeypoints,rDescriptors);
 
     knn_matches.clear();
@@ -571,13 +584,15 @@ while(cv::waitKey(1)!=2)
 //
   std::vector<Point2f> obj;
   std::vector<Point2f> scene;
+  float determinant;
 
 
-    if(good_matches.size()>8)
+
+    if(good_matches.size()>12)
     {
+      drawMatches( limg, lKeypoints, colorFrame, rKeypoints, good_matches, img_Matches, Scalar::all(-1),
+       Scalar::all(-1), std::vector<char>(), DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS );
 
-        drawMatches( limg, lKeypoints, colorFrame, rKeypoints, good_matches, img_Matches, Scalar::all(-1),
-         Scalar::all(-1), std::vector<char>(), DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS );
 
           for( size_t i = 0; i < good_matches.size(); i++ )
           {
@@ -590,6 +605,39 @@ while(cv::waitKey(1)!=2)
 
           if(!H.empty())
           {
+
+            determinant=cv::determinant(H(Rect ( 0, 0, 1, 1 )));
+            int solutions=cv::decomposeHomographyMat(H,cameraIntrinsicsMat,Rs_decomp, ts_decomp, normals_decomp);
+            angle=atan2(Rs_decomp[0].at<double>(1,0), Rs_decomp[0].at<double>(0,0));
+            angle*=(180/PI);
+            angle=(int)((int)angle+360)%360;
+
+            cout<<"Atta bag angle is"<<angle;
+
+
+
+            cv::putText(img_Matches, //target image
+            "Angle is"+to_string(angle), //text
+            cv::Point(limg.cols,800), //top-left position
+            cv::FONT_HERSHEY_DUPLEX,
+            2.0,
+            CV_RGB(255,255,255), //font color
+            2);
+
+
+            if( (angle>360-angle_range_threshold && angle<360) || angle<angle_range_threshold && angle>0)
+            putText(img_Matches,"Atta packet is upright",cv::Point(limg.cols,900),cv::FONT_HERSHEY_DUPLEX, 2.0, CV_RGB(255,255,255),2);
+            else if((angle>90-angle_range_threshold && angle<90+angle_range_threshold))
+            putText(img_Matches,"Right edge of atta packet facing downwards",cv::Point(limg.cols,900),cv::FONT_HERSHEY_DUPLEX, 2.0, CV_RGB(255,255,255),2);
+            else if((angle>180-angle_range_threshold && angle<180+angle_range_threshold))
+            putText(img_Matches,"Atta packet is inverted",cv::Point(limg.cols,900),cv::FONT_HERSHEY_DUPLEX, 2.0, CV_RGB(255,255,255),2);
+            else if((angle>270-angle_range_threshold && angle<270+angle_range_threshold))
+            putText(img_Matches,"Left edge of atta packet facing downwards",cv::Point(limg.cols,900),cv::FONT_HERSHEY_DUPLEX, 2.0, CV_RGB(255,255,255),2);
+
+
+              cout<<"Determinant = "<<determinant<<endl;
+
+
 
 
                 std::cout <<"\n\n Matching and Homography "<< float( clock () - begin_time ) /  CLOCKS_PER_SEC;
@@ -618,6 +666,17 @@ while(cv::waitKey(1)!=2)
                 line( img2, scene_corners[3], scene_corners[0], cv::Scalar( 0, 255, 0), 4 );
 
             }
+
+
+
+
+    }
+
+    else {
+          img_Matches=cv::Mat::ones(std::max(limg.rows,colorFrame.rows),limg.cols+colorFrame.cols,CV_8UC3);
+          limg.copyTo(img_Matches(cv::Rect(0,0,limg.cols,limg.rows)));
+           colorFrame.copyTo(img_Matches(cv::Rect(limg.cols,0,colorFrame.cols,colorFrame.rows)));
+
     }
 
     outputWriter<<img_Matches;
@@ -629,119 +688,6 @@ while(cv::waitKey(1)!=2)
 
 }
 
-
-//    //
-//
-//    rJob = detectFeaturesAndDescriptors( colorFrame, PopSift );
-//     //
-//     rFeatures = rJob->getDev();
-//
-//     lFeatures->match( rFeatures);
-//
-//     right_features = new popsift::FeaturesHost( rFeatures->getFeatureCount(), rFeatures->getDescriptorCount() );
-//
-//     // cv::Mat leftDescMat=convertFeaturesDevToMat(lFeatures,left_features);
-//     // cout<<leftDescMat;
-//
-// /////
-//
-//     left_features->pin( );
-//
-//     cudaMemcpy( left_features->getObj(),
-//                         lFeatures->getObj(),
-//                         lFeatures->getDescriptorCount() * sizeof(float),
-//                         cudaMemcpyDeviceToHost );
-//
-//
-//     cudaMemcpy( left_features->getNumGoodMatches(),
-//                         lFeatures->getNumGoodMatches(),
-//                         sizeof(int),
-//                         cudaMemcpyDeviceToHost );
-//     //
-//
-//     left_features->unpin( );
-//
-//     int numGoodMatches=*left_features->getNumGoodMatches();
-//      numGoodMatches/=4;
-//
-//      if(numGoodMatches<8)
-//      continue;
-//
-//      begin_time = clock();
-//      float* objFeatures=left_features->getObj();
-//
-//      matchesImg=cv::Mat::ones(std::max(limg.rows,rimg.rows),limg.cols+rimg.cols,CV_8UC3);
-//
-//      //
-//      limg.copyTo(matchesImg(cv::Rect(0,0,limg.cols,limg.rows)));
-//      colorFrame.copyTo(matchesImg(cv::Rect(limg.cols,0,rimg.cols,rimg.rows)));
-//
-//      std::vector<cv::Point2f> objPts;
-//      std::vector<cv::Point2f> scenePts;
-//
-//      for(int i=0;i<numGoodMatches ;i++)
-//      {
-//
-//        cv::Point2f objPt(objFeatures[i*4],objFeatures[i*4+1]);
-//        cv::Point2f scenePt(objFeatures[i*4+2],objFeatures[i*4+3]);
-//
-//        // cout<<"\n\nPoint info"<<i<<" "<<objFeatures[i*4]<<" \t"<< objFeatures[i*4+1];
-//       line(matchesImg, objPt,   cv::Point2f((float)limg.cols, 0)+scenePt, cv::Scalar(255, 0, 0), 4, cv::LINE_8);
-//
-//       objPts.push_back(objPt);
-//       scenePts.push_back(scenePt);
-//
-//      }
-//
-//     cv::Mat H = cv::findHomography( objPts, scenePts,cv::RANSAC );
-//     std::cout <<"\n\n Matching and Homography "<< float( clock () - begin_time ) /  CLOCKS_PER_SEC;
-//
-//
-//
-//     if(!H.empty())
-//     {
-//
-//     obj_corners[0] = cv::Point2f(0, 0);
-//     obj_corners[1] = cv::Point2f( (float)limg.cols, 0 );
-//     obj_corners[2] = cv::Point2f( (float)limg.cols, (float)limg.rows );
-//     obj_corners[3] = cv::Point2f( 0, (float)limg.rows );
-//
-//     perspectiveTransform( obj_corners, scene_corners, H);
-//
-//     //-- Draw lines between the corners (the mapped object in the scene - image_2 )
-//     line( matchesImg, scene_corners[0] + cv::Point2f((float)limg.cols, 0),
-//           scene_corners[1] + cv::Point2f((float)limg.cols, 0), cv::Scalar(0, 255, 0), 4 );
-//     line( matchesImg, scene_corners[1] + cv::Point2f((float)limg.cols, 0),
-//           scene_corners[2]   + cv::Point2f((float)limg.cols, 0), cv::Scalar( 0, 255, 0), 4 );
-//     line( matchesImg, scene_corners[2] + cv::Point2f((float)limg.cols, 0),
-//           scene_corners[3] + cv::Point2f((float)limg.cols, 0), cv::Scalar( 0, 255, 0), 4 );
-//     line( matchesImg, scene_corners[3] + cv::Point2f((float)limg.cols, 0),
-//           scene_corners[0] + cv::Point2f((float)limg.cols, 0), cv::Scalar( 0, 255, 0), 4 );
-//     //-- Show detected matches
-//     }
-//
-//    if(matchesImg.rows>0)
-//    cv::imshow("Matches",matchesImg);
-//
-//    outputWriter<<matchesImg;
-//   //
-//   //
-//   // rFeatures->reset( rFeatures->getFeatureCount(), rFeatures->getDescriptorCount());
-//   // right_features->reset(rFeatures->getFeatureCount(), rFeatures->getDescriptorCount());
-//   //
-//   // rJob=nullptr;
-//   // rFeatures=nullptr;
-//   // right_features=nullptr;
-//   // objFeatures=nullptr;
-//   //
-//   // delete rJob;
-//   // delete rFeatures;
-//   // delete right_features;
-//
-//
-// }
-//
-// outputWriter.release();
 
     return EXIT_SUCCESS;
 }

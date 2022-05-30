@@ -44,10 +44,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/cmake/1000/bin/cmake
+CMAKE_COMMAND = /snap/cmake/1035/bin/cmake
 
 # The command to remove a file.
-RM = /snap/cmake/1000/bin/cmake -E rm -f
+RM = /snap/cmake/1035/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -67,7 +67,7 @@ include CMakeFiles/uninstall.dir/compiler_depend.make
 include CMakeFiles/uninstall.dir/progress.make
 
 CMakeFiles/uninstall:
-	/snap/cmake/1000/bin/cmake -P /home/rahul/Work/LiveGoggle/Code/popsift/cmake/cmake_uninstall.cmake
+	/snap/cmake/1035/bin/cmake -P /home/rahul/Work/LiveGoggle/Code/popsift/cmake/cmake_uninstall.cmake
 
 uninstall: CMakeFiles/uninstall
 uninstall: CMakeFiles/uninstall.dir/build.make

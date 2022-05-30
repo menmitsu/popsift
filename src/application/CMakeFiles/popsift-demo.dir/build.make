@@ -44,10 +44,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/cmake/1000/bin/cmake
+CMAKE_COMMAND = /snap/cmake/1035/bin/cmake
 
 # The command to remove a file.
-RM = /snap/cmake/1000/bin/cmake -E rm -f
+RM = /snap/cmake/1035/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -113,6 +113,8 @@ Linux-x86_64/popsift-demo: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so
 Linux-x86_64/popsift-demo: /usr/lib/x86_64-linux-gnu/libboost_program_options.so
 Linux-x86_64/popsift-demo: /usr/lib/x86_64-linux-gnu/libboost_system.so
 Linux-x86_64/popsift-demo: /usr/local/cuda/lib64/libcudadevrt.a
+Linux-x86_64/popsift-demo: /usr/lib/x86_64-linux-gnu/libIL.so
+Linux-x86_64/popsift-demo: /usr/lib/x86_64-linux-gnu/libILU.so
 Linux-x86_64/popsift-demo: /usr/local/cuda/lib64/libcudart.so
 Linux-x86_64/popsift-demo: /usr/local/cuda/lib64/libcublas.so
 Linux-x86_64/popsift-demo: /usr/local/lib/libopencv_gapi.so.4.5.2

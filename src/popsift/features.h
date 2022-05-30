@@ -129,6 +129,7 @@ std::ostream& operator<<( std::ostream& ostr, const FeaturesHost& feature );
 
 class FeaturesDev : public FeaturesBase
 {
+  public:
     Feature*     _ext;
     Descriptor*  _ori;
     int*         _rev; // the reverse map from descriptors to extrema

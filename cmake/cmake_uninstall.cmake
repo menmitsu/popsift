@@ -9,7 +9,7 @@ FOREACH(file ${file_list})
   MESSAGE(STATUS "Uninstalling $ENV{DESTDIR}${file}")
   IF(EXISTS "$ENV{DESTDIR}${file}")
     EXEC_PROGRAM(
-      "/snap/cmake/1000/bin/cmake" ARGS "-E remove $ENV{DESTDIR}${file}"
+      "/snap/cmake/1035/bin/cmake" ARGS "-E remove $ENV{DESTDIR}${file}"
       OUTPUT_VARIABLE rm_out
       RETURN_VALUE rm_retval
       )

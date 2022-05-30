@@ -47,3 +47,6 @@ oxford
 
 # Downloaded archives for tests.
 *.tgz
+
+*.avi
+*.mp4
